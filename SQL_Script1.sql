@@ -48,7 +48,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `tfdb`.`case` (
   `case_id` INT NOT NULL,
   `name` VARCHAR(45) NULL,
-  `user_created_id` INT NULL,
+  `user_created_id` INT NOT NULL,
   `type` VARCHAR(45) NULL,
   `size` INT NULL,
   `project_id` INT NOT NULL,
