@@ -86,52 +86,6 @@ CREATE TABLE IF NOT EXISTS `tfdb`.`project_user_mapping` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `tfdb`.`timestamps`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `tfdb`.`timestamps` (
-  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` TIMESTAMP NULL,
-  `case_id` INT NOT NULL,
-  `project_id` INT NOT NULL,
-  INDEX `fk_timestamps_case1_idx` (`case_id` ASC, `project_id` ASC),
-  CONSTRAINT `fk_timestamps_case1`
-    FOREIGN KEY (`case_id` , `project_id`)
-    REFERENCES `tfdb`.`case` (`case_id` , `project_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
--- -----------------------------------------------------
--- Table `tfdb`.``
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `tfdb`.`` (
-  `create_time`  NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time`  NULL);
-
-
--- -----------------------------------------------------
--- Table `tfdb`.`user_`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `tfdb`.`user_` (
-  `user_user_id` INT NOT NULL,
-  `project_project_id` INT NOT NULL,
-  PRIMARY KEY (`user_user_id`, `project_project_id`),
-  INDEX `fk_user_has_project_project1_idx` (`project_project_id` ASC),
-  INDEX `fk_user_has_project_user1_idx` (`user_user_id` ASC),
-  CONSTRAINT `fk_user_has_project_user1`
-    FOREIGN KEY (`user_user_id`)
-    REFERENCES `tfdb`.`user` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_has_project_project1`
-    FOREIGN KEY (`project_project_id`)
-    REFERENCES `tfdb`.`project` (`project_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
