@@ -4,6 +4,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver
 
 environments {
 
+    //тестовое изменение
     // run via “./gradlew -Dgeb.env=chrome -Dwebdriver.chrome.driver=/Applications/chromedriver iT”
     chrome {
         driver = { new ChromeDriver() }
