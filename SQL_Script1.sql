@@ -21,10 +21,10 @@ USE `tfdb` ;
 -- Table `tfdb`.`user`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `tfdb`.`user` (
-  `user_id` INT NOT NULL,
+  `user_id` INT NOT NULL auto_increment,
   `name` VARCHAR(45) NULL,
   `role` VARCHAR(45) NULL,
-  `login` VARCHAR(45) NULL,
+  `login` VARCHAR(45) NULL unique,
   `password` VARCHAR(45) NULL,
   PRIMARY KEY (`user_id`))
 ENGINE = InnoDB;
