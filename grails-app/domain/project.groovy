@@ -8,7 +8,9 @@ class Project {
     String name
     String teamlist
     SimpleDateFormat create_stamp
+
     static constraints = {
+        project_id nullable: true
         name nullable: true
         teamlist nullable: true
         create_stamp nullable: true
@@ -16,5 +18,8 @@ class Project {
 
     static mapping = {
         id name : 'project_id'
+        name sqlType: "varchar(45)"
+        teamlist sqlType: "varchar(45)"
+        create_stamp sqlType:"timestamp"
     }
 }
