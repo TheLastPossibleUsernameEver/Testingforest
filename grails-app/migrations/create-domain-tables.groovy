@@ -1,6 +1,6 @@
 databaseChangeLog = {
 
-    changeSet(author: "Оля (generated)", id: "1562677987244-1") {
+    changeSet(author: "Оля (generated)", id: "1562680898006-1") {
         createTable(tableName: "case") {
             column(autoIncrement: "true", name: "id", type: "BIGINT") {
                 constraints(primaryKey: "true", primaryKeyName: "casePK")
@@ -26,7 +26,7 @@ databaseChangeLog = {
         }
     }
 
-    changeSet(author: "Оля (generated)", id: "1562677987244-2") {
+    changeSet(author: "Оля (generated)", id: "1562680898006-2") {
         createTable(tableName: "project") {
             column(autoIncrement: "true", name: "project_id", type: "INT") {
                 constraints(primaryKey: "true", primaryKeyName: "projectPK")
@@ -44,27 +44,7 @@ databaseChangeLog = {
         }
     }
 
-    changeSet(author: "Оля (generated)", id: "1562677987244-3") {
-        createTable(tableName: "test") {
-            column(autoIncrement: "true", name: "test_id", type: "INT") {
-                constraints(primaryKey: "true", primaryKeyName: "testPK")
-            }
-
-            column(name: "version", type: "BIGINT") {
-                constraints(nullable: "false")
-            }
-
-            column(name: "path", type: "VARCHAR(255)") {
-                constraints(nullable: "false")
-            }
-
-            column(name: "name", type: "VARCHAR(255)") {
-                constraints(nullable: "false")
-            }
-        }
-    }
-
-    changeSet(author: "Оля (generated)", id: "1562677987244-4") {
+    changeSet(author: "Оля (generated)", id: "1562680898006-3") {
         createTable(tableName: "user") {
             column(autoIncrement: "true", name: "user_id", type: "INT") {
                 constraints(primaryKey: "true", primaryKeyName: "userPK")
