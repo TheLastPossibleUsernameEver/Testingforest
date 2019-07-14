@@ -9,11 +9,11 @@ class UserController {
     def log_in = {}
 
     def authenticate = {
-        def user = User.findByLoginAndPassword(params.login, params.password)
+        def hexPassword = params.password.encodeAsSHA1()
+        def user = User.findByLoginAndPassword(params.login, hexPassword)
         if(user){
             session.user = user
-            flash.message = "Hello ${user.name}"
-            redirect(action: "log_in")
+            redirect(controller: "project", action: "project_list")
         }
         else{
             flash.message = "Sorry, ${params.login}. Please try another login/password."

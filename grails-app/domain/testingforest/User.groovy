@@ -8,12 +8,14 @@ class User {
     String name
     String role
 
-    static constraints = {
-        login(unique: true)
-        password(password: true)
+    @Override
+    String toString() {
+        return login
     }
-
-    static mapping = {
-        id column: "id"
+    static constraints = {
+        login size: 5..30, matches: "[a-zA-Z0-9]+", unique: true
+        password size: 5..30, password: true
+        name size: 1..255, matches: "[a-zA-Z0-9]+"
+        role inList: ["admin", "user"]
     }
 }
