@@ -91,15 +91,27 @@ hibernate:
 dataSource:
     pooled: true
     jmxExport: true
+ testingforest-11
     driverClassName: com.mysql.jdbc.Driver
+    dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     username: 'root'
+
+    driverClassName: com.mysql.cj.jdbc.Driver
+    dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    username: root
+ master
     password: 'root'
 
 environments:
     development:
         dataSource:
+ testingforest-11
             dbCreate: none
-            url: jdbc:mysql://localhost:3306/tfdb?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=UTC
+            url: jdbc:mysql://localhost:3306/tfdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+=======
+            dbCreate: none
+            url: jdbc:mysql://localhost:3306/tfdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+ master
     test:
         dataSource:
             dbCreate: update
