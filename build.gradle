@@ -63,6 +63,9 @@ dependencies {
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
     testRuntime "org.seleniumhq.selenium:selenium-chrome-driver:2.47.1"
+    compile "org.hibernate:hibernate-ehcache"
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.5'
+    compile group: 'mysql', name: 'mysql-connector-java', version:'8.0.16'
 }
 
 sourceSets {

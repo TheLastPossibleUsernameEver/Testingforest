@@ -76,35 +76,23 @@ databaseChangeLog = {
 
     changeSet(author: "pogre (generated)", id: "1563222136314-4") {
         createTable(tableName: "user") {
-            column(autoIncrement: "true", name: "id", type: "BIGINT") {
+            column(autoIncrement: "true", name: "user_id", type: "BIGINT") {
                 constraints(primaryKey: "true", primaryKeyName: "userPK")
             }
 
-            column(name: "version", type: "BIGINT") {
+            column(name: "login", type: "VARCHAR(45)") {
+                constraints(nullable: "false",unique: "true")
+            }
+
+            column(name: "role", type: "VARCHAR(45)") {
                 constraints(nullable: "false")
             }
 
-            column(name: "login", type: "VARCHAR(30)") {
+            column(name: "password", type: "VARCHAR(45)") {
                 constraints(nullable: "false")
             }
 
-            column(name: "date_created", type: "datetime") {
-                constraints(nullable: "false")
-            }
-
-            column(name: "last_updated", type: "datetime") {
-                constraints(nullable: "false")
-            }
-
-            column(name: "role", type: "VARCHAR(5)") {
-                constraints(nullable: "false")
-            }
-
-            column(name: "password", type: "VARCHAR(30)") {
-                constraints(nullable: "false")
-            }
-
-            column(name: "user_name", type: "VARCHAR(255)") {
+            column(name: "name", type: "VARCHAR(45)") {
                 constraints(nullable: "false")
             }
         }
@@ -115,11 +103,11 @@ databaseChangeLog = {
     }
 
     changeSet(author: "pogre (generated)", id: "1563222136314-6") {
-        addForeignKeyConstraint(baseColumnNames: "user_id", baseTableName: "project_user", constraintName: "FK4jl2o131jivd80xsuw6pivnbx", deferrable: "false", initiallyDeferred: "false", referencedColumnNames: "id", referencedTableName: "user")
+        addForeignKeyConstraint(baseColumnNames: "user_id", baseTableName: "project_user", constraintName: "FK4jl2o131jivd80xsuw6pivnbx", deferrable: "false", initiallyDeferred: "false", referencedColumnNames: "user_id", referencedTableName: "user")
     }
 
     changeSet(author: "pogre (generated)", id: "1563222136314-7") {
-        addForeignKeyConstraint(baseColumnNames: "user_created_id", baseTableName: "test_case", constraintName: "FK57td41jyxfewpu950nn2itic7", deferrable: "false", initiallyDeferred: "false", referencedColumnNames: "id", referencedTableName: "user")
+        addForeignKeyConstraint(baseColumnNames: "user_created_id", baseTableName: "test_case", constraintName: "FK57td41jyxfewpu950nn2itic7", deferrable: "false", initiallyDeferred: "false", referencedColumnNames: "user_id", referencedTableName: "user")
     }
 
     changeSet(author: "pogre (generated)", id: "1563222136314-8") {
