@@ -22,14 +22,14 @@ class UserController {
         respond new User(params)
     }
 
-    def save(User user) {
+    def save( User user) {
         if (user == null) {
             notFound()
             return
         }
 
         try {
-            userService.save(user)
+         userService.save(user)
         } catch (ValidationException e) {
             respond user.errors, view:'create'
             return
@@ -48,14 +48,14 @@ class UserController {
         respond userService.get(id)
     }
 
-    def update(User user) {
+    def update( User user) {
         if (user == null) {
             notFound()
             return
         }
 
         try {
-            userService.save(user)
+            user.save(flush:false)
         } catch (ValidationException e) {
             respond user.errors, view:'edit'
             return
