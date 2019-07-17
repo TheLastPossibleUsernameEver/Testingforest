@@ -7,8 +7,9 @@
 
 <div class="nav" role="navigation">
     <u1>
-        <li><a class="home" href="${createLink(uri: '/')}">home</a></li>
-        <li><g:link class="list" action="logout">logout</g:link> </li>
+        <li><a class="home" href="${createLink(uri: '/')}">Home</a></li>
+        <li><g:link class="list" action="logout">Logout</g:link> </li>
+        <li><g:link class="list" action="create">Registration</g:link> </li>
     </u1>
 </div>
 <div class="body">

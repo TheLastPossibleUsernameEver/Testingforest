@@ -2,6 +2,8 @@ package testingforest
 
 class UserController {
 
+    def userService
+
     def index = {
         redirect(action: "log_in")
     }
@@ -13,7 +15,8 @@ class UserController {
         def user = User.findByLoginAndPassword(params.login, hexPassword)
         if(user){
             session.user = user
-            redirect(controller: "project", action: "project_list")
+            flash.message = "Hello ${params.login} !"
+            redirect(action: "log_in")
         }
         else{
             flash.message = "Sorry, ${params.login}. Please try another login/password."
@@ -28,4 +31,5 @@ class UserController {
         }
         redirect(action: "log_in")
     }
+
 }

@@ -2,7 +2,6 @@ package testingforest
 
 class User {
 
-    int id
     String login
     String password
     String name

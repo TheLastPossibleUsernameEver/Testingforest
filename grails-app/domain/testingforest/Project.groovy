@@ -7,9 +7,6 @@ class Project {
 
     static hasMany = [teamList : User]
 
-    static mapping = {
-    }
-
     static constraints = {
         projectName size: 1..255
         teamList cascade: 'all'
