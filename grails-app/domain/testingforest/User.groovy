@@ -10,7 +10,7 @@ class User {
     static hasMany = [caseList : TestCase]
 
     static constraints = {
-        login size: 1..45, unique:true,validator: {
+        login size: 1..45, unique:true, validator: {
             if (! it.matches("^[a-zA-Z]*[a-zA-Z0-9_]") ) return ['errorLogin']
         }
         password size: 5..45
@@ -18,10 +18,7 @@ class User {
         role inList: ["admin", "user"]
         caseList nullable: true
     }
-    static mapping = {
-        version false
-        id column : 'user_id'
-    }
+
     def beforeInsert(){
         encodePassword()
     }

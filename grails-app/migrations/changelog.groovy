@@ -1,3 +1,3 @@
 databaseChangeLog = {
-    include file: 'create-table.groovy'
+    include file:'create-table.groovy'
 }

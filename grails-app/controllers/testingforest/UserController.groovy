@@ -11,7 +11,31 @@ class UserController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond userService.list(params), model:[userCount: userService.count()]
+        redirect(action: "log_in")
+    }
+
+    def log_in() {}
+
+    def authenticate = {
+        def hexPassword = params.password.encodeAsSHA1()
+        def user = User.findByLoginAndPassword(params.login, hexPassword)
+        if(user){
+            session.user = user
+            flash.message = "Hello ${session.user.name} !"
+            redirect(action: "log_in")
+        }
+        else{
+            flash.message = "Sorry, ${params.login}. Please try another login/password."
+            redirect(action: "log_in")
+        }
+    }
+
+    def logout = {
+        if(session.user != null) {
+            flash.message = "Goodbye ${session.user.name}"
+            session.user = null
+        }
+        redirect(action: "log_in")
     }
 
     def show(Long id) {
@@ -37,8 +61,8 @@ class UserController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect user
+                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.name])
+                redirect(action: "log_in")
             }
             '*' { respond user, [status: CREATED] }
         }
