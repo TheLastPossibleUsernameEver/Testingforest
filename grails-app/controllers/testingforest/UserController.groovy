@@ -79,7 +79,7 @@ class UserController {
         }
 
         try {
-            user.save(flush:false)
+            userService.save(user)
         } catch (ValidationException e) {
             respond user.errors, view:'edit'
             return
