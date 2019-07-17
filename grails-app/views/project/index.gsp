@@ -6,9 +6,12 @@
 <body>
 <div class="nav" role="navigation">
     <ul>
-        <li><g:link class="create" action="create">Create</g:link></li>
+        <li><g:link class="create" action="create">Create project</g:link></li>
     </ul>
 </div>
-<label>You have no project</label>
+<div id="list-project" class="content scaffold-list" role="main">
+    <f:table collection="${projectList}"
+             properties="['projectName', 'dateCreated']" />
+</div>
 </body>
 </html>

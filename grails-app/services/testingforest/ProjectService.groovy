@@ -5,7 +5,7 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class ProjectService {
 
-    def get(id){
+    def get(Long id){
         Project.get(id)
     }
 
@@ -13,12 +13,11 @@ class ProjectService {
         Project.list()
     }
 
-
-    def save(project){
+    def save(Project project){
         project.save()
     }
 
-    def delete(id){
+    def delete(Long id){
         Project.get(id).delete()
     }
 }

@@ -7,7 +7,7 @@
 
 <div class="nav" role="navigation">
     <u1>
-        <li><g:link class="list" action="back_to_show">Back</g:link> </li>
+        <li><g:link class="list" action="backToShow">Back</g:link> </li>
     </u1>
 </div>
 <div class="body">
@@ -15,7 +15,7 @@
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
-    <g:form action="adding_user" >
+    <g:form action="addingUser" >
         <fieldset class="form">
             <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'login','error')}">
                 <label>User login:</label>
@@ -23,7 +23,7 @@
             </div>
         </fieldset>
         <fieldset class="buttons">
-            <g:submitButton name="add_user_project" class="save" value="Add"/>
+            <g:submitButton name="addUserProject" class="save" value="Add"/>
         </fieldset>
     </g:form>
 </div>

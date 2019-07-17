@@ -4,61 +4,41 @@ class ProjectController {
 
     def projectService
 
-    def project_list(){  //вывод проекта для залогинненого пользователя
-        for(Project project:Project.all) {
-            for (User user : project.getTeamList())
-                if (user.getLogin().equals(session.user.login)) {
-                    redirect(action: "show", id:  project.id)
-                    return
-                }
-        }
-        redirect(action: "index")
+    def addUserProject(){ // добавление к проекту юзера
     }
 
-    def add_user_project(){ // добавление к проекту юзера
-    }
-
-    def adding_user(){
-        def curr_user = User.findByLogin(params.login)
-        if(curr_user){ //если он существует и если у него нет проекта
-            for(Project project:Project.all) {
-                for (User user : project.getTeamList())
-                    if (user.getLogin().equals(curr_user.getLogin())) {
-                        flash.message = "Current user has already had project."
-                        redirect(action: "add_user_project")
-                        return
-                    }
-            }
-            for(Project project:Project.all) {
-                for (User user : project.getTeamList())
-                    if (user.getLogin().equals(session.user.login)) {
-                        project.addToTeamList(curr_user).save(flush: true)
-                        flash.message = "User $curr_user has added to project."
-                        redirect(action: "add_user_project")
-                        return
-                    }
-            }
+    def addingUser(){
+        def currUser = User.findByLogin(params.login)
+        if(currUser){ //если он существует и если у него нет проекта
+            def currProject = Project.get(session.project.id)
+            currProject.addToTeamList(currUser).save(flush: true)
+            flash.message = "User $currUser has added to project."
+            redirect(action: "addUserProject")
         }
         else{
             flash.message = "Sorry. Please try another login."
-            redirect(action: "add_user_project")
+            redirect(action: "addUserProject")
         }
     }
 
-    def back_to_show(){
-        for(Project project:Project.all) {
-            for (User user : project.getTeamList())
-                if (user.getLogin().equals(session.user.login)) {
-                    redirect(action: "show", id:  project.id)
-                    return
-                }
-        }
+    def backToShow(){
+        redirect(action: "show", id:  session.project.id)
     }
 
     def index() {
+        session.project = null //обнуляем текущий проект
+        def projectList = []
+        for(Project project:Project.all) {
+            for (User user : project.getTeamList())
+                if (user.getLogin().equals(session.user.login)) {
+                    projectList.add(project)
+                }
+        }
+        respond projectList
     }
 
     def show(Long id) {
+        session.project = Project.get(id) //текущий проект в show
         respond projectService.get(id)
     }
 
@@ -69,7 +49,7 @@ class ProjectController {
 
     def save(Project project) {
         project.addToTeamList(session.user).save(flush: true)
-        redirect action:"project_list"
+        redirect action:"index"
     }
 
 }

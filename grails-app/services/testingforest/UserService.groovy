@@ -5,7 +5,7 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class UserService {
 
-    def get(id){
+    def get(Long id){
         User.get(id)
     }
 
@@ -13,11 +13,11 @@ class UserService {
         User.list()
     }
 
-    def save(user){
+    def save(User user){
         user.save()
     }
 
-    def delete(id){
+    def delete(Long id){
         User.get(id).delete()
     }
 

@@ -4,6 +4,11 @@
     <meta name="layout" content="main" />
 </head>
 <body>
+<div class="nav" role="navigation">
+    <u1>
+        <li><g:link class="list" action="index">Back</g:link> </li>
+    </u1>
+</div>
 <div id="create-project" class="content scaffold-create" role="main">
     <g:form resource="${this.project}" method="POST">
         <fieldset class="form">

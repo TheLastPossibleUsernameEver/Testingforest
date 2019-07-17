@@ -18,4 +18,5 @@ class User {
         name size: 1..255, matches: "[a-zA-Z0-9]+"
         role inList: ["admin", "user"]
     }
+
 }
