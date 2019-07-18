@@ -11,7 +11,7 @@
 </div>
 <div id="list-project" class="content scaffold-list" role="main">
     <f:table collection="${projectList}"
-             properties="['projectName', 'dateCreated']" />
+             properties="['projectName', 'dateCreated', 'lastUpdated']" />
 </div>
 </body>
 </html>

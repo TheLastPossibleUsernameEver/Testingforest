@@ -8,7 +8,12 @@ class TestCase {
     Date dateCreated
     Date lastUpdated
 
-    static belongsTo = [project : Project]
+    @Override
+    String toString() {
+        return caseName
+    }
+
+    static belongsTo = [project: Project]
     static hasOne = [userCreated: User]
 
     static constraints = {

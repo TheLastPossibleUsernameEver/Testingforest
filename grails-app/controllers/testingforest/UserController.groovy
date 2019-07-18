@@ -21,8 +21,7 @@ class UserController {
         def user = User.findByLoginAndPassword(params.login, hexPassword)
         if(user){
             session.user = user
-            flash.message = "Hello ${session.user.name} !"
-            redirect(action: "log_in")
+            redirect(controller: "project ", action: "index")
         }
         else{
             flash.message = "Sorry, ${params.login}. Please try another login/password."
