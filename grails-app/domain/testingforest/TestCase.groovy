@@ -17,7 +17,7 @@ class TestCase {
     static hasOne = [userCreated: User]
 
     static constraints = {
-        caseName range: 1..255
+        caseName size: 1..255
         typeCase inList: ["public","protected","private"]
         sizeData min: new Long(0)
     }

@@ -1,5 +1,5 @@
 package testingforest
-import groovy.sql.Sql
+
 class User {
     String name
     String role
@@ -26,16 +26,15 @@ class User {
     def beforeInsert(){
         encodePassword()
     }
-    def dataSource
+
     def beforeUpdate(){
-        def query = new Sql(dataSource)
-        def old_password =  query.firstRow("select password from tfdb.user WHERE user_id="+id)
-        if (old_password != password){
+        def oldPassword = getPersistentValue("password")
+        if (oldPassword != password) {
             encodePassword()
         }
     }
     protected encodePassword(){
-        password=password.encodeAsSHA1()
+        password = password.encodeAsSHA1()
     }
 }
 

@@ -45,7 +45,7 @@ class UserController {
         respond new User(params)
     }
 
-    def save( User user) {
+    def save(User user) {
         if (user == null) {
             notFound()
             return
@@ -71,11 +71,14 @@ class UserController {
         respond userService.get(id)
     }
 
-    def update( User user) {
+    def update(User user) {
+
         if (user == null) {
             notFound()
             return
         }
+
+
 
         try {
             userService.save(user)

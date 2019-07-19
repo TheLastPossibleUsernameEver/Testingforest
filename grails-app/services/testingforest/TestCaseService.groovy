@@ -13,6 +13,10 @@ class TestCaseService {
         TestCase.get(id)
     }
 
+    def save(TestCase testCase){
+        testCase.save()
+    }
+
     def delete(Long id){
         TestCase.get(id).delete()
     }
