@@ -37,6 +37,19 @@ class TestCaseController {
         }
     }
 
+    def edit(Long id) {
+        respond testCaseService.get(id)
+    }
+
+    def update(TestCase testCase) {
+        if (testCase.validate()){
+            testCaseService.save(testCase)
+            redirect action: "show", id: testCase.id
+        } else {
+            respond testCase.errors, view: "edit"
+        }
+    }
+
     def delete(Long id) {
         testCaseService.delete(id)
         redirect action:"index", method:"GET"
