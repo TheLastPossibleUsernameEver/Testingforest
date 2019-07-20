@@ -6,7 +6,7 @@
 <body>
 <div id="list-case" class="content scaffold-list" role="main">
     <f:table collection="${testCaseList}"
-             properties="['nameCase', 'typeData', 'sizeData']" />
+             properties="['caseName', 'typeCase', 'sizeData', 'dateCreated','lastUpdated']" />
 </div>
 </body>
 </html>
