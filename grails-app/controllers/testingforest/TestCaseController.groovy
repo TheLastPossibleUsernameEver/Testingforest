@@ -8,6 +8,10 @@ class TestCaseController {
         respond testCaseService.list()
     }
 
+    def list(Long projectId) {
+        Project project = Project.get(projectId)
+        respond project.getTestCaseList()
+    }
 
     def show(Long id) {
         respond testCaseService.get(id)
