@@ -20,4 +20,7 @@ class ProjectService {
     def delete(Long id){
         Project.get(id).delete()
     }
+    def count(){
+        Project.count()
+    }
 }
