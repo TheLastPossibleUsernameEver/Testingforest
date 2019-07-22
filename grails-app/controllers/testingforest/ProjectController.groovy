@@ -54,7 +54,7 @@ class ProjectController {
 
     def save(Project project) {
         project.addToTeamList(session.user).save(flush: true)
-        redirect action:"index"
+        redirect uri: "/project/index"
     }
 
 }
