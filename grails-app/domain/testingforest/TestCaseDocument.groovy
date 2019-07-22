@@ -1,6 +1,6 @@
 package testingforest
 
-class TestCaseData {
+class TestCaseDocument {
 
     String name
     String type
