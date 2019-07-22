@@ -4,34 +4,34 @@ class ProjectController {
 
     def projectService
 
-    def addUserProject(){ // добавление к проекту юзера
+    def addUserProject(Long projectId){ // добавление к проекту юзера
+        session.projectId = projectId //текущий проект в show
+        respond projectService.get(projectId)
     }
 
     def addingUser(){
         def currUser = User.findByLogin(params.login)
         if(currUser){ //если он существует и если у него нет проекта
-            def currProject = Project.get(session.project.id)
-            def teamList = project.getTeamList()
-            def sessionUser = session.user
-            def result = teamList.find{member -> if (member != null) member.login.equals(sessionUser.login)}
+            def currProject = Project.get(session.projectId)
+            def teamList = currProject.getTeamList()
+            def result = teamList.find{member -> if (member != null) member.login.equals(currUser.login)}
             if(result == null) {
                 currProject.addToTeamList(currUser).save(flush: true)
+                flash.message = "User $currUser has added to project!"
+                redirect(uri: "/project/$session.projectId/addUserProject")
+            }
+            else {
                 flash.message = "User $currUser has already been in project!"
-                redirect(action: "addUserProject")
+                redirect(uri: "/project/$session.projectId/addUserProject")
             }
         }
         else{
             flash.message = "Sorry. Please try another login."
-            redirect(action: "addUserProject")
+            redirect(uri: "/project/$session.projectId/addUserProject")
         }
     }
 
-    def backToShow(){
-        redirect(action: "show", id:  session.project.id)
-    }
-
     def index() {
-        session.project = null //обнуляем текущий проект
         def projectList = []
         for(Project project:Project.all) {
             def teamList = project.getTeamList()
@@ -44,7 +44,6 @@ class ProjectController {
     }
 
     def show(Long id) {
-        session.project = Project.get(id) //текущий проект в show
         respond projectService.get(id)
     }
 
