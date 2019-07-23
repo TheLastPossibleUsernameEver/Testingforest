@@ -4,7 +4,6 @@ class TestCase {
 
     String caseName
     String typeCase
-    Long sizeData
     Date dateCreated
     Date lastUpdated
 
@@ -14,7 +13,7 @@ class TestCase {
     }
 
     static belongsTo = [project: Project]
-    static hasOne = [userCreated: User]
+    static hasOne = [userCreated: User, document: TestCaseDocument]
 
     static constraints = {
         caseName size: 1..255

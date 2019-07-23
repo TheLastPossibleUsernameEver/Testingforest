@@ -21,7 +21,12 @@ class TestCaseDocumentController {
     }
 
     def create() {
+        if (params != null) {
         respond new TestCaseDocument(params)
+        }
+        else {
+            redirect(action: "index")
+        }
     }
 
     def save(TestCaseDocument testCaseDocument) {
@@ -72,21 +77,20 @@ class TestCaseDocumentController {
             response.setContentType("APPLICATION/OCTET-STREAM")
             response.setHeader("Content-Disposition",
                     "Attachment;Filename=\"${testCaseDocument.name}\"")
-            def file = new File(testCaseDocument.name).write(JsonOutput.toJson(testCaseDocument))
+            //def file = new File(testCaseDocument.name).write(JsonOutput.toJson(testCaseDocument))
 
-            def fileInputStream = new FileInputStream(file)
+            //def fileInputStream = new FileInputStream(file)
             def outputStream = response.getOutputStream()
-            byte[] buffer = new byte[4096]
-            int len
-            while ((len = fileInputStream.read(buffer)) > 0) {
-                outputStream.write(buffer, 0, len)
-            }
+            //byte[] buffer = new byte[4096]
+            //int len
+            //while ((len = fileInputStream.read(buffer)) > 0) {
+            //    outputStream.write(buffer, 0, len)
+            //}
+            outputStream << testCaseDocument.data
             outputStream.flush()
             outputStream.close()
-            fileInputStream.close()
         }
     }
-
 
     def edit(TestCaseDocument testCaseDocument) {
         respond testCaseDocument
