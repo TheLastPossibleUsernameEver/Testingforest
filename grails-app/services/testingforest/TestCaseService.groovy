@@ -20,4 +20,7 @@ class TestCaseService {
     def delete(Long id){
         TestCase.get(id).delete()
     }
+    def count(){
+        TestCase.count()
+    }
 }

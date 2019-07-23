@@ -11,7 +11,7 @@ class UserController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        redirect(action: "log_in")
+        redirect uri: "/user/log_in"
     }
 
     def log_in() {}
@@ -21,11 +21,11 @@ class UserController {
         def user = User.findByLoginAndPassword(params.login, hexPassword)
         if(user){
             session.user = user
-            redirect(controller: "project ", action: "index")
+            redirect uri: "/project/index"
         }
         else{
             flash.message = "Sorry, ${params.login}. Please try another login/password."
-            redirect(action: "log_in")
+            redirect uri: "/user/log_in"
         }
     }
 
@@ -34,7 +34,7 @@ class UserController {
             flash.message = "Goodbye ${session.user.name}"
             session.user = null
         }
-        redirect(action: "log_in")
+        redirect uri: "/user/log_in"
     }
 
     def show(Long id) {
@@ -61,7 +61,7 @@ class UserController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.name])
-                redirect(action: "log_in")
+                redirect uri: "/user/log_in"
             }
             '*' { respond user, [status: CREATED] }
         }
@@ -90,7 +90,7 @@ class UserController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect user
+                redirect uri: "/user/show/${user.id}"
             }
             '*'{ respond user, [status: OK] }
         }
@@ -107,7 +107,7 @@ class UserController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
-                redirect action:"index", method:"GET"
+                redirect uri: "/user/index"
             }
             '*'{ render status: NO_CONTENT }
         }
@@ -117,7 +117,7 @@ class UserController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])
-                redirect action: "index", method: "GET"
+                redirect uri: "/user/index"
             }
             '*'{ render status: NOT_FOUND }
         }
