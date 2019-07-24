@@ -6,10 +6,6 @@ class Project {
     Date dateCreated
     Date lastUpdated
 
-    @Override
-    String toString() {
-        return projectName
-    }
     static hasMany = [teamList: User, testCaseList: TestCase]
 
     static constraints = {

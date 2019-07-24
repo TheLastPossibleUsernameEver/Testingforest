@@ -32,7 +32,7 @@ class ProjectController {
     }
 
     def index() {
-        def projectList = []
+        List<Project> projectList = []
         for(Project project:Project.all) {
             def teamList = project.getTeamList()
             def sessionUser = session.user
@@ -40,6 +40,7 @@ class ProjectController {
             if(result)
                 projectList.add(project)
         }
+        params.sizeList = projectList.size()
         respond projectList
     }
 
