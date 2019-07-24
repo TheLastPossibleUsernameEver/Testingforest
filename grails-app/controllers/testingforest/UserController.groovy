@@ -9,31 +9,25 @@ class UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        redirect uri: "/user/log_in"
-    }
-
     def log_in() {}
 
-    def authenticate = {
+    def authenticate() {
         def hexPassword = params.password.encodeAsSHA1()
         def user = User.findByLoginAndPassword(params.login, hexPassword)
         if(user){
             session.user = user
+            flash.message = message(code:"login.message", args: [session.user.name])
             redirect uri: "/project/index"
         }
         else{
-            flash.message = "Sorry, ${params.login}. Please try another login/password."
+            flash.error = message(code:"login.error")
             redirect uri: "/user/log_in"
         }
     }
 
-    def logout = {
-        if(session.user != null) {
-            flash.message = "Goodbye ${session.user.name}"
-            session.user = null
-        }
+    def logout() {
+        flash.message = message(code:"logout.message", args: [session.user.name])
+        session.user = null
         redirect uri: "/user/log_in"
     }
 
