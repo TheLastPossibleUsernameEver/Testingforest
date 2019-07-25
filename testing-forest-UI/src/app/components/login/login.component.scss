@@ -1,0 +1,95 @@
+$lightgray:#8bc24a;
+$gray:rgb(127, 127, 127);
+$darkgray:rgb(51, 51, 51);
+$lightblue:#f9fbf7;
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  
+  padding: 30px;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+
+  border: 1px solid rgb(245, 245, 245);
+  border-radius: 100px;
+  background: #8bc24a;
+  box-shadow: 0 0 10px 0 #4d8d01;
+
+  width: 100%;
+  max-width: 400px;
+
+  .logo {
+    margin: 0 auto;
+  }
+
+  input {
+    padding: 6px 0 4px 10px;
+    margin: 10px auto;
+
+    width: 100%;
+    max-width: 300px;
+
+    font-size: 13px;
+
+    border: 1px solid $lightgray;
+    background: #F6F6f6;
+  }
+
+  &__enter-button {
+    padding: 6px 0 4px 10px;
+    margin: 0 auto;
+    margin-top: 15px;
+    border-radius: 100px;
+    width: 100%;
+    max-width: 150px;
+
+    color: $lightgray;
+    background: $lightblue;
+    border: 1px solid $lightgray;
+
+    font: inherit;
+    font-size: 14px;
+    line-height: 18px;
+
+    &:disabled {
+      background: $gray;
+      pointer-events: none;
+    }
+    &:hover,
+    &:focus {
+      color: $darkgray;
+      cursor: pointer;
+    }
+  }
+}
+
+
+.login {
+  display: flex;
+  flex-direction: column;
+
+  &__forget-link {
+    a {
+      font-size: 13px;
+      line-height: 24px;
+      font-weight: normal;
+      color: $darkgray;
+
+      &:hover,
+      &focus {
+        color: $darkgray;
+      }
+    }
+  }
+}
+
+/* 
+.visually-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: 1px;
+} */

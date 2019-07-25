@@ -4,10 +4,10 @@ class TestCaseController {
 
     def testCaseService
 
-    def index() {
-        respond testCaseService.list()
+    def list(Long projectId) {
+        Project project = Project.get(projectId)
+        respond project.getTestCaseList()
     }
-
 
     def show(Long id) {
         respond testCaseService.get(id)
@@ -44,14 +44,15 @@ class TestCaseController {
     def update(TestCase testCase) {
         if (testCase.validate()){
             testCaseService.save(testCase)
-            redirect action: "show", id: testCase.id
+            redirect uri: "/testCase/show/$testCase.id"
         } else {
             respond testCase.errors, view: "edit"
         }
     }
 
     def delete(Long id) {
+        def projectId = testCaseService.get(id).project.id
         testCaseService.delete(id)
-        redirect action:"index", method:"GET"
+        redirect uri: "/project/${projectId}/testCase/list"
     }
 }
