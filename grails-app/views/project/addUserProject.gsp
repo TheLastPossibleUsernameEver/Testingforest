@@ -7,7 +7,8 @@
 
 <div class="nav" role="navigation">
     <u1>
-        <li><g:link class="list" uri="/project/show/${this.project.id}">Back</g:link></li>
+        <li><g:link class="list" uri="/project/show/${this.project.id}">Project info</g:link></li>
+        <li><g:link class="list" uri="/user/logout">Log out</g:link></li>
     </u1>
 </div>
 <div class="body">

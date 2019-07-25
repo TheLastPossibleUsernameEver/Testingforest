@@ -62,6 +62,33 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
         noExceptionThrown()
     }
 
+    void "Test project/addingUser url mapping"() {
+        when:
+        request.method = "POST"
+        assertForwardUrlMapping("/project/addingUser", controller: 'project',
+                action: 'addingUser', method: 'POST')
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "Test project/addUserProject url mapping"() {
+        expect:
+        verifyForwardUrlMapping("/project/projectId/addUserProject", controller: 'project',
+                action: 'addUserProject', method: 'GET'){
+            id = projectId
+        }
+
+        when:
+        assertForwardUrlMapping("/project/projectId/addUserProject", controller: 'project',
+                action: 'addUserProject', method: 'GET'){
+            id = projectId
+        }
+
+        then:
+        noExceptionThrown()
+    }
+
     void "User controller log_in action"() {
         expect:
         verifyAction('user', 'log_in')
@@ -101,6 +128,28 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
 
         when:
         assertAction('project', 'index')
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "Project controller addUserProject action"() {
+        expect:
+        verifyAction('project', 'addUserProject')
+
+        when:
+        assertAction('project', 'addUserProject')
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "Project controller addingUser action"() {
+        expect:
+        verifyAction('project', 'addingUser')
+
+        when:
+        assertAction('project', 'addingUser')
 
         then:
         noExceptionThrown()

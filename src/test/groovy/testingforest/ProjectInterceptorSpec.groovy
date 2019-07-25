@@ -3,29 +3,13 @@ package testingforest
 import grails.testing.web.interceptor.InterceptorUnitTest
 import spock.lang.Specification
 
-class LogoutInterceptorSpec extends Specification implements InterceptorUnitTest<LogoutInterceptor> {
+class ProjectInterceptorSpec extends Specification implements InterceptorUnitTest<ProjectInterceptor> {
 
     def setup() {
     }
 
     def cleanup() {
 
-    }
-
-    void "Test logout interceptor matching"() {
-        when:"A request matches the interceptor"
-            withRequest(controller:"user", action: "logout")
-
-        then:"The interceptor does match"
-            interceptor.doesMatch()
-    }
-
-    void "Test project/index interceptor matching"() {
-        when:"A request matches the interceptor"
-        withRequest(controller:"project", action: "index")
-
-        then:"The interceptor does match"
-        interceptor.doesMatch()
     }
 
     void "Test project/addUserProject interceptor matching"() {
