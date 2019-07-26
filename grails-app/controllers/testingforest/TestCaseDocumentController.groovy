@@ -1,7 +1,6 @@
 package testingforest
 
 import grails.validation.ValidationException
-import groovy.json.JsonOutput
 
 import static org.springframework.http.HttpStatus.*
 
@@ -46,46 +45,23 @@ class TestCaseDocumentController {
         testCaseDocument.save (flush:true)
 
         redirect(action: "index")
-
-//        try {
-//            testCaseDataService.save(testCaseData)
-//        } catch (ValidationException e) {
-//            respond testCaseData.errors, view:'create'
-//            return
-//        }
-//
-//        request.withFormat {
-//            form multipartForm {
-//                flash.message = message(code: 'default.created.message', args: [message(code: 'testCaseData.label', default: 'TestCaseData'), testCaseData.id])
-//                redirect testCaseData
-//            }
-//            '*' { respond testCaseData, [status: CREATED] }
-//        }
     }
 
-    def showDocument(TestCaseDocument testCaseDocument){
-        response.outputStream << testCaseDocument.data
-        response.outputStream.flush()
-    }
+//    def showDocument(TestCaseDocument testCaseDocument){
+//        this feature is not yet implemented
+//    }
 
-    def downloadDocument(Long id){
+    def download(Long id){
         TestCaseDocument testCaseDocument = TestCaseDocument.get(id)
         if (testCaseDocument == null) {
             flash.message = "Document not found"
-            redirect (action:'list')
+            redirect (action:'index')
         } else {
             response.setContentType("APPLICATION/OCTET-STREAM")
             response.setHeader("Content-Disposition",
                     "Attachment;Filename=\"${testCaseDocument.name}\"")
-            //def file = new File(testCaseDocument.name).write(JsonOutput.toJson(testCaseDocument))
 
-            //def fileInputStream = new FileInputStream(file)
             def outputStream = response.getOutputStream()
-            //byte[] buffer = new byte[4096]
-            //int len
-            //while ((len = fileInputStream.read(buffer)) > 0) {
-            //    outputStream.write(buffer, 0, len)
-            //}
             outputStream << testCaseDocument.data
             outputStream.flush()
             outputStream.close()

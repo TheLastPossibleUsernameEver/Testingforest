@@ -10,7 +10,6 @@
             <tr>
                 <td>Name</td>
                 <td>Type</td>
-                <td>Size</td>
                 <td>Date Created</td>
                 <td>Last Updated</td>
             </tr>
@@ -25,9 +24,6 @@
                     </td>
                     <td>
                         <g:fieldValue bean="${it}" field="typeCase" />
-                    </td>
-                    <td>
-                        <g:fieldValue bean="${it}" field="sizeData" />
                     </td>
                     <td>
                         <g:formatDate date="${it.dateCreated}" type="datetime" style="SHORT" />

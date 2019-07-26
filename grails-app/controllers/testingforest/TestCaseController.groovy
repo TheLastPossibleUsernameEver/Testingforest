@@ -20,7 +20,6 @@ class TestCaseController {
 
     def save(TestCase testCase) {
         //File uploading is not supported yet
-        testCase.sizeData = new Long(0)
         //Test-case types are not supported yet
         testCase.typeCase = "public"
 
@@ -30,7 +29,7 @@ class TestCaseController {
         sessionUser.addToCaseList(testCase)
         if (testCase.validate()){
             testCaseService.save(testCase)
-            flash.message = "Тест-кейс ${testCase.caseName} успешно создан"
+            flash.message = "Test-case ${testCase.caseName} created successfully"
             redirect uri: "/project/${session.projectId}/testCase/create"
         } else {
             respond testCase.errors, view: "create"
