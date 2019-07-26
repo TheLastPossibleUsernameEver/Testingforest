@@ -27,4 +27,20 @@ class LoginInterceptorSpec extends Specification implements InterceptorUnitTest<
         then:"The interceptor does match"
         interceptor.doesMatch()
     }
+
+    void "Test user/save interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"user", action: "save")
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
+
+    void "Test user/create interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"user", action: "create")
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
 }

@@ -36,6 +36,16 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
         noExceptionThrown()
     }
 
+    void "Test user/save url mapping"() {
+        when:
+        request.method = "POST"
+        assertForwardUrlMapping("/user/save", controller: 'user',
+                action: 'save', method: 'POST')
+
+        then:
+        noExceptionThrown()
+    }
+
     void "Test logout url mapping"() {
         expect:
         verifyForwardUrlMapping("/user/logout", controller: 'user',
@@ -44,6 +54,19 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
         when:
         assertForwardUrlMapping("/user/logout", controller: 'user',
                 action: 'logout', method: 'GET')
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "Test user/create url mapping"() {
+        expect:
+        verifyForwardUrlMapping("/user/create", controller: 'user',
+                action: 'create', method: 'GET')
+
+        when:
+        assertForwardUrlMapping("/user/create", controller: 'user',
+                action: 'create', method: 'GET')
 
         then:
         noExceptionThrown()
@@ -90,6 +113,28 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
 
         when:
         assertAction('user', 'logout')
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "User controller create action"() {
+        expect:
+        verifyAction('user', 'create')
+
+        when:
+        assertAction('user', 'create')
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "User controller save action"() {
+        expect:
+        verifyAction('user', 'save')
+
+        when:
+        assertAction('user', 'save')
 
         then:
         noExceptionThrown()
