@@ -6,11 +6,7 @@ class User {
     String login
     String password
 
-    @Override
-    String toString() {
-        return login
-    }
-//User created any TestCase
+    //User created any TestCase
     static hasMany = [caseList : TestCase]
 
     static constraints = {

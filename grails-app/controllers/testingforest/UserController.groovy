@@ -40,24 +40,13 @@ class UserController {
     }
 
     def save(User user) {
-        if (user == null) {
-            notFound()
-            return
-        }
-
-        try {
-         userService.save(user)
-        } catch (ValidationException e) {
-            respond user.errors, view:'create'
-            return
-        }
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.name])
-                redirect uri: "/user/log_in"
-            }
-            '*' { respond user, [status: CREATED] }
+        user.role = "user"
+        if (user.validate()) {
+            user.save()
+            flash.message = message(code: 'registration.success.message', args: [user.name])
+            redirect uri: "/user/log_in"
+        } else {
+            respond user.errors, view: 'create'
         }
     }
 
