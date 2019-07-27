@@ -6,22 +6,28 @@
 <body>
 <div class="nav" role="navigation">
     <ul>
-        <li><g:link class="create" action="create">Create project</g:link></li>
-        <li><g:link class="list" uri="/user/show/${this.session.user.id}">User info</g:link></li>
-        <li><g:link class="list" uri="/user/logout">Log out</g:link></li>
+        <li><g:link class="create" action="create">
+            <g:message code="project.index.create.button"/>
+        </g:link></li>
+        <li><g:link class="list" uri="/user/show/${this.session.user.id}">
+            <g:message code="user.label.show.info"/>
+        </g:link></li>
+        <li><g:link class="list" uri="/user/logout">
+            <g:message code="logout.label"/>
+        </g:link></li>
     </ul>
 </div>
 <div>
     <g:if test="${params.sizeList == 0}">
-        <h1>You have no projects. Create it!</h1>
+        <h1><g:message code="project.label.no.project"/></h1>
     </g:if>
     <g:else>
         <table class="main">
             <thead>
             <tr>
-                <td>Name</td>
-                <td>Date Created</td>
-                <td>Last Updated</td>
+                <td><g:message code="project.name.label.field"/></td>
+                <td><g:message code="project.dateCreated.label.field"/></td>
+                <td><g:message code="project.lastUpdated.label.field"/></td>
             </tr>
             </thead>
             <tbody>

@@ -17,16 +17,16 @@ class ProjectController {
             def result = teamList.find{member -> if (member != null) member.login.equals(currUser.login)}
             if(result == null) {
                 currProject.addToTeamList(currUser).save(flush: true)
-                flash.message = "User $currUser has added to project!"
+                flash.message = message(code: 'project.success.addUser.message', args: [params.login])
                 redirect(uri: "/project/$session.projectId/addUserProject")
             }
             else {
-                flash.message = "User $currUser has already been in project!"
+                flash.error = message(code: 'user.already.in.project', args: [params.login])
                 redirect(uri: "/project/$session.projectId/addUserProject")
             }
         }
         else{
-            flash.message = "Sorry. Please try another login."
+            flash.error = message(code: 'user.login.not.exist')
             redirect(uri: "/project/$session.projectId/addUserProject")
         }
     }

@@ -5,11 +5,14 @@ class ProjectInterceptor {
 
     ProjectInterceptor(){
         match(controller: "project", action: "addUserProject")
-        match(controller: "project", action: "addingUser")
     }
 
-    boolean after() {
-        def project = Project.get(session.projectId)
+    boolean before(){
+        def project = Project.get(params.projectId)
+        if(project == null){
+            redirect(uri:"/project/index")
+            return false
+        }
         def teamList = project.getTeamList()
         def sessionUser = session.user
         def result = teamList.find{member -> if (member != null) member.login.equals(sessionUser.login)}

@@ -74,15 +74,15 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
 
     void "Test project/addUserProject url mapping"() {
         expect:
-        verifyForwardUrlMapping("/project/projectId/addUserProject", controller: 'project',
+        verifyForwardUrlMapping("/project/1/addUserProject", controller: 'project',
                 action: 'addUserProject', method: 'GET'){
-            id = projectId
+            projectId = 1
         }
 
         when:
-        assertForwardUrlMapping("/project/projectId/addUserProject", controller: 'project',
+        assertForwardUrlMapping("/project/1/addUserProject", controller: 'project',
                 action: 'addUserProject', method: 'GET'){
-            id = projectId
+            projectId = 1
         }
 
         then:
