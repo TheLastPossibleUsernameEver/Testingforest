@@ -8,6 +8,7 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
     def setup() {
         mockController(UserController)
         mockController(ProjectController)
+        mockController(TestCaseController)
     }
 
     def cleanup() {
@@ -112,6 +113,19 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
         noExceptionThrown()
     }
 
+    void "Test /project/projectId/testCase/list url mapping"() {
+        expect:
+        verifyForwardUrlMapping("/project/1/testCase/list", controller: 'testCase',
+                action: 'list', method: 'GET') {projectId = 1}
+
+        when:
+        assertForwardUrlMapping("/project/1/testCase/list", controller: 'testCase',
+                action: 'list', method: 'GET') {projectId = 1}
+
+        then:
+        noExceptionThrown()
+    }
+
     void "User controller log_in action"() {
         expect:
         verifyAction('user', 'log_in')
@@ -195,6 +209,17 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
 
         when:
         assertAction('project', 'addingUser')
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "Project testCase list action"() {
+        expect:
+        verifyAction('testCase', 'list')
+
+        when:
+        assertAction('testCase', 'list')
 
         then:
         noExceptionThrown()

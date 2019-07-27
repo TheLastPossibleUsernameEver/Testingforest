@@ -6,6 +6,8 @@ class TestCaseController {
 
     def list(Long projectId) {
         Project project = Project.get(projectId)
+        params.projectName = project.projectName
+        params.sizeTestCaseList = project.testCaseList.size()
         respond project.getTestCaseList()
     }
 
