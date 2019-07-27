@@ -27,4 +27,20 @@ class LogoutInterceptorSpec extends Specification implements InterceptorUnitTest
         then:"The interceptor does match"
         interceptor.doesMatch()
     }
+
+    void "Test project/addUserProject interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"project", action: "addUserProject")
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
+
+    void "Test project/addingUser interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"project", action: "addingUser")
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
 }

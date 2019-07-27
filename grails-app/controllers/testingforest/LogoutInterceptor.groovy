@@ -5,6 +5,8 @@ class LogoutInterceptor {
     LogoutInterceptor() {
         match(controller: "user", action: "logout")
         match(controller: "project", action: "index")
+        match(controller: "project", action: "addUserProject")
+        match(controller: "project", action: "addingUser")
     }
 
     boolean before() {
