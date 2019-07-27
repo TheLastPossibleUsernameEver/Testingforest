@@ -53,42 +53,15 @@ class UserControllerSpec extends Specification implements
         User user = new User(name: "test", login: "test", password: "12345")
 
 
-        when:"Save executed"
+        when: "Save executed"
         controller.save(user)
 
-        then:"User should be saved"
+        then: "User should be saved"
         User.list().size() == 1
         def userSaved = User.list()[0]
         userSaved.name == "test"
         userSaved.role == "user"
         userSaved.login == "test"
         userSaved.password == "12345".encodeAsSHA1()
-
-    void "Test authenticate"() {
-        given:
-        User user = new User( name: "test", role: "user", login: "test", password: "12345")
-        user.save()
-        params.login = "test"
-        params.password = "12345"
-
-        when:"authenticate executed"
-        controller.authenticate()
-
-
-        then:"Session user is not null"
-        session.user != null
-    }
-
-    void "Test logout"() {
-        given:
-        User user = new User( name: "test", role: "user", login: "test", password: "12345")
-        user.save()
-        session.user = user
-
-        when:"logout executed"
-        controller.logout()
-
-        then:"Session user should be null"
-        session.user == null
     }
 }

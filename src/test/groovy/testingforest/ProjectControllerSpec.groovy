@@ -48,7 +48,7 @@ class ProjectControllerSpec extends Specification implements DataTest, Controlle
         project_1.save()
         User newUser = new User( name: "test_1", role: "user", login: "test_1", password: "12345")
         newUser.save()
-        params.login = "tuki"
+        params.login = "test_1"
         controller.projectService = Stub(ProjectService) {
             get() >> project_1
         }
