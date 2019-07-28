@@ -44,8 +44,11 @@ class ProjectController {
         respond projectList
     }
 
-    def show(Long id) {
-        respond projectService.get(id)
+    def show(Long projectId) {
+        Project project = projectService.get(projectId)
+        params.projectName = project.projectName
+        params.sizeTestCaseList = project.testCaseList.size()
+        respond projectService.get(projectId)
     }
 
     def create() {
@@ -58,4 +61,25 @@ class ProjectController {
         redirect uri: "/project/index"
     }
 
+    def leaveProject(Long projectId) {
+        Project project = Project.get(projectId)
+        if (project) {
+            User user = project.teamList.find { member -> member.id == session.user.id}
+            project.removeFromTeamList(user)
+            if (project.teamList.isEmpty()) {
+                projectService.delete(projectId)
+                redirect uri: "/project/index"
+            } else {
+                projectService.save(project)
+                redirect uri: "/project/index"
+            }
+        } else {
+            redirect uri: "/project/index"
+        }
+    }
+
+    def delete(Long projectId) {
+        projectService.delete(projectId)
+        redirect uri: "/project/index"
+    }
 }

@@ -28,9 +28,11 @@ class UrlMappings {
         get "/project/$projectId/addUserProject"(controller: "project", action: "addUserProject")
         post "/project/addingUser"(controller: "project", action: "addingUser")
         get "/project/index"(controller: "project", action: "index")
-        get "/project/show/$id"(controller: "project", action: "show")
+        get "/project/show/$projectId"(controller: "project", action: "show")
         get "/project/create"(controller: "project", action: "create")
         post "/project/save"(controller: "project", action: "save")
+        delete "/project/delete/$projectId"(controller: "project", action: "delete")
+        put "/project/leaveProject/$projectId"(controller: "project", action: "leaveProject")
 
         //Diagnostic controller uri
         get "/diagnostic/index"(controller: "diagnostic", action: "index")
