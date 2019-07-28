@@ -99,8 +99,9 @@ class ProjectControllerSpec extends Specification implements DataTest, Controlle
                 , lastUpdated: "20.09.2011", teamList: [user_1])
         project_1.save()
         Long projectId = project_1.id
-        def service = Mock(ProjectService)
-        controller.projectService = service
+        controller.projectService = Stub(ProjectService) {
+            delete() >> project_1.delete()
+        }
 
         when: 'The actions is executed'
         controller.leaveProject(projectId)
@@ -118,8 +119,9 @@ class ProjectControllerSpec extends Specification implements DataTest, Controlle
                 , lastUpdated: "20.09.2011", teamList: [user_1])
         project_1.save()
         Long projectId = project_1.id
-        def service = Mock(ProjectService)
-        controller.projectService = service
+        controller.projectService = Stub(ProjectService) {
+            delete() >> project_1.delete()
+        }
 
         when: 'The actions is executed'
         controller.delete(projectId)
