@@ -21,6 +21,9 @@ class TestCaseController {
     }
 
     def save(TestCase testCase) {
+        //File uploading is not supported yet
+        testCase.sizeData = new Long(0)
+
         //Test-case types are not supported yet
         testCase.typeCase = "public"
 
