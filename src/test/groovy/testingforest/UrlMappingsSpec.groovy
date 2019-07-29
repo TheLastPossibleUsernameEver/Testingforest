@@ -126,6 +126,26 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
         noExceptionThrown()
     }
 
+    void "Test /project/delete/projectId url mapping"() {
+        when:
+        request.method = "DELETE"
+        assertUrlMapping("/project/delete/1", controller: 'project',
+                action: 'delete', method: 'DELETE') {projectId = 1}
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "Test project/leaveProject url mapping"() {
+        when:
+        request.method = "PUT"
+        assertUrlMapping("/project/leaveProject/1", controller: 'project',
+                action: 'leaveProject', method: 'PUT') {projectId = 1}
+
+        then:
+        noExceptionThrown()
+    }
+
     void "User controller log_in action"() {
         expect:
         verifyAction('user', 'log_in')
@@ -220,6 +240,28 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
 
         when:
         assertAction('testCase', 'list')
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "Project project delete action"() {
+        expect:
+        verifyAction('project', 'delete')
+
+        when:
+        assertAction('project', 'delete')
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "Project project leaveProject action"() {
+        expect:
+        verifyAction('project', 'leaveProject')
+
+        when:
+        assertAction('project', 'leaveProject')
 
         then:
         noExceptionThrown()
