@@ -16,7 +16,7 @@ class UrlMappings {
         get "/testCaseDocument/create"(controller: "testCaseDocument", action: "create")
         post "/testCaseDocument/save"(controller: "testCaseDocument", action: "save")
         get "/testCaseDocument/index"(controller: "testCaseDocument", action: "index")
-        get "/testCaseDocument/downloadDocument"(controller: "testCaseDocument", action:"download")
+        get "/testCaseDocument/downloadDocument/$id"(controller: "testCaseDocument", action:"download")
 
         //User controller uri
         get "/user/index"(controller: "user", action: "index")

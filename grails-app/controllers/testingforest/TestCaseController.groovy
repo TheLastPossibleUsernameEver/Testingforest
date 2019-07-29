@@ -19,7 +19,6 @@ class TestCaseController {
     }
 
     def save(TestCase testCase) {
-        //File uploading is not supported yet
         //Test-case types are not supported yet
         testCase.typeCase = "public"
 

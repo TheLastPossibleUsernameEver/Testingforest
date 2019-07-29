@@ -13,11 +13,10 @@ class TestCase {
     }
 
     static belongsTo = [project: Project]
-    static hasOne = [userCreated: User, document: TestCaseDocument]
+    static hasOne = [userCreated: User]
 
     static constraints = {
         caseName size: 1..255
         typeCase inList: ["public","protected","private"]
-        document (blank:true, nullable:true)
     }
 }

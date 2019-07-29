@@ -6,10 +6,10 @@
         <title><g:message code="default.edit.label" args="[entityName]" /></title>
     </head>
     <body>
-        <g:form url="[resource:testCaseDocumentInstance, action:'update']"
+        <g:form url="[resource: testCaseDocument, action:'update']"
                 method="POST" enctype="multipart/form-data">
             <g:hiddenField name="version"
-                           value="${testCaseDocumentInstance?.version}"/>
+                           value="${testCaseDocument?.version}"/>
             <input type="file" id="data" name="data"/>
 
             <fieldset class="buttons">
