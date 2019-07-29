@@ -129,4 +129,23 @@ class ProjectControllerSpec extends Specification implements DataTest, Controlle
         then: 'The model is correct'
         !Project.exists(projectId)
     }
+
+    def "Test create&save"(){
+        given:
+        controller.request.method = 'POST'
+        User user = new User( name: "test", role: "user", login: "test", password: "12345")
+        user.save()
+        session.user = user
+        Project project = new Project(projectName: "Hello world")
+
+
+        when: "Save executed"
+        controller.save(project)
+
+        then: "Project should be saved"
+        Project.list().size() == 1
+        def projectSaved = Project.list()[0]
+        projectSaved.projectName == "Hello world"
+        projectSaved.teamList.contains(user)
+    }
 }
