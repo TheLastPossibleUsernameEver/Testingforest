@@ -57,8 +57,12 @@ class ProjectController {
     }
 
     def save(Project project) {
-        project.addToTeamList(session.user).save(flush: true)
-        redirect uri: "/project/index"
+        if (project.validate()) {
+            project.addToTeamList(session.user).save(flush: true)
+            redirect uri: "/project/index"
+        } else {
+            respond project.errors, view: 'create'
+        }
     }
 
     def leaveProject(Long projectId) {
