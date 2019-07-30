@@ -1,7 +1,6 @@
 package testingforest
 
 import grails.testing.gorm.DataTest
-import grails.testing.services.ServiceUnitTest
 import grails.testing.web.controllers.ControllerUnitTest
 import spock.lang.Specification
 
