@@ -21,9 +21,6 @@ class TestCaseController {
     }
 
     def save(TestCase testCase) {
-        //File uploading is not supported yet
-        testCase.sizeData = new Long(0)
-
         //Test-case types are not supported yet
         testCase.typeCase = "public"
 
@@ -34,8 +31,14 @@ class TestCaseController {
         if (testCase.validate()){
             testCaseService.save(testCase)
             flash.message = "Test-case ${testCase.caseName} created successfully"
+
+            log.info("Created ${testCase.caseName} test-case in ${sessionProject.projectName} project ")
+
             redirect uri: "/project/${session.projectId}/testCase/create"
         } else {
+            log.error("Test-case ${testCase} in ${sessionProject} is invalid: "
+                    + testCase.errors)
+
             respond testCase.errors, view: "create"
         }
     }
@@ -47,6 +50,9 @@ class TestCaseController {
     def update(TestCase testCase) {
         if (testCase.validate()){
             testCaseService.save(testCase)
+
+            log.info("Updated ${testCase.caseName} test-case in ${testCaseService.get(testCase).project.projectName}")
+
             redirect uri: "/testCase/show/$testCase.id"
         } else {
             respond testCase.errors, view: "edit"
@@ -55,6 +61,10 @@ class TestCaseController {
 
     def delete(Long id) {
         def projectId = testCaseService.get(id).project.id
+
+        log.info("Deleted ${testCaseService.get(id).caseName} test-case" +
+                "in ${testCaseService.get(id).project.projectName} project")
+
         testCaseService.delete(id)
         redirect uri: "/project/${projectId}/testCase/list"
     }
