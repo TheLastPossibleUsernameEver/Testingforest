@@ -10,6 +10,7 @@ conversionRule 'clr', ColorConverter
 conversionRule 'wex', WhitespaceThrowableProxyConverter
 
 // See http://logback.qos.ch/manual/groovy.html for details on configuration
+// Declaration of console logger
 appender('STDOUT', ConsoleAppender) {
     encoder(PatternLayoutEncoder) {
         charset = Charset.forName('UTF-8')
@@ -23,6 +24,7 @@ appender('STDOUT', ConsoleAppender) {
     }
 }
 
+// Declaration of the file for default stacktrace dump for exceptions and errors in development environment
 def targetDir = BuildSettings.TARGET_DIR
 if (Environment.isDevelopmentMode() && targetDir != null) {
     appender("FULL_STACKTRACE", FileAppender) {
@@ -35,11 +37,13 @@ if (Environment.isDevelopmentMode() && targetDir != null) {
     logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
 }
 
+//THIS is the path you should configure, path to the directory which locates current project
 def LOCAL_PATH = "/home/humanzer0"
 
 //The place, where Grails collect logs.
 def HOME_DIR = "${LOCAL_PATH}/testingforest/build"
 
+//Declaration of rolling(meaning that it saves logs outside every constant period) logger
 appender("ROLLING", RollingFileAppender) {
     encoder(PatternLayoutEncoder) {
         pattern = "%level %logger - %msg%n"
