@@ -32,8 +32,8 @@ class TestCaseController {
         User sessionUser = User.get(session.user.id)
         sessionUser.addToCaseList(testCase)
         if (testCase.validate()){
-            testCaseService.save(testCase)
-            flash.message = "Test-case ${testCase.caseName} created successfully"
+            testCase.save(flush: true)
+            flash.message = message(code: "testCase.create.success.message", args: [testCase.caseName])
             redirect uri: "/project/${session.projectId}/testCase/create"
         } else {
             respond testCase.errors, view: "create"

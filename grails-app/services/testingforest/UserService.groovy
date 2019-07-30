@@ -9,6 +9,14 @@ class UserService {
         User.get(id)
     }
 
+    def list(){
+        User.list()
+    }
+
+    def count(){
+        User.count()
+    }
+
     def delete(Long id) {
         User.get(id).delete()
     }
