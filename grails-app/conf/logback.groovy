@@ -40,7 +40,10 @@ if (Environment.isDevelopmentMode() && targetDir != null) {
 //Declaration of rolling(meaning that it saves logs outside every constant period) logger
 appender("ROLLING", RollingFileAppender) {
     encoder(PatternLayoutEncoder) {
-        pattern = "%level %logger - %msg%n"
+        charset = Charset.forName('UTF-8')
+
+        pattern = '%d{yyyy-MM-dd HH:mm:ss.SSS} ' + //Date and time
+                "%level %logger - %msg%n"
     }
     rollingPolicy(TimeBasedRollingPolicy) {
         fileNamePattern = "${targetDir}/logs/testingforest-%d{yyyy-MM-dd_HH-mm}.log"
