@@ -3,7 +3,7 @@
     <head>
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'testCaseDocument.label', default: 'TestCaseDocument')}" />
-        <title><g:message code="default.show.label" args="[entityName]" /></title>
+        <title>Document - TestingForest</title>
     </head>
     <body>
         <div content-type="plain/text" src="${createLink(controller: 'testCaseDocument', action: 'showDocument',

@@ -2,8 +2,8 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'testCaseDocumentInstance.label', default: 'TestCaseDocument')}" />
-        <title><g:message code="default.edit.label" args="[entityName]" /></title>
+        <g:set var="entityName" value="${message(code: 'testCaseDocument.label', default: 'TestCaseDocument')}" />
+        <title>Document edit - TestingForest</title>
     </head>
     <body>
         <g:form url="[resource: testCaseDocument, action:'update']"

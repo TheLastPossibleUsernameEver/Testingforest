@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta name="layout" content="main" />
-    <title>Add user</title>
+    <title>Add member to your project - TestingForest</title>
 </head>
 <body>
 

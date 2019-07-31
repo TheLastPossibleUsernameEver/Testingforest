@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="main" />
+        <title>Diagnostic page - TestingForest</title>
     </head>
     <body>
         <div class="nav" role="navigation">

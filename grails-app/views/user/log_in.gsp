@@ -1,6 +1,7 @@
 <html>
 <head>
     <meta name="layout" content="main" />
+    <title> Sign In - TestingForest</title>
 </head>
 <body>
 <div class="nav" role="navigation">
@@ -24,7 +25,7 @@
             ${flash.message}
         </div>
     </g:if>
-    <g:form action="authenticate" >
+    <g:form action="authenticate">
         <fieldset class="form">
             <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'login','error')}">
                 <label><g:message code="login.label"/></label>

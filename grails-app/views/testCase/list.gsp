@@ -2,6 +2,9 @@
 <html>
 <head>
     <meta name="layout" content="main" />
+    <title>
+        Test-case list - TestingForest
+    </title>
 </head>
 <body>
 <div>

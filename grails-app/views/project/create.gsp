@@ -2,6 +2,9 @@
 <html>
 <head>
     <meta name="layout" content="main" />
+    <title>
+        New project - TestingForest
+    </title>
 </head>
 <body>
 <div class="nav" role="navigation">

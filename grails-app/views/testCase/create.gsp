@@ -3,6 +3,9 @@
 <head>
     <meta name="layout" content="main" />
     <g:set var="entityName" value="${message(code: 'user.label', default: 'Test-Case')}" />
+    <title>
+        New test-case - Testingforest
+    </title>
 </head>
 <body>
 <div class="nav" role="navigation">

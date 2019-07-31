@@ -2,6 +2,9 @@
 <html>
 <head>
     <meta name="layout" content="main" />
+    <title>
+        Available projects - TestingForest
+    </title>
 </head>
 <body>
 <div class="nav" role="navigation">
@@ -13,7 +16,7 @@
 </div>
 <div>
     <g:if test="${params.sizeList == 0}">
-        <h1>You have no projects. Create it!</h1>
+        <h1 style="text-align: center">You have no projects. Create new one!</h1>
     </g:if>
     <g:else>
         <table class="main">

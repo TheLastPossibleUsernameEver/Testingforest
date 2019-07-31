@@ -3,6 +3,9 @@
 <head>
     <meta name="layout" content="main" />
     <g:set var="entityName" value="${message(code: 'testCase.label', default: 'TestCase')}" />
+    <title>
+            Test-case info - Testingforest
+    </title>
 </head>
 <body>
 <div id="show-testCase" class="content scaffold-show" role="main">
