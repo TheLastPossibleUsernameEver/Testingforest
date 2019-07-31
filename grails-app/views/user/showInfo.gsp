@@ -48,7 +48,7 @@
          </tr>
       </g:each>
 </table>
-<h2><g:message code="user.info.testcases" /></h2>
+<h4><g:message code="user.info.testcases" /></h4>
 <hr>
 <table>
       <th>
@@ -69,9 +69,13 @@
       </g:each>
 </table>
 </div>
-<g:form controller="user" action="deleteCurrentUser">
-          <input class="delete" type="submit" value="${message(code: 'user.info.button.deleteAccount', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />              
-  </g:form>
+  <g:form uri="/user/deleteCurrentUser" method="DELETE">
+        <g:submitButton name="delete"
+                        value="${message(code: 'user.info.button.deleteAccount')}"
+                        onclick="return confirm('${message(code:
+                                'user.button.delete.confirm.message',
+                                args: [params.projectName])}');"/>
+   </g:form>
 </div>
 </body>
 </html>

@@ -30,11 +30,7 @@ class UserController {
         session.user = null
         redirect uri: "/user/log_in"
     }
-    def showInfo() {
-        if (session.user==null){
-            flash.error = message(code:"need.login")
-            redirect uri: "/user/log_in"
-        } else {
+    def showInfo() {   
             def user = User.get(session.user.id)
             def testCases=user.caseList
             def c=Project.createCriteria()
@@ -44,12 +40,12 @@ class UserController {
                 }
             }
             [projects:projects,testCases:testCases]
-        }
+        
     }
     def deleteCurrentUser() {
         def user=session.user;
-        def c=Project.createCriteria()
-        def projects=c.list{
+        def criteria=Project.createCriteria()
+        def projects=criteria.list{
             teamList{
                 idEq(user.id)
             }
@@ -58,11 +54,13 @@ class UserController {
             if (it.teamList.size()==1){
                 it.delete()
             } else {
-                it.teamList.remove(user)
+                it.teamList.removeElement(user)
             }
         }
-        userService.delete(user.id)
-        session.user=null
+        User.get(user.id).caseList.each{
+            it.delete()
+        }
+        User.get(user.id).delete(flush:true)
         session.invalidate()
         redirect uri: "/user/log_in"
     }
