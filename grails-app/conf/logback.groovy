@@ -37,19 +37,13 @@ if (Environment.isDevelopmentMode() && targetDir != null) {
     logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
 }
 
-//THIS is the path you should configure, path to the directory which locates current project
-def LOCAL_PATH = "/home/humanzer0"
-
-//The place, where Grails collect logs.
-def HOME_DIR = "${LOCAL_PATH}/testingforest/build"
-
 //Declaration of rolling(meaning that it saves logs outside every constant period) logger
 appender("ROLLING", RollingFileAppender) {
     encoder(PatternLayoutEncoder) {
         pattern = "%level %logger - %msg%n"
     }
     rollingPolicy(TimeBasedRollingPolicy) {
-        fileNamePattern = "${HOME_DIR}/logs/testingforest-%d{yyyy-MM-dd_HH-mm}.log"
+        fileNamePattern = "${targetDir}/logs/testingforest-%d{yyyy-MM-dd_HH-mm}.log"
         maxHistory = 30
         totalSizeCap = FileSize.valueOf("2GB")
     }
