@@ -5,7 +5,7 @@ class User {
     String role
     String login
     String password
-
+    Date dateCreated
     //User created any TestCase
     static hasMany = [caseList : TestCase]
 
@@ -17,6 +17,7 @@ class User {
         name size: 1..45
         role inList: ["admin", "user"]
         caseList nullable: true
+        dateCreated nullable:true
     }
 
     def beforeInsert(){

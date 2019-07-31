@@ -29,6 +29,8 @@ class UrlMappings {
         get "/user/edit/$id"(controller: "user", action: "edit")
         put "/user/update/$id"(controller: "user", action: "update")
         delete "/user/delete/$id"(controller: "user", action: "delete")
+        get "/user/showInfo"(controller: "user", action: "showInfo")
+        delete "/user/deleteCurrentUser" (controller: "user", action: "deleteCurrentUser")
 
         //Project controller uri
         get "/project/$projectId/addUserProject"(controller: "project", action: "addUserProject")
