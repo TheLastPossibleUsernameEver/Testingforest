@@ -30,35 +30,34 @@ class UserController {
         session.user = null
         redirect uri: "/user/log_in"
     }
-    def showInfo() {   
-            def user = User.get(session.user.id)
-            def testCases=user.caseList
-            def c=Project.createCriteria()
-            def projects=c.list{
-                teamList{
-                    idEq(user.id)
-                }
+    def showInfo() {
+        def user = User.get(session.user.id)
+        def testCases = user.caseList
+        def criteria = Project.createCriteria()
+        def projects = criteria.list{
+            teamList{
+                idEq(user.id)
             }
-            [projects:projects,testCases:testCases]
-        
+        }
+        return [projects:projects,testCases:testCases]
     }
     def deleteCurrentUser() {
-        def user=session.user;
-        def criteria=Project.createCriteria()
-        def projects=criteria.list{
+        def user = session.user
+        def criteria = Project.createCriteria()
+        def projects = criteria.list{
             teamList{
                 idEq(user.id)
             }
         }
         projects.each{
-            if (it.teamList.size()==1){
-                it.delete()
+            if ( it.teamList.size() == 1 ){
+                it.delete(flush:true)
             } else {
                 it.teamList.removeElement(user)
             }
         }
         User.get(user.id).caseList.each{
-            it.delete()
+            it.delete(flush:true)
         }
         User.get(user.id).delete(flush:true)
         session.invalidate()
