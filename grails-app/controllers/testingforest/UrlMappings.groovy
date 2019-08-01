@@ -7,10 +7,10 @@ class UrlMappings {
         get "/project/$projectId/testCase/list"(controller: "testCase", action: "list")
         get "/project/$projectId/testCase/create"(controller: "testCase", action: "create")
         post "/testCase/save"(controller: "testCase", action: "save")
-        get "/testCase/show/$id"(controller: "testCase", action: "show")
-        get "/testCase/edit/$id"(controller: "testCase", action: "edit")
+        get "/testCase/show/$testCaseId"(controller: "testCase", action: "show")
+        get "/testCase/edit/$testCaseId"(controller: "testCase", action: "edit")
         put "/testCase/update/$id"(controller: "testCase", action: "update")
-        delete "/testCase/delete/$id"(controller: "testCase", action: "delete")
+        delete "/testCase/delete/$testCaseId"(controller: "testCase", action: "delete")
 
         //TestCaseDocument controller uri
         get "/testCaseDocument/create"(controller: "testCaseDocument", action: "create")

@@ -30,6 +30,17 @@
                 <label>Test-case name:</label>
                 <g:textField name="caseName" value="${testCase.caseName}"/>
             </div>
+            <g:if test="${testCase.userCreated.id == session.user.id}">
+                <div class="fieldcontain ${hasErrors(bean: testCase, field: 'typeCase','error')}">
+                    <label>
+                        <g:message code="testCase.typeCase.label.field"/>
+                    </label>
+                    <g:select name="typeCase"
+                              from="${testCase.getConstrainedProperties().typeCase.inList}"
+                              value="${testCase.typeCase}"
+                              valueMessagePrefix="testCase.type.label" />
+                </div>
+            </g:if>
         </fieldset>
         <fieldset class="buttons">
             <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />

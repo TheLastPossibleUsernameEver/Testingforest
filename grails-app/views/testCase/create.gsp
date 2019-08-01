@@ -39,6 +39,15 @@
                 </label>
                 <g:textField name="caseName" value="${testCase.caseName}"/>
             </div>
+            <div class="fieldcontain ${hasErrors(bean: testCase, field: 'typeCase','error')}">
+                <label>
+                    <g:message code="testCase.typeCase.label.field"/>
+                </label>
+                <g:select name="typeCase"
+                          from="${testCase.getConstrainedProperties().typeCase.inList}"
+                          value="${testCase.getConstrainedProperties().typeCase.inList[0]}"
+                          valueMessagePrefix="testCase.type.label" />
+            </div>
         </fieldset>
         <fieldset class="buttons">
             <g:submitButton name="save"  value="${message(code: 'testCase.create.label.button')}" />

@@ -7,12 +7,15 @@ class TestCaseController {
     def list(Long projectId) {
         Project project = Project.get(projectId)
         params.projectName = project.projectName
-        params.sizeTestCaseList = project.testCaseList.size()
-        respond project.getTestCaseList()
+        params.testCaseListFiltered = project.testCaseList.findAll {
+            testCase -> if (testCase.typeCase == "public" ||
+                    (testCase.typeCase == "private" && testCase.userCreated.id == session.user.id)) testCase}
+        params.sizeTestCaseListFiltered = params.testCaseListFiltered.size()
+        respond view: "list"
     }
 
-    def show(Long id) {
-        respond testCaseService.get(id)
+    def show(Long testCaseId) {
+        respond testCaseService.get(testCaseId)
     }
 
     def create(Long projectId) {
@@ -23,9 +26,6 @@ class TestCaseController {
     def save(TestCase testCase) {
         //File uploading is not supported yet
         testCase.sizeData = new Long(0)
-
-        //Test-case types are not supported yet
-        testCase.typeCase = "public"
 
         Project sessionProject = Project.get(session.projectId)
         sessionProject.addToTestCaseList(testCase)
@@ -40,8 +40,8 @@ class TestCaseController {
         }
     }
 
-    def edit(Long id) {
-        respond testCaseService.get(id)
+    def edit(Long testCaseId) {
+        respond testCaseService.get(testCaseId)
     }
 
     def update(TestCase testCase) {
@@ -53,9 +53,9 @@ class TestCaseController {
         }
     }
 
-    def delete(Long id) {
-        def projectId = testCaseService.get(id).project.id
-        testCaseService.delete(id)
+    def delete(Long testCaseId) {
+        def projectId = testCaseService.get(testCaseId).project.id
+        testCaseService.delete(testCaseId)
         redirect uri: "/project/${projectId}/testCase/list"
     }
 }

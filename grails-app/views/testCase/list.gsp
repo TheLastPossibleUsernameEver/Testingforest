@@ -32,7 +32,7 @@
             <h1>
                 <g:message code="testCase.list.label" args="[params.projectName]"/>
             </h1>
-            <g:if test="${params.sizeTestCaseList == 0}">
+            <g:if test="${params.sizeTestCaseListFiltered == 0}">
                 <label>
                     <g:message code="testCase.list.empty.label"/>
                 </label>
@@ -59,7 +59,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <g:each in ="${testCaseSet}">
+                        <g:each in ="${params.testCaseListFiltered}">
                             <tr>
                                 <td>
                                     <g:link url="/testCase/show/${it.id}">
@@ -67,7 +67,7 @@
                                     </g:link>
                                 </td>
                                 <td>
-                                    <g:fieldValue bean="${it}" field="typeCase" />
+                                    <g:message code="testCase.type.label.${it.typeCase}"/>
                                 </td>
                                 <td>
                                     <g:fieldValue bean="${it}" field="sizeData" />
