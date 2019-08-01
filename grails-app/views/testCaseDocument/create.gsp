@@ -3,7 +3,9 @@
 <head>
     <meta name="layout" content="main" />
     <g:set var="entityName" value="${message(code: 'testCaseDocument.label', default: 'Document')}" />
-    <title>Document upload - TestingForest</title>
+    <title>
+        <g:message code=""/>
+    </title>
 </head>
 <body>
     <g:form url="[resource: testCaseDocument, action:'save']" enctype="multipart/form-data">

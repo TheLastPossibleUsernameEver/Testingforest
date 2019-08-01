@@ -3,7 +3,7 @@
 <head>
     <meta name="layout" content="main" />
     <title>
-        New project - TestingForest
+        <g:message code="title.project.create"/>
     </title>
 </head>
 <body>

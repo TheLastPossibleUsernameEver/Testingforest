@@ -3,7 +3,7 @@
 <head>
     <meta name="layout" content="main" />
     <title>
-        Available projects - TestingForest
+        <g:message code="title.project.index"/>
     </title>
 </head>
 <body>

@@ -3,7 +3,7 @@
 <head>
     <meta name="layout" content="main" />
     <title>
-        Test-case list - TestingForest
+        <g:message code="title.testCase.list"/>
     </title>
 </head>
 <body>

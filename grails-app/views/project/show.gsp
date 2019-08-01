@@ -2,7 +2,9 @@
 <html>
 <head>
     <meta name="layout" content="main" />
-    <title>Project info - TestingForest</title>
+    <title>
+        <g:message code="title.project.show"/>
+    </title>
 </head>
 <body>
 <div class="nav" role="navigation">

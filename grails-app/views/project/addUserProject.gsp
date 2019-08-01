@@ -1,7 +1,9 @@
 <html>
 <head>
-    <meta name="layout" content="main" />
-    <title>Add member to your project - TestingForest</title>
+    <meta name="layout" content="main">
+    <title>
+        <g:message code="title.project.addUserProject"/>
+    </title>
 </head>
 <body>
 

@@ -4,7 +4,7 @@
     <meta name="layout" content="main" />
     <g:set var="entityName" value="${message(code: 'testCase.label', default: 'TestCase')}" />
     <title>
-            Test-case info - Testingforest
+        <g:message code="title.testCase.show"/>
     </title>
 </head>
 <body>
