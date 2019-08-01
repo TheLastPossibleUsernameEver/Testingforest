@@ -34,9 +34,7 @@
 <g:layoutBody/>
 
 <div class="footer row" role="contentinfo">
-    <div class="col">
-        <strong><p style="text-align: center"> Welcome to TestingForest - a hub web-service for storing and managing your test-cases</p></strong>
-
+    <strong><p style="text-align: center"><g:message code="welcome"/></p></strong>
 </div>
 
 
