@@ -1,6 +1,7 @@
 <html>
     <head>
         <meta name="layout" content="main" />
+        <title><g:message code="title.user.authentication"/></title>
     </head>
     <body>
         <div class="nav" role="navigation">

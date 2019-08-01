@@ -1,7 +1,9 @@
 <html>
 <head>
-    <meta name="layout" content="main" />
-    <title>Add user</title>
+    <meta name="layout" content="main">
+    <title>
+        <g:message code="title.project.addUserProject"/>
+    </title>
 </head>
 <body>
 

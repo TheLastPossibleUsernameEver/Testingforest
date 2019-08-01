@@ -3,7 +3,9 @@
     <head>
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'testCaseDocumentInstance.label', default: 'TestCaseDocument')}" />
-        <title><g:message code="default.edit.label" args="[entityName]" /></title>
+        <title>
+            <g:message code=""/>
+        </title>
     </head>
     <body>
         <g:form url="[resource: testCaseDocument, action:'update']"
