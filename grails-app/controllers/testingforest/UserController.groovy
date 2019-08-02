@@ -63,6 +63,7 @@ class UserController {
                 it.teamList.removeElement(user)
             }
         }
+        log.info("User ${session.user.login} was removed")
         User.get(user.id).caseList.each{
             it.delete(flush:true)
         }
