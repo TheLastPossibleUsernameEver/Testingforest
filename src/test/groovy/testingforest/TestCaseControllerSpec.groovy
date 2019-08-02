@@ -38,4 +38,26 @@ class TestCaseControllerSpec extends Specification
         then:
         model.testCaseSet.size() == 1
     }
+
+    void "Test test case save"() {
+        given:
+        controller.request.method = 'POST'
+        User user = new User(name: "user1", role: "user", login: "user", password: "12345")
+        user.save()
+        Project project = new Project(projectName: "test", teamList: [user])
+        project.save()
+        session.projectId = project.id
+        session.user = user
+        TestCase test = new TestCase(caseName: "test")
+
+        when: "Save executed"
+        controller.save(test)
+
+        then: "User should be saved"
+        TestCase.count == 1
+        TestCase.find {member -> member.userCreated == user} == test
+        TestCase.find {member -> member.project == project} == test
+        TestCase.find {member -> member.typeCase == "public"} == test
+        TestCase.find {member -> member.sizeData == new Long(0)} == test
+    }
 }

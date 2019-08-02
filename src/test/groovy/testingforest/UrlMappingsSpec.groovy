@@ -169,6 +169,26 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
         noExceptionThrown()
     }
 
+    void "Test testCase/save url mapping"() {
+        when:
+        request.method = "POST"
+        assertUrlMapping("/testCase/save", controller: 'testCase',
+                action: 'save', method: 'POST')
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "Test testCase/create url mapping"() {
+        when:
+        request.method = "GET"
+        assertUrlMapping("/project/1/testCase/create", controller: 'testCase',
+                action: 'create', method: 'GET') {projectId = 1}
+
+        then:
+        noExceptionThrown()
+    }
+
     void "User controller log_in action"() {
         expect:
         verifyAction('user', 'log_in')
@@ -307,6 +327,28 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
 
         when:
         assertAction('project', 'leaveProject')
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "Test testCase save action"() {
+        expect:
+        verifyAction('testCase', 'save')
+
+        when:
+        assertAction('testCase', 'save')
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "Test testCase create action"() {
+        expect:
+        verifyAction('testCase', 'create')
+
+        when:
+        assertAction('testCase', 'create')
 
         then:
         noExceptionThrown()

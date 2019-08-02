@@ -83,6 +83,22 @@ class LogoutInterceptorSpec extends Specification implements InterceptorUnitTest
         then:"The interceptor does match"
         interceptor.doesMatch()
     }
+
+    void "Test testCase/create interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"testCase", action: "create")
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
+
+    void "Test testCase/save interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"testCase", action: "save")
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
     void "Test user/showInfo interceptor matching"() {
         when:"A request matches the interceptor"
         withRequest(controller:"user", action: "showInfo")
@@ -97,4 +113,5 @@ class LogoutInterceptorSpec extends Specification implements InterceptorUnitTest
         then:"The interceptor does match"
         interceptor.doesMatch()
     }
+
 }
