@@ -41,7 +41,7 @@ class UrlMappings {
         put "/project/leaveProject/$projectId"(controller: "project", action: "leaveProject")
 
         //Diagnostic controller uri
-        get "/diagnostic/index"(controller: "diagnostic", action: "index")
+        get "/diagnostics/index"(controller: "diagnostics", action: "index")
 
         /*
         //Init version
