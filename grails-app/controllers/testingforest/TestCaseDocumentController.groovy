@@ -5,6 +5,8 @@ class TestCaseDocumentController {
     def download(Long testCaseId){
         TestCaseDocument testCaseDocument = TestCaseDocument.get(testCaseId)
         if (testCaseDocument == null) {
+            log.error("Error downloading file ${testCaseDocument.name}: file not found")
+
             flash.error = message(code:"data.error")
             redirect (uri:"/project/${session.projectId}/testCase/list")
         } else {
@@ -16,6 +18,7 @@ class TestCaseDocumentController {
             outputStream << testCaseDocument.data
             outputStream.flush()
             outputStream.close()
+            log.info("Downloading ${testCaseDocument.name}")
         }
     }
 
