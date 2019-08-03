@@ -101,9 +101,13 @@ class ProjectController {
     }
 
     def delete(Long projectId) {
-        log.info("Deleting ${projectService.get(projectId).projectName}")
+        Project project = Project.get(projectId)
+        if(project) {
+            log.info("Deleting ${project.projectName}")
 
-        projectService.delete(projectId)
-        redirect uri: "/project/index"
+            projectService.delete(projectId)
+
+            redirect uri: "/project/index"
+        }
     }
 }
