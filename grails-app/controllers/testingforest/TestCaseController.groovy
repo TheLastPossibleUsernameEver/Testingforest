@@ -24,6 +24,9 @@ class TestCaseController {
         //Test-case types are not supported yet
         testCase.typeCase = "public"
 
+        //File uploading is not supported yet
+        testCase.sizeData = new Long(0)
+
         Project sessionProject = Project.get(session.projectId)
         sessionProject.addToTestCaseList(testCase)
         User sessionUser = User.get(session.user.id)

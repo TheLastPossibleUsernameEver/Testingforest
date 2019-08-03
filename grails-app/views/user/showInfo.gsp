@@ -20,83 +20,86 @@
             </li>
          </u1>
       </div>
-      <div class="body">
-         <div class="fields">
-            <h1>
-               <g:message code="user.info.pageName" />
-            </h1>
-            <hr>
-            <fieldset class="form">
-               <p>
-                  <g:message code="user.info.login" />
-               </p>
-               <p>
-                  <g:textField readonly="true"  name="login"  value="${session.user.login}" />
-               </p>
-               <p>
+      <div class="content">
+         <h1>
+            <g:message code="user.info.pageName"/>
+         </h1>
+      </div>
+      <div class="fields">
+         <fieldset class="form">
+            <div class="fieldcontain">
+               <label>
                   <g:message code="user.info.name" />
-               </p>
-               <p>
-                  <g:textField readonly="true"  name="name"  value="${session.user.name}" />
-               </p>
-               <p>
+               </label>
+               <g:fieldValue bean="${session.user}" field="name" />
+            </div>
+            <div class="fieldcontain">
+               <label>
+                  <g:message code="user.info.login" />
+               </label>
+               <g:fieldValue bean="${session.user}" field="login" />
+            </div>
+            <div class="fieldcontain">
+               <label >
                   <g:message code="user.info.regDate" />
-               </p>
-               <p>
-                  <g:textField readonly="true"  name="regDate"  value="${session.user.dateCreated}" />
-               </p>
-         </div>
+               </label>
+               <g:formatDate date="${session.user.dateCreated}" type="datetime" style="SHORT"/>
+            </div>
          </fieldset>
+      </div>
+         <div class="content">
+            <h1 >
+               <g:message code="user.info.testCase.list.label" />
+            </h1>
          <table>
-            <th>
-               <g:message code="user.info.button.projectList"/>
-            </th>
-            <g:each var="project" in="${projects}" >
-               <tr>
-                  <td>
-                     <g:link url="/project/show/${project.id}">  ${project.projectName}                         
-                     </g:link>
-                  </td>
-               </tr>
-            </g:each>
-         </table>
-         <h4>
-            <g:message code="user.info.testcases" />
-         </h4>
-         <hr>
-         <table>
-            <th>
-               <g:message code="user.testcase.caseName" />
-            </th>
-            <th>
-               <g:message code="user.testcase.type" />
-            </th>
-            <th>
-               <g:message code="user.testcase.dateCreated" />
-            </th>
-            <th>
-               <g:message code="user.testcase.lastUpdated" />
-            </th>
+            <tr>
+               <th>
+                  <g:message code="user.testcase.caseName" />
+               </th>
+               <th>
+                  <g:message code="user.project.projectName" />
+               </th>
+               <th>
+                  <g:message code="user.testcase.type" />
+               </th>
+               <th>
+                  <g:message code="user.testcase.dateCreated" />
+               </th>
+               <th>
+                  <g:message code="user.testcase.lastUpdated" />
+               </th>
+            </tr>
             <g:each var="testcase" in="${testCases}" >
                <tr>
                   <td>
-                     <g:link url="/testCase/show/${testcase.id}">  ${testcase.caseName}                         
+                     <g:link uri="/testCase/show/${testcase.id}">
+                        <g:fieldValue bean="${testcase}" field="caseName" />
                      </g:link>
                   </td>
-                  <td>${testcase.typeCase}</td>
-                  <td>${testcase.dateCreated}</td>
-                  <td>${testcase.lastUpdated}</td>
+                  <td>
+                     <g:link uri="/project/show/${testcase.project.id}">
+                        <g:fieldValue bean="${testcase.project}" field="projectName" />
+                     </g:link>
+                  </td>
+                  <td>
+                     <g:fieldValue bean="${testcase}" field="typeCase" />
+                  </td>
+                  <td>
+                     <g:formatDate date="${testcase.dateCreated}" type="datetime" style="MEDIUM"/>
+                  </td>
+                  <td>
+                     <g:formatDate date="${testcase.lastUpdated}" type="datetime" style="MEDIUM"/>
+                  </td>
                </tr>
             </g:each>
          </table>
       </div>
-      </div>
-      <fieldset class="button">
+      <fieldset class="buttons">
          <g:form uri="/user/deleteCurrentUser" method="DELETE">
-            <g:submitButton name="delete" 
-               value="${message(code: 'user.info.button.deleteAccount')}"
-               onclick="return confirm('${message(code:
-               'user.button.delete.confirm.message')}')"/>
+            <g:submitButton name="delete"
+                            value="${message(code: 'user.info.button.deleteAccount')}"
+                            onclick="return confirm('${message(code:
+                                    'user.button.delete.confirm.message')}')"/>
          </g:form>
       </fieldset>
    </body>

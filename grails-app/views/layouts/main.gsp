@@ -17,12 +17,10 @@
 </nav>
 <g:layoutBody/>
 <div class="footer" role = "contentinfo" style="text-align: center">
-    <table>
-        <tr>
-        <p><g:message code="footer"/></p>
-        <a href="https://github.com/TheLastPossibleUsernameEver/testingforest"><g:message code="github"/></a>
-        </tr>
-    </table>
+    <p><g:message code="footer"/></p>
+    <a href="https://github.com/TheLastPossibleUsernameEver/testingforest">
+        <g:message code="github"/>
+    </a>
 </div>
 <div id="spinner" class="spinner" style="display:none;">
     <g:message code="spinner.alt" default="Loading&hellip;"/>

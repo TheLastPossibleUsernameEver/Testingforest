@@ -26,6 +26,11 @@
         </li>
     </ul>
 </div>
+<div class="content">
+    <h1>
+        <g:message code="project.label.show.info"/>
+    </h1>
+</div>
 <div class="fieldcontain">
     <label>
         <g:message code="project.name.label.field"/>
