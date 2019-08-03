@@ -8,6 +8,7 @@ class TestCaseInterceptor {
     TestCaseInterceptor() {
         match(controller: "testCase", action: "show")
         match(controller: "testCase", action: "edit")
+        match(controller: "testCaseDocument", action: "download")
     }
 
     boolean before() {

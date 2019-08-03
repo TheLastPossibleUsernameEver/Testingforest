@@ -59,6 +59,9 @@
                             <th>
                                 <g:message code="testCase.lastUpdated.label.field"/>
                             </th>
+                            <th>
+                                <g:message code="testCaseDocument.download"/>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,13 +76,18 @@
                                     <g:message code="testCase.type.label.${it.typeCase}"/>
                                 </td>
                                 <td>
-                                    <g:fieldValue bean="${it}" field="sizeData" />
+                                    <g:fieldValue bean="${it}" field="caseData.sizeData" />
                                 </td>
                                 <td>
                                     <g:formatDate date="${it.dateCreated}" type="datetime" style="SHORT" />
                                 </td>
                                 <td>
                                     <g:formatDate date="${it.lastUpdated}" type="datetime" style="SHORT"/>
+                                </td>
+                                <td>
+                                    <g:link url="/project/${session.projectId}/testCaseDocument/downloadDocument/${it.id}">
+                                        <g:img dir="images" file="download.png" width="30" height="30"/>
+                                    </g:link>
                                 </td>
                             </tr>
                         </g:each>

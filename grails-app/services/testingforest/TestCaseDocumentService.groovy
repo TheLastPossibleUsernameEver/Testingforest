@@ -1,18 +1,26 @@
 package testingforest
 
-import grails.gorm.services.Service
+import grails.gorm.transactions.Transactional
 
-@Service(TestCaseDocument)
-interface TestCaseDocumentService {
+@Transactional
+class TestCaseDocumentService {
 
-    TestCaseDocument get(Serializable id)
+    def get(Long id){
+        TestCaseDocument.get(id)
+    }
 
-    List<TestCaseDocument> list(Map args)
+    def list(){
+        TestCaseDocument.list()
+    }
 
-    Long count()
+    def save(TestCaseDocument testCaseDocument){
+        testCaseDocument.save()
+    }
 
-    void delete(Serializable id)
-
-    TestCaseDocument save(TestCaseDocument testCaseDocument)
-
+    def delete(Long id){
+        TestCaseDocument.get(id).delete()
+    }
+    def count(){
+        TestCaseDocument.count()
+    }
 }

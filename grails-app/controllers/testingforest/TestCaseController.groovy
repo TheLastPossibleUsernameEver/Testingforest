@@ -20,24 +20,38 @@ class TestCaseController {
 
     def create(Long projectId) {
         session.projectId = projectId
+        respond new TestCaseDocument(params)
         respond new TestCase(params)
     }
 
-    def save(TestCase testCase) {
-        //File uploading is not supported yet
-        testCase.sizeData = new Long(0)
+    def save(TestCase testCase, TestCaseDocument testCaseDocument) {
+        def uploadedFile = params.data
+        testCaseDocument.data = uploadedFile.getBytes()
+        testCaseDocument.name = uploadedFile.originalFilename
+        testCaseDocument.type = uploadedFile.contentType
+        testCaseDocument.sizeData = testCaseDocument.data.length
 
         Project sessionProject = Project.get(session.projectId)
         sessionProject.addToTestCaseList(testCase)
         User sessionUser = User.get(session.user.id)
         sessionUser.addToCaseList(testCase)
-        if (testCase.validate()){
-            testCase.save(flush: true)
-            flash.message = message(code: "testCase.create.success.message", args: [testCase.caseName])
+        testCase.setCaseData(testCaseDocument)
+        testCaseDocument.setTestCase(testCase)
+        if (testCase.validate()) {
+            if (testCaseDocument.validate()) {
+                testCaseDocument.save(flush: true)
+                testCase.save(flush: true)
+                flash.message = message(code: "testCase.create.success.message", args: [testCase.caseName])
 
-            log.info("Created ${testCase.caseName} test-case in ${sessionProject.projectName} project ")
+                log.info("Created ${testCase.caseName} test-case in ${sessionProject.projectName} project ")
 
-            redirect uri: "/project/${session.projectId}/testCase/create"
+                redirect uri: "/project/${session.projectId}/testCase/create"
+            } else {
+                log.error("Test-case ${testCase} in ${sessionProject} is invalid: "
+                        + testCaseDocument.errors)
+
+                respond testCaseDocument.errors, view: "create"
+            }
         } else {
             log.error("Test-case ${testCase} in ${sessionProject} is invalid: "
                     + testCase.errors)

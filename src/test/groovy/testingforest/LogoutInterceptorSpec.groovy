@@ -99,6 +99,15 @@ class LogoutInterceptorSpec extends Specification implements InterceptorUnitTest
         then:"The interceptor does match"
         interceptor.doesMatch()
     }
+
+    void "Test testCaseDocument/download interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"testCaseDocument", action: "download")
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
+
     void "Test user/showInfo interceptor matching"() {
         when:"A request matches the interceptor"
         withRequest(controller:"user", action: "showInfo")

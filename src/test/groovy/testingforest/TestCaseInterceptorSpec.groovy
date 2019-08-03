@@ -27,4 +27,12 @@ class TestCaseInterceptorSpec extends Specification implements InterceptorUnitTe
         then:"The interceptor does match"
         interceptor.doesMatch()
     }
+
+    void "Test testCaseDocument/download interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"testCaseDocument", action: "download")
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
 }

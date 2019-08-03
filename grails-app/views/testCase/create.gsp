@@ -35,7 +35,16 @@
             </g:eachError>
         </ul>
     </g:hasErrors>
-    <g:form action="save">
+    <g:hasErrors bean="${this.testCaseDocument}">
+        <ul class="errors" role="alert">
+            <g:eachError bean="${this.testCaseDocument}" var="error">
+                <li <g:if test="${error in org.springframework.validation.FieldError}"> data-field-id="${error.field}" </g:if>>
+                    <g:message error="${error}"/>
+                </li>
+            </g:eachError>
+        </ul>
+    </g:hasErrors>
+    <g:form action="save" enctype="multipart/form-data">
         <fieldset class="form">
             <div class="fieldcontain ${hasErrors(bean: testCase, field: 'caseName','error')}">
                 <label>
@@ -51,6 +60,12 @@
                           from="${testCase.getConstrainedProperties().typeCase.inList}"
                           value="${testCase.getConstrainedProperties().typeCase.inList[0]}"
                           valueMessagePrefix="testCase.type.label" />
+            </div>
+            <div class="fieldcontain ${hasErrors(bean: testCaseDocument, field: 'data','error')}">
+                <label>
+                    <g:message code="testCaseDocument.data.label.field"/>
+                </label>
+                <input type="file" id="data" name="data" code="testCaseDocument.upload"/>
             </div>
         </fieldset>
         <fieldset class="buttons">

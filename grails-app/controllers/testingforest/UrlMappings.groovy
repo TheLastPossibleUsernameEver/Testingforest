@@ -13,10 +13,7 @@ class UrlMappings {
         delete "/testCase/delete/$testCaseId"(controller: "testCase", action: "delete")
 
         //TestCaseDocument controller uri
-        get "/testCaseDocument/create"(controller: "testCaseDocument", action: "create")
-        post "/testCaseDocument/save"(controller: "testCaseDocument", action: "save")
-        get "/testCaseDocument/index"(controller: "testCaseDocument", action: "index")
-        get "/testCaseDocument/downloadDocument/$id"(controller: "testCaseDocument", action:"download")
+        get "/project/$projectId/testCaseDocument/downloadDocument/$testCaseId"(controller: "testCaseDocument", action:"download")
 
         //User controller uri
         get "/user/index"(controller: "user", action: "index")
