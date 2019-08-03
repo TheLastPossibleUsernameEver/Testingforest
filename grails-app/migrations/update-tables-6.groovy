@@ -1,6 +1,14 @@
 databaseChangeLog = {
 
-    changeSet(author: "galina (generated)", id: "1564682484549-3") {
+    changeSet(author: "nikita (generated)", id: "1564837482984-2") {
+        addColumn(tableName: "user") {
+            column(name: "date_created", type: "datetime") {
+                constraints(nullable: "false")
+            }
+        }
+    }
+
+    changeSet(author: "nikita (generated)", id: "1564837482984-3") {
         addColumn(tableName: "user") {
             column(name: "last_updated", type: "datetime") {
                 constraints(nullable: "false")
@@ -8,11 +16,7 @@ databaseChangeLog = {
         }
     }
 
-    changeSet(author: "galina (generated)", id: "1564682484549-1") {
-        addNotNullConstraint(columnDataType: "datetime", columnName: "date_created", tableName: "user")
-    }
-
-    changeSet(author: "galina (generated)", id: "1564682484549-2") {
+    changeSet(author: "nikita (generated)", id: "1564837482984-1") {
         dropUniqueConstraint(constraintName: "UC_USERLOGIN_COL", tableName: "user")
 
         addUniqueConstraint(columnNames: "login", constraintName: "UC_USERLOGIN_COL", tableName: "user")
