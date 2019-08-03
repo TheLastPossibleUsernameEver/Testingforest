@@ -3,7 +3,9 @@
     <head>
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'testCaseDocument.label', default: 'TestCaseDocument')}" />
-        <title><g:message code="default.list.label" args="[entityName]" /></title>
+        <title>
+            <g:message code=""/>
+        </title>
     </head>
     <body>
         <div class="nav" role="navigation">
@@ -13,7 +15,7 @@
             </ul>
         </div>
         <div class="content scaffold-list" role="main">
-            <h1>Document List</h1>
+            <h1 style="text-align: center">Document list</h1>
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>

@@ -2,7 +2,8 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <title><g:message code="registration.label"/></title>
+        <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
+        <title><g:message code="title.user.registration"/></title>
     </head>
     <body>
         <div class="nav" role="navigation">

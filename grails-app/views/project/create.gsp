@@ -2,6 +2,9 @@
 <html>
 <head>
     <meta name="layout" content="main" />
+    <title>
+        <g:message code="title.project.create"/>
+    </title>
 </head>
 <body>
 <div class="nav" role="navigation">
