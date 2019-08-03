@@ -36,7 +36,7 @@ class TestCaseControllerSpec extends Specification
         controller.list(project_1.id)
 
         then:
-        model.testCaseSet.size() == 1
+        params.testCaseListFiltered.size() == 1
     }
 
     void "Test test case save"() {
@@ -48,7 +48,7 @@ class TestCaseControllerSpec extends Specification
         project.save()
         session.projectId = project.id
         session.user = user
-        TestCase test = new TestCase(caseName: "test")
+        TestCase test = new TestCase(caseName: "test", typeCase: "public")
 
         when: "Save executed"
         controller.save(test)

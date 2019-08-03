@@ -7,12 +7,15 @@ class TestCaseController {
     def list(Long projectId) {
         Project project = Project.get(projectId)
         params.projectName = project.projectName
-        params.sizeTestCaseList = project.testCaseList.size()
-        respond project.getTestCaseList()
+        params.testCaseListFiltered = project.testCaseList.findAll {
+            testCase -> if (testCase.typeCase == "public" ||
+                    (testCase.typeCase == "private" && testCase.userCreated.id == session.user.id)) testCase}
+        params.sizeTestCaseListFiltered = params.testCaseListFiltered.size()
+        respond view: "list"
     }
 
-    def show(Long id) {
-        respond testCaseService.get(id)
+    def show(Long testCaseId) {
+        respond testCaseService.get(testCaseId)
     }
 
     def create(Long projectId) {
@@ -21,9 +24,6 @@ class TestCaseController {
     }
 
     def save(TestCase testCase) {
-        //Test-case types are not supported yet
-        testCase.typeCase = "public"
-
         //File uploading is not supported yet
         testCase.sizeData = new Long(0)
 
@@ -34,7 +34,7 @@ class TestCaseController {
         if (testCase.validate()){
             testCase.save(flush: true)
             flash.message = message(code: "testCase.create.success.message", args: [testCase.caseName])
-          
+
             log.info("Created ${testCase.caseName} test-case in ${sessionProject.projectName} project ")
 
             redirect uri: "/project/${session.projectId}/testCase/create"
@@ -46,8 +46,8 @@ class TestCaseController {
         }
     }
 
-    def edit(Long id) {
-        respond testCaseService.get(id)
+    def edit(Long testCaseId) {
+        respond testCaseService.get(testCaseId)
     }
 
     def update(TestCase testCase) {
@@ -62,13 +62,13 @@ class TestCaseController {
         }
     }
 
-    def delete(Long id) {
-        def projectId = testCaseService.get(id).project.id
+    def delete(Long testCaseId) {
+        def projectId = testCaseService.get(testCaseId).project.id
 
-        log.info("Deleted ${testCaseService.get(id).caseName} test-case" +
-                "in ${testCaseService.get(id).project.projectName} project")
+        log.info("Deleted ${testCaseService.get(testCaseId).caseName} test-case" +
+                "in ${testCaseService.get(testCaseId).project.projectName} project")
 
-        testCaseService.delete(id)
+        testCaseService.delete(testCaseId)
         redirect uri: "/project/${projectId}/testCase/list"
     }
 }
