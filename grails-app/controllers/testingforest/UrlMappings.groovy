@@ -29,17 +29,21 @@ class UrlMappings {
         get "/user/edit/$id"(controller: "user", action: "edit")
         put "/user/update/$id"(controller: "user", action: "update")
         delete "/user/delete/$id"(controller: "user", action: "delete")
+        get "/user/showInfo"(controller: "user", action: "showInfo")
+        delete "/user/deleteCurrentUser" (controller: "user", action: "deleteCurrentUser")
 
         //Project controller uri
         get "/project/$projectId/addUserProject"(controller: "project", action: "addUserProject")
         post "/project/addingUser"(controller: "project", action: "addingUser")
         get "/project/index"(controller: "project", action: "index")
-        get "/project/show/$id"(controller: "project", action: "show")
+        get "/project/show/$projectId"(controller: "project", action: "show")
         get "/project/create"(controller: "project", action: "create")
         post "/project/save"(controller: "project", action: "save")
+        delete "/project/delete/$projectId"(controller: "project", action: "delete")
+        put "/project/leaveProject/$projectId"(controller: "project", action: "leaveProject")
 
         //Diagnostic controller uri
-        get "/diagnostic/index"(controller: "diagnostic", action: "index")
+        get "/diagnostics/index"(controller: "diagnostics", action: "index")
 
         /*
         //Init version

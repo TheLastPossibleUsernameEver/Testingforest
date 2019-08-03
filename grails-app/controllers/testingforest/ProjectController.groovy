@@ -11,22 +11,31 @@ class ProjectController {
 
     def addingUser(){
         def currUser = User.findByLogin(params.login)
+        def currProject = Project.get(session.projectId)
         if(currUser){ //если он существует и если у него нет проекта
-            def currProject = Project.get(session.projectId)
             def teamList = currProject.getTeamList()
             def result = teamList.find{member -> if (member != null) member.login.equals(currUser.login)}
             if(result == null) {
                 currProject.addToTeamList(currUser).save(flush: true)
-                flash.message = "User $currUser has added to project!"
+
+                log.info("Added user ${currUser.login} to ${currProject.projectName} project")
+
+                flash.message = message(code: 'project.success.addUser.message', args: [params.login])
                 redirect(uri: "/project/$session.projectId/addUserProject")
             }
             else {
-                flash.message = "User $currUser has already been in project!"
+                log.error("Adding user ${currUser.login} to ${currProject.projectName} is failed: " +
+                        "user is already in project")
+
+                flash.error = message(code: 'user.already.in.project', args: [params.login])
                 redirect(uri: "/project/$session.projectId/addUserProject")
             }
         }
-        else{
-            flash.message = "Sorry. Please try another login."
+        else {
+            log.error "Adding user ${currUser.login} to ${currProject.projectName} project is failed: " +
+                    "User not found"
+
+            flash.error = message(code: 'user.login.not.exist')
             redirect(uri: "/project/$session.projectId/addUserProject")
         }
     }
@@ -44,18 +53,57 @@ class ProjectController {
         respond projectList
     }
 
-    def show(Long id) {
-        respond projectService.get(id)
+    def show(Long projectId) {
+        Project project = projectService.get(projectId)
+        params.projectName = project.projectName
+        params.sizeTestCaseList = project.testCaseList.size()
+        respond projectService.get(projectId)
     }
 
     def create() {
         respond new Project(params)
-
     }
 
     def save(Project project) {
-        project.addToTeamList(session.user).save(flush: true)
-        redirect uri: "/project/index"
+        if (project.validate()) {
+            project.addToTeamList(session.user).save(flush: true)
+
+            log.info("Adding ${session.user.login} user to ${project.projectName} project ")
+
+            redirect uri: "/project/index"
+        } else {
+            respond project.errors, view: 'create'
+            log.error("Error updating project status: " + project.errors)
+        }
     }
 
+    def leaveProject(Long projectId) {
+        Project project = Project.get(projectId)
+        if (project) {
+            User user = project.teamList.find { member -> member.id == session.user.id}
+            project.removeFromTeamList(user)
+            if (project.teamList.isEmpty()) {
+                projectService.delete(projectId)
+
+                log.info("Deleting ${project.projectName} project: last member ${user.login} left")
+
+                redirect uri: "/project/index"
+            } else {
+                projectService.save(project)
+
+                log.info("User ${user.login} left ${project.projectName} project")
+
+                redirect uri: "/project/index"
+            }
+        } else {
+            redirect uri: "/project/index"
+        }
+    }
+
+    def delete(Long projectId) {
+        log.info("Deleting ${projectService.get(projectId).projectName}")
+
+        projectService.delete(projectId)
+        redirect uri: "/project/index"
+    }
 }

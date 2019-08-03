@@ -5,12 +5,9 @@ class User {
     String role
     String login
     String password
-
-    @Override
-    String toString() {
-        return login
-    }
-//User created any TestCase
+    Date dateCreated
+    Date lastUpdated
+    //User created any TestCase
     static hasMany = [caseList : TestCase]
 
     static constraints = {

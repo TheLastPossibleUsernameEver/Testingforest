@@ -23,14 +23,12 @@
                 <thead>
                     <tr>
                         <g:sortableColumn title="Filename" property="name"/>
-                        <g:sortableColumn title="Upload Date" property="uploadDate"/>
                     </tr>
                 </thead>
                 <tbody>
                 <g:each in="${testCaseDocumentList}" status="i" var="testCaseDocument">
                     <tr class="${(i%2)==0? 'even' : 'odd'}">
                         <td><g:link action="downloadDocument" id="${testCaseDocument.id}">${testCaseDocument.name}</g:link></td>
-                        <td><g:formatDate date="${testCaseDocument.uploadDate}"/></td>
                     </tr>
                 </g:each>
                 </tbody>

@@ -27,4 +27,91 @@ class LogoutInterceptorSpec extends Specification implements InterceptorUnitTest
         then:"The interceptor does match"
         interceptor.doesMatch()
     }
+
+    void "Test project/addUserProject interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"project", action: "addUserProject")
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
+
+    void "Test project/addingUser interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"project", action: "addingUser")
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
+
+    void "Test /project/projectId/testCase/list interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"testCase", action: "list",)
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
+
+    void "Test project/show interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"project", action: "show")
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
+
+    void "Test project/delete interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"project", action: "delete")
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
+
+    void "Test project/leaveProject interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"project", action: "leaveProject")
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
+
+    void "Test project/create interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"project", action: "create")
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
+
+    void "Test testCase/create interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"testCase", action: "create")
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
+
+    void "Test testCase/save interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"testCase", action: "save")
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
+    void "Test user/showInfo interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"user", action: "showInfo")
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
+    void "Test user/deleteCurrentUser interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"user", action: "deleteCurrentUser")
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
+
 }

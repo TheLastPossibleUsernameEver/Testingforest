@@ -4,6 +4,7 @@ class TestCase {
 
     String caseName
     String typeCase
+    Long sizeData
     Date dateCreated
     Date lastUpdated
 
@@ -18,5 +19,6 @@ class TestCase {
     static constraints = {
         caseName size: 1..255
         typeCase inList: ["public","protected","private"]
+        sizeData min: new Long(0)
     }
 }

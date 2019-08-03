@@ -4,8 +4,8 @@ import grails.testing.gorm.DomainUnitTest
 import grails.testing.web.controllers.ControllerUnitTest
 import grails.validation.ValidationException
 import spock.lang.*
-
-class TestCaseDataControllerSpec extends Specification implements ControllerUnitTest<TestCaseDataController>, DomainUnitTest<TestCaseData> {
+/*
+class TestCaseDocumentControllerSpec extends Specification implements ControllerUnitTest<TestCaseDataController>, DomainUnitTest<TestCaseData> {
 
     def populateValidParams(params) {
         assert params != null
@@ -219,7 +219,7 @@ class TestCaseDataControllerSpec extends Specification implements ControllerUnit
         flash.message != null
     }
 }
-
+*/
 
 
 

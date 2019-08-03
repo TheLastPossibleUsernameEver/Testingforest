@@ -2,8 +2,8 @@ package testingforest
 
 import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
-
-class TestCaseDataSpec extends Specification implements DomainUnitTest<TestCaseData> {
+/*
+class TestCaseDocumentSpec extends Specification implements DomainUnitTest<TestCaseData> {
 
     def setup() {
     }
@@ -16,3 +16,4 @@ class TestCaseDataSpec extends Specification implements DomainUnitTest<TestCaseD
             true == false
     }
 }
+*/

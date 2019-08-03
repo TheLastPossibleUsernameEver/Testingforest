@@ -44,6 +44,8 @@ class TestCaseDocumentController {
 
         testCaseDocument.save (flush:true)
 
+        log.info("${uploadedFile.originalFilename} file saved")
+
         redirect(action: "index")
     }
 
@@ -54,7 +56,10 @@ class TestCaseDocumentController {
     def download(Long id){
         TestCaseDocument testCaseDocument = TestCaseDocument.get(id)
         if (testCaseDocument == null) {
-            flash.message = "Document not found"
+            flash.message = "File not found"
+
+            log.error("Error downloading file ${testCaseDocument.name}: file not found")
+
             redirect (action:'index')
         } else {
             response.setContentType("APPLICATION/OCTET-STREAM")
@@ -65,6 +70,7 @@ class TestCaseDocumentController {
             outputStream << testCaseDocument.data
             outputStream.flush()
             outputStream.close()
+            log.info("Downloading ${testCaseDocument.name}")
         }
     }
 
@@ -73,8 +79,11 @@ class TestCaseDocumentController {
 
         def uploadedDocument = request.getFile('data')
         if (uploadedDocument.empty) {
+            log.error("Error uploading ${uploadedDocument.originalFilename} file: file not found")
             notFound()
         } else {
+            log.info("${testCaseDocument.name} updated. New filename is ${uploadedDocument.originalFilename}")
+
             testCaseDocument.name = uploadedDocument.originalFilename
             testCaseDocument.type = uploadedDocument.contentType
             testCaseDocument.data = uploadedDocument.getBytes()
