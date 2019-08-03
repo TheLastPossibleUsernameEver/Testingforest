@@ -28,11 +28,11 @@
     <g:form action="authenticate">
         <fieldset class="form">
             <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'login','error')}">
-                <label><g:message code="login.label"/></label>
+                <label><g:message code="user.login.label.field"/></label>
                 <g:textField name="login" value="${userInstance?.login}"/>
             </div>
             <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password','error')}">
-                <label><g:message code="password.label"/></label>
+                <label><g:message code="user.password.label.field"/></label>
                 <g:passwordField type="password" name="password" value="${userInstance?.password}"/>
             </div>
         </fieldset>

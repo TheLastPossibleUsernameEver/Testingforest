@@ -119,6 +119,7 @@ class ProjectControllerSpec extends Specification implements DataTest, Controlle
         project_1.save()
         Long projectId = project_1.id
         controller.projectService = Stub(ProjectService) {
+            get() >> project_1
             delete() >> project_1.delete()
         }
 
