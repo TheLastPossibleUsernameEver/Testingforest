@@ -20,7 +20,7 @@
     <table>
         <tr>
         <p><g:message code="footer"/></p>
-        <p><a href="https://github.com/TheLastPossibleUsernameEver/testingforest"><br><g:message code="github"/></a></p>
+        <a href="https://github.com/TheLastPossibleUsernameEver/testingforest"><g:message code="github"/></a>
         </tr>
     </table>
 </div>
