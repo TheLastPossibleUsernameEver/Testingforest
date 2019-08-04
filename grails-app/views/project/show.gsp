@@ -68,6 +68,9 @@
     ${params.sizeTestCaseList}
 </div>
 <div class="buttons">
+    <g:link uri="/project/edit/${params.projectId}">
+        <g:message code="project.edit.label.button"/>
+    </g:link>
     <g:form uri="/project/leaveProject/${params.projectId}" method="PUT">
         <g:submitButton name="leaveProject"
                         value="${message(code: 'project.leave.label.button')}"
