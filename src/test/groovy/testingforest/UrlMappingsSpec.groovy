@@ -189,6 +189,26 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
         noExceptionThrown()
     }
 
+    void "Test user/edit url mapping"() {
+        when:
+        request.method = "GET"
+        assertUrlMapping("/user/edit/1", controller: 'user',
+                action: 'edit', method: 'GET') {userId = 1}
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "Test user/update url mapping"() {
+        when:
+        request.method = "PUT"
+        assertUrlMapping("/user/update", controller: 'user',
+                action: 'update', method: 'PUT')
+
+        then:
+        noExceptionThrown()
+    }
+
     void "User controller log_in action"() {
         expect:
         verifyAction('user', 'log_in')
@@ -369,6 +389,17 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
 
         when:
         assertAction('user', 'deleteCurrentUser')
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "User controller update action"() {
+        expect:
+        verifyAction('user', 'update')
+
+        when:
+        assertAction('user', 'update')
 
         then:
         noExceptionThrown()
