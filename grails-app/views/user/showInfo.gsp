@@ -63,10 +63,16 @@
                   <g:message code="user.testcase.type" />
                </th>
                <th>
+                  <g:message code="user.testcase.sizeData"/>
+               </th>
+               <th>
                   <g:message code="user.testcase.dateCreated" />
                </th>
                <th>
                   <g:message code="user.testcase.lastUpdated" />
+               </th>
+               <th>
+                  <g:message code="testCaseDocument.download"/>
                </th>
             </tr>
             <g:each var="testcase" in="${testCases}" >
@@ -85,10 +91,18 @@
                      <g:fieldValue bean="${testcase}" field="typeCase" />
                   </td>
                   <td>
+                     <g:fieldValue bean="${testcase}" field="caseData.sizeData" />
+                  </td>
+                  <td>
                      <g:formatDate date="${testcase.dateCreated}" type="datetime" style="MEDIUM"/>
                   </td>
                   <td>
                      <g:formatDate date="${testcase.lastUpdated}" type="datetime" style="MEDIUM"/>
+                  </td>
+                  <td>
+                     <g:link url="/project/${testcase.project.id}/testCaseDocument/downloadDocument/${testcase.id}">
+                        <g:img dir="images" file="download.png" width="30" height="30"/>
+                     </g:link>
                   </td>
                </tr>
             </g:each>
