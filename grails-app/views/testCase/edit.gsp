@@ -10,12 +10,24 @@
 <body>
 <div class="nav" role="navigation">
     <ul>
-        <li><g:link class="home" uri="/"><g:message code="default.home.label"/></g:link></li>
-        <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+        <li>
+            <g:link class="home" uri="/">
+                <g:message code="project.list.label.button"/>
+            </g:link>
+        </li>
+        <li><g:link class="list" uri="/project/${session.projectId}/testCase/list">
+            <g:message code="testCase.list.label.button"/>
+            </g:link>
+        </li>
+        <li>
+            <g:link uri="/user/logout">
+                <g:message code="logout.label"/>
+            </g:link>
+        </li>
     </ul>
 </div>
 <div id="edit-testCase" class="content scaffold-edit" role="main">
-    <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
+    <h1><g:message code="testCase.edit.label" args="[entityName]" /></h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
@@ -29,12 +41,12 @@
     <g:form resource="${this.testCase}" method="PUT">
         <fieldset class="form">
             <div class="fieldcontain ${hasErrors(bean: testCase, field: 'caseName','error')}">
-                <label>Test-case name:</label>
+                <label><g:message code="testCase.caseName.label.field"/></label>
                 <g:textField name="caseName" value="${testCase.caseName}"/>
             </div>
         </fieldset>
         <fieldset class="buttons">
-            <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+            <input class="save" type="submit" value="${message(code: 'testCase.save.label.button', default: 'Update')}" />
         </fieldset>
     </g:form>
 </div>
