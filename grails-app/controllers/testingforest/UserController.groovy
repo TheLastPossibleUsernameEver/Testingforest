@@ -37,6 +37,7 @@ class UserController {
         session.user = null
         redirect uri: "/user/log_in"
     }
+
     def showInfo() {
         def user = User.get(session.user.id)
         def testCases = user.caseList
@@ -48,6 +49,7 @@ class UserController {
         }
         return [projects:projects,testCases:testCases]
     }
+
     def deleteCurrentUser() {
         def user = session.user
         def criteria = Project.createCriteria()
@@ -82,14 +84,15 @@ class UserController {
 
     def save(User user) {
         user.role = "user"
-        if (user.validate()) {
+        if (user.validate() && params.password == params.passwordRepeat) {
             user.save()
             log.info("User ${user.login} registered")
             flash.message = message(code: 'registration.success.message', args: [user.name])
             redirect uri: "/user/log_in"
         } else {
+            flash.message = message(code: 'user.password.mismatch', args: [user.name])
             respond user.errors, view: 'create'
-            log.error(user.errors)
+            log.error("Passwords mismatch for ${params.login} user login")
         }
     }
 
@@ -103,8 +106,6 @@ class UserController {
             notFound()
             return
         }
-
-
 
         try {
             userService.save(user)
