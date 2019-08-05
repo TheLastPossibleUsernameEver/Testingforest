@@ -27,7 +27,7 @@
     </ul>
 </div>
 <div id="edit-testCase" class="content scaffold-edit" role="main">
-    <h1><g:message code="testCase.edit.label" args="[entityName]" /></h1>
+    <h1 style="text-align: center"><g:message code="default.edit.label" args="[entityName]" /></h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
@@ -44,6 +44,17 @@
                 <label><g:message code="testCase.caseName.label.field"/></label>
                 <g:textField name="caseName" value="${testCase.caseName}"/>
             </div>
+            <g:if test="${testCase.userCreated.id == session.user.id}">
+                <div class="fieldcontain ${hasErrors(bean: testCase, field: 'typeCase','error')}">
+                    <label>
+                        <g:message code="testCase.typeCase.label.field"/>
+                    </label>
+                    <g:select name="typeCase"
+                              from="${testCase.getConstrainedProperties().typeCase.inList}"
+                              value="${testCase.typeCase}"
+                              valueMessagePrefix="testCase.type.label" />
+                </div>
+            </g:if>
         </fieldset>
         <fieldset class="buttons">
             <input class="save" type="submit" value="${message(code: 'testCase.save.label.button', default: 'Update')}" />

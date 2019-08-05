@@ -5,7 +5,8 @@ class User {
     String role
     String login
     String password
-
+    Date dateCreated
+    Date lastUpdated
     //User created any TestCase
     static hasMany = [caseList : TestCase]
 

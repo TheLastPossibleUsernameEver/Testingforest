@@ -12,7 +12,7 @@
         <li><g:link class="create" action="create">
             <g:message code="project.index.create.button"/>
         </g:link></li>
-        <li><g:link class="list" uri="/user/show/${this.session.user.id}">
+        <li><g:link class="list" uri="/user/showInfo">
             <g:message code="user.label.show.info"/>
         </g:link></li>
         <li><g:link class="list" uri="/user/logout">

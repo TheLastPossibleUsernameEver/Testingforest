@@ -5,10 +5,13 @@ class TestCaseDocument {
     String name
     String type
     byte[] data
+    long sizeData
+
+    static belongsTo = [testCase:TestCase]
 
     static constraints = {
-        data(nullable:false, maxSize: 1073741824) // max of 4GB
-        type(blank:true, nullable:false)
-        name(blank:true, nullable:false)
+        type blank:true
+        name size: 0..255
+        sizeData min: new Long(1), max: new Long(1073741824) // max of 4GB
     }
 }
