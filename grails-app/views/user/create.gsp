@@ -53,6 +53,12 @@
                         </label>
                         <g:passwordField name="password" value="${this.user?.password}"/>
                     </div>
+                    <div class="fieldcontain ${hasErrors(bean: this.user, field: 'email','error')}">
+                        <label>
+                            <g:message code="user.email.label.field"/>
+                        </label>
+                        <g:textField name="email" value="${this.user?.name}"/>
+                    </div>
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" value="${message(code: 'registration.label.button')}" />
