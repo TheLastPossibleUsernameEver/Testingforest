@@ -27,8 +27,4 @@ class TestCaseInterceptor {
     void afterView() {
         // no-op
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> master
