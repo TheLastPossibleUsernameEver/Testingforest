@@ -440,6 +440,17 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
         noExceptionThrown()
     }
 
+    void "User controller edit action"() {
+        expect:
+        verifyAction('user', 'edit')
+
+        when:
+        assertAction('user', 'edit')
+
+        then:
+        noExceptionThrown()
+    }
+
     void "User controller update action"() {
         expect:
         verifyAction('user', 'update')
