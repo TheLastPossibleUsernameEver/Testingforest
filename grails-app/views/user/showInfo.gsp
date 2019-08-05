@@ -109,6 +109,9 @@
          </table>
       </div>
       <fieldset class="buttons">
+         <g:link uri="/user/edit/${session.user.id}">
+            <g:message code="user.edit.label.button"/>
+         </g:link>
          <g:form uri="/user/deleteCurrentUser" method="DELETE">
             <g:submitButton name="delete"
                             value="${message(code: 'user.info.button.deleteAccount')}"
