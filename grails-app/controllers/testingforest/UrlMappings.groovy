@@ -38,6 +38,8 @@ class UrlMappings {
         post "/project/save"(controller: "project", action: "save")
         delete "/project/delete/$projectId"(controller: "project", action: "delete")
         put "/project/leaveProject/$projectId"(controller: "project", action: "leaveProject")
+        get "/project/edit/$projectId"(controller: "project", action: "edit")
+        put "/project/update"(controller: "project", action: "update")
 
         //Diagnostic controller uri
         get "/diagnostics/index"(controller: "diagnostics", action: "index")

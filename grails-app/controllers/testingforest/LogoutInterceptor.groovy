@@ -21,6 +21,7 @@ class LogoutInterceptor {
         match(controller: "testCaseDocument", action: "download")
         match(controller: "user", action: "edit")
         match(controller: "user", action: "update")
+        match(controller: "project", action: "edit")
     }
 
     boolean before() {

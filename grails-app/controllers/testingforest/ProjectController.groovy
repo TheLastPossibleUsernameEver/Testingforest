@@ -110,4 +110,21 @@ class ProjectController {
             redirect uri: "/project/index"
         }
     }
+
+    def edit(Long projectId) {
+        respond projectService.get(projectId)
+    }
+
+    def update(Project project) {
+        if (project.validate()){
+           project.save(flush: true)
+           flash.message = message(code: "project.edit.success.message")
+
+           log.info("Updating ${project.projectName} project.")
+
+           redirect uri: "/project/show/${project.id}"
+        } else {
+            respond project.errors, view: "edit"
+        }
+    }
 }
