@@ -85,8 +85,10 @@ class UserController {
         if (user.validate()) {
             sendMail {
                 from "testingforest@yandex.ru"
+                subject "E-mail confirmation"
                 to params.email
-                text "Congratulations! You successfully registered on Testingforest"
+                text "Congratulations! You are successfully registered on TestingForest" +
+                        "check this link for confirmation: "
             }
             user.save()
             log.info("User ${user.login} registered")

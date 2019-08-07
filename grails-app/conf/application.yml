@@ -78,6 +78,18 @@ grails:
                 scriptlets: html
                 taglib: none
                 staticparts: none
+    mail:
+        host: smtp.yandex.ru
+        port: 465
+        username: testingforest@yandex.ru
+        password: kMEMW@9GgN4dOUV
+        default:
+            from: testingforest@yandex.ru
+        props:
+            mail.smtp.auth: true
+            mail.smtp.socketFactory.port: 465
+            mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
+            mail.smtp.socketFactory.fallback: false
 endpoints:
     jmx:
         unique-names: true
