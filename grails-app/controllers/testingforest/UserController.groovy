@@ -83,6 +83,11 @@ class UserController {
     def save(User user) {
         user.role = "user"
         if (user.validate()) {
+            sendMail {
+                from "testingforest@yandex.ru"
+                to params.email
+                text "Congratulations! You successfully registered on Testingforest"
+            }
             user.save()
             log.info("User ${user.login} registered")
             flash.message = message(code: 'registration.success.message', args: [user.name])
