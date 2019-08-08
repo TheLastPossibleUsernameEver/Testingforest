@@ -10,6 +10,7 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
         mockController(ProjectController)
         mockController(TestCaseController)
         mockController(TestCaseDocumentController)
+        mockController(OldTestCaseController)
     }
 
     def cleanup() {
@@ -480,6 +481,15 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
         when:
         assertAction('project', 'update')
 
+        then:
+        noExceptionThrown()
+    }
+    void "Test /oldTestCase/delete url mapping"() {
+        expect:
+        verifyAction('oldTestCase', 'delete')
+
+        when:
+        assertAction('oldTestCase', 'delete')
         then:
         noExceptionThrown()
     }

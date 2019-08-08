@@ -43,7 +43,8 @@ class UrlMappings {
 
         //Diagnostic controller uri
         get "/diagnostics/index"(controller: "diagnostics", action: "index")
-
+        //Old testcase deletion Scheduler
+        get "/oldTestCase/delete" (controller: "oldTestCase", action: "delete")
         /*
         //Init version
         "/$controller/$action?/$id?(.$format)?"{
