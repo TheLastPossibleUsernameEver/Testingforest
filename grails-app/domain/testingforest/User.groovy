@@ -10,6 +10,10 @@ class User {
     //User created any TestCase
     static hasMany = [caseList : TestCase]
 
+    static mapping = {
+        sort name: 'asc'
+    }
+
     static constraints = {
         login size: 1..45, unique:true, validator: {
             if (! it.matches(/(\w)+/) ) return ['errorLogin']
