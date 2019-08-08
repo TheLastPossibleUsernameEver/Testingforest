@@ -90,7 +90,7 @@ class UserController {
             redirect uri: "/user/log_in"
         } else if (user.validate()) {
             render view: 'create'
-            flash.error = message(code: 'user.password.mismatch')
+            flash.error = message(code: 'user.password.error')
             log.error("Passwords mismatch for ${params.login} user login")
         } else {
             respond user.errors, view: 'create'
