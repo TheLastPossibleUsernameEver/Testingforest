@@ -21,8 +21,7 @@ class UserController {
 
             flash.message = message(code:"login.message", args: [session.user.name])
             redirect uri: "/project/index"
-        }
-        else{
+        } else {
             flash.error = message(code:"login.error")
             log.error("User's authentication failed")
             redirect uri: "/user/log_in"
@@ -89,10 +88,12 @@ class UserController {
             log.info("User ${user.login} registered")
             flash.message = message(code: 'registration.success.message', args: [user.name])
             redirect uri: "/user/log_in"
-        } else {
-            flash.message = message(code: 'user.password.mismatch', args: [user.name])
-            respond user.errors, view: 'create'
+        } else if (user.validate()) {
+            render view: 'create'
+            flash.error = message(code: 'user.password.mismatch')
             log.error("Passwords mismatch for ${params.login} user login")
+        } else {
+            respond user.errors, view: 'create'
         }
     }
 
