@@ -89,7 +89,7 @@ class UserController {
             redirect uri: "/user/log_in"
         } else {
             respond user.errors, view: 'create'
-            log.error(user.errors)
+            log.error("Incorrect data for user registration")
         }
     }
 
