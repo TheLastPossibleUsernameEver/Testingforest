@@ -18,7 +18,7 @@
 		
       <div id="list-testCase" class="content scaffold-list" role="main">
     <f:table collection="${testCaseList}"
-             properties="['caseName','typeCase','sizeData']" />
+             properties="['caseName','typeCase','caseData.sizeData']" />
 	TestCases Total:	<g:formatNumber number="${testCaseCount}" type="number"/>
 </div>
 	<div id="list-project" class="content scaffold-list" role="main">
