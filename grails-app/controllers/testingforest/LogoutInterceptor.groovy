@@ -14,6 +14,15 @@ class LogoutInterceptor {
         match(controller: "project", action: "leaveProject")
         match(controller: "project", action: "delete")
         match(controller: "project", action: "create")
+        match(controller: "testCase", action: "save")
+        match(controller: "testCase", action: "create")
+        match(controller: "user", action: "showInfo")
+        match(controller: "user", action: "deleteCurrentUser")
+        match(controller: "testCaseDocument", action: "download")
+        match(controller: "user", action: "edit")
+        match(controller: "user", action: "update")
+        match(controller: "project", action: "edit")
+        match(controller: "project", action: "update")
     }
 
     boolean before() {

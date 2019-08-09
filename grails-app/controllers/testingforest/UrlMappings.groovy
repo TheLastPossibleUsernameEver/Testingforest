@@ -7,16 +7,13 @@ class UrlMappings {
         get "/project/$projectId/testCase/list"(controller: "testCase", action: "list")
         get "/project/$projectId/testCase/create"(controller: "testCase", action: "create")
         post "/testCase/save"(controller: "testCase", action: "save")
-        get "/testCase/show/$id"(controller: "testCase", action: "show")
-        get "/testCase/edit/$id"(controller: "testCase", action: "edit")
+        get "/testCase/show/$testCaseId"(controller: "testCase", action: "show")
+        get "/testCase/edit/$testCaseId"(controller: "testCase", action: "edit")
         put "/testCase/update/$id"(controller: "testCase", action: "update")
-        delete "/testCase/delete/$id"(controller: "testCase", action: "delete")
+        delete "/testCase/delete/$testCaseId"(controller: "testCase", action: "delete")
 
         //TestCaseDocument controller uri
-        get "/testCaseDocument/create"(controller: "testCaseDocument", action: "create")
-        post "/testCaseDocument/save"(controller: "testCaseDocument", action: "save")
-        get "/testCaseDocument/index"(controller: "testCaseDocument", action: "index")
-        get "/testCaseDocument/downloadDocument/$id"(controller: "testCaseDocument", action:"download")
+        get "/project/$projectId/testCaseDocument/downloadDocument/$testCaseId"(controller: "testCaseDocument", action:"download")
 
         //User controller uri
         get "/user/index"(controller: "user", action: "index")
@@ -26,9 +23,11 @@ class UrlMappings {
         get "/user/show/$id"(controller: "user", action: "show")
         get "/user/create"(controller: "user", action: "create")
         post "/user/save"(controller: "user", action: "save")
-        get "/user/edit/$id"(controller: "user", action: "edit")
-        put "/user/update/$id"(controller: "user", action: "update")
+        get "/user/edit/$userId"(controller: "user", action: "edit")
+        put "/user/update"(controller: "user", action: "update")
         delete "/user/delete/$id"(controller: "user", action: "delete")
+        get "/user/showInfo"(controller: "user", action: "showInfo")
+        delete "/user/deleteCurrentUser" (controller: "user", action: "deleteCurrentUser")
 
         //Project controller uri
         get "/project/$projectId/addUserProject"(controller: "project", action: "addUserProject")
@@ -39,9 +38,11 @@ class UrlMappings {
         post "/project/save"(controller: "project", action: "save")
         delete "/project/delete/$projectId"(controller: "project", action: "delete")
         put "/project/leaveProject/$projectId"(controller: "project", action: "leaveProject")
+        get "/project/edit/$projectId"(controller: "project", action: "edit")
+        put "/project/update"(controller: "project", action: "update")
 
         //Diagnostic controller uri
-        get "/diagnostic/index"(controller: "diagnostic", action: "index")
+        get "/diagnostics/index"(controller: "diagnostics", action: "index")
 
         /*
         //Init version

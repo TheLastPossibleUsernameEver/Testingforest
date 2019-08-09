@@ -1,7 +1,6 @@
 package testingforest
 
 import grails.testing.gorm.DataTest
-import grails.testing.services.ServiceUnitTest
 import grails.testing.web.controllers.ControllerUnitTest
 import spock.lang.Specification
 
@@ -120,6 +119,7 @@ class ProjectControllerSpec extends Specification implements DataTest, Controlle
         project_1.save()
         Long projectId = project_1.id
         controller.projectService = Stub(ProjectService) {
+            get() >> project_1
             delete() >> project_1.delete()
         }
 
@@ -146,6 +146,27 @@ class ProjectControllerSpec extends Specification implements DataTest, Controlle
         Project.list().size() == 1
         def projectSaved = Project.list()[0]
         projectSaved.projectName == "Hello world"
+        projectSaved.teamList.contains(user)
+    }
+
+    def "Test update"(){
+        given:
+        controller.request.method = 'PUT'
+        User user = new User( name: "test", role: "user", login: "test", password: "12345")
+        user.save()
+        session.user = user
+        Project project = new Project(projectName: "Hello world", teamList: [user])
+        project.save()
+        project.projectName = "Hello world new"
+
+
+        when: "Save executed"
+        controller.update(project)
+
+        then: "Project should be saved"
+        Project.list().size() == 1
+        def projectSaved = Project.list()[0]
+        projectSaved.projectName == "Hello world new"
         projectSaved.teamList.contains(user)
     }
 }

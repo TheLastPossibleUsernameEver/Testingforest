@@ -16,18 +16,59 @@ class UserController {
         def user = User.findByLoginAndPassword(params.login, hexPassword)
         if(user){
             session.user = user
+
+            log.info("User ${session.user.login} logged in")
+
             flash.message = message(code:"login.message", args: [session.user.name])
             redirect uri: "/project/index"
         }
         else{
             flash.error = message(code:"login.error")
+            log.error("User's authentication failed")
             redirect uri: "/user/log_in"
         }
     }
 
     def logout() {
         flash.message = message(code:"logout.message", args: [session.user.name])
+
+        log.info("User ${session.user.login} logged out")
+
         session.user = null
+        redirect uri: "/user/log_in"
+    }
+    def showInfo() {
+        def user = User.get(session.user.id)
+        def testCases = user.caseList
+        def criteria = Project.createCriteria()
+        def projects = criteria.list{
+            teamList{
+                idEq(user.id)
+            }
+        }
+        return [projects:projects,testCases:testCases]
+    }
+    def deleteCurrentUser() {
+        def user = session.user
+        def criteria = Project.createCriteria()
+        def projects = criteria.list{
+            teamList{
+                idEq(user.id)
+            }
+        }
+        projects.each{
+            if ( it.teamList.size() == 1 ){
+                it.delete(flush:true)
+            } else {
+                it.teamList.removeElement(user)
+            }
+        }
+        log.info("User ${session.user.login} was removed")
+        User.get(user.id).caseList.each{
+            it.delete(flush:true)
+        }
+        User.get(user.id).delete(flush:true)
+        session.invalidate()
         redirect uri: "/user/log_in"
     }
 
@@ -43,39 +84,33 @@ class UserController {
         user.role = "user"
         if (user.validate()) {
             user.save()
+            log.info("User ${user.login} registered")
             flash.message = message(code: 'registration.success.message', args: [user.name])
             redirect uri: "/user/log_in"
         } else {
             respond user.errors, view: 'create'
+            log.error(user.errors)
         }
     }
 
-    def edit(Long id) {
-        respond userService.get(id)
+    def edit(Long userId) {
+        respond userService.get(userId)
     }
 
     def update(User user) {
-
-        if (user == null) {
-            notFound()
-            return
+        if (!user.password) {
+            user.password = user.getPersistentValue("password")
         }
+        if (user.validate()) {
+            user.save(flush: true)
+            flash.message = message(code: "user.edit.success.message")
+            session.user = user
 
+            log.info("Updated ${user.login} user.")
 
-
-        try {
-            userService.save(user)
-        } catch (ValidationException e) {
-            respond user.errors, view:'edit'
-            return
-        }
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect uri: "/user/show/${user.id}"
-            }
-            '*'{ respond user, [status: OK] }
+            redirect uri: "/user/showInfo"
+        } else {
+            respond user.errors, view: "edit"
         }
     }
 
@@ -86,6 +121,7 @@ class UserController {
         }
 
         userService.delete(id)
+        log.debug("User ${userService.get(id).login} account deleted")
 
         request.withFormat {
             form multipartForm {

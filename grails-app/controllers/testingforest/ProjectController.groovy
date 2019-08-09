@@ -11,21 +11,30 @@ class ProjectController {
 
     def addingUser(){
         def currUser = User.findByLogin(params.login)
+        def currProject = Project.get(session.projectId)
         if(currUser){ //если он существует и если у него нет проекта
-            def currProject = Project.get(session.projectId)
             def teamList = currProject.getTeamList()
             def result = teamList.find{member -> if (member != null) member.login.equals(currUser.login)}
             if(result == null) {
                 currProject.addToTeamList(currUser).save(flush: true)
+
+                log.info("Added user ${currUser.login} to ${currProject.projectName} project")
+
                 flash.message = message(code: 'project.success.addUser.message', args: [params.login])
                 redirect(uri: "/project/$session.projectId/addUserProject")
             }
             else {
+                log.error("Adding user ${currUser.login} to ${currProject.projectName} is failed: " +
+                        "user is already in project")
+
                 flash.error = message(code: 'user.already.in.project', args: [params.login])
                 redirect(uri: "/project/$session.projectId/addUserProject")
             }
         }
-        else{
+        else {
+            log.error "Adding user ${currUser.login} to ${currProject.projectName} project is failed: " +
+                    "User not found"
+
             flash.error = message(code: 'user.login.not.exist')
             redirect(uri: "/project/$session.projectId/addUserProject")
         }
@@ -53,15 +62,18 @@ class ProjectController {
 
     def create() {
         respond new Project(params)
-
     }
 
     def save(Project project) {
         if (project.validate()) {
             project.addToTeamList(session.user).save(flush: true)
+
+            log.info("Adding ${session.user.login} user to ${project.projectName} project ")
+
             redirect uri: "/project/index"
         } else {
             respond project.errors, view: 'create'
+            log.error("Error updating project status: " + project.errors)
         }
     }
 
@@ -72,9 +84,15 @@ class ProjectController {
             project.removeFromTeamList(user)
             if (project.teamList.isEmpty()) {
                 projectService.delete(projectId)
+
+                log.info("Deleting ${project.projectName} project: last member ${user.login} left")
+
                 redirect uri: "/project/index"
             } else {
                 projectService.save(project)
+
+                log.info("User ${user.login} left ${project.projectName} project")
+
                 redirect uri: "/project/index"
             }
         } else {
@@ -83,7 +101,30 @@ class ProjectController {
     }
 
     def delete(Long projectId) {
-        projectService.delete(projectId)
-        redirect uri: "/project/index"
+        Project project = Project.get(projectId)
+        if(project) {
+            log.info("Deleting ${project.projectName}")
+
+            projectService.delete(projectId)
+
+            redirect uri: "/project/index"
+        }
+    }
+
+    def edit(Long projectId) {
+        respond projectService.get(projectId)
+    }
+
+    def update(Project project) {
+        if (project.validate()){
+           project.save(flush: true)
+           flash.message = message(code: "project.edit.success.message")
+
+           log.info("Updating ${project.projectName} project.")
+
+           redirect uri: "/project/show/${project.id}"
+        } else {
+            respond project.errors, view: "edit"
+        }
     }
 }

@@ -2,6 +2,9 @@
 <html>
 <head>
     <meta name="layout" content="main" />
+    <title>
+        <g:message code="title.project.show"/>
+    </title>
 </head>
 <body>
 <div class="nav" role="navigation">
@@ -22,6 +25,11 @@
             </g:link>
         </li>
     </ul>
+</div>
+<div class="content">
+    <h1>
+        <g:message code="project.label.show.info"/>
+    </h1>
 </div>
 <div class="fieldcontain">
     <label>
@@ -60,6 +68,9 @@
     ${params.sizeTestCaseList}
 </div>
 <div class="buttons">
+    <g:link uri="/project/edit/${params.projectId}">
+        <g:message code="project.edit.label.button"/>
+    </g:link>
     <g:form uri="/project/leaveProject/${params.projectId}" method="PUT">
         <g:submitButton name="leaveProject"
                         value="${message(code: 'project.leave.label.button')}"

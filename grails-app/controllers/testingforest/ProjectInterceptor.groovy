@@ -9,6 +9,9 @@ class ProjectInterceptor {
         match(controller: "project", action: "show")
         match(controller: "project", action: "leaveProject")
         match(controller: "project", action: "delete")
+        match(controller: "testCase", action: "create")
+        match(controller: "testCaseDocument", action: "download")
+        match(controller: "project", action: "edit")
     }
 
     boolean before() {
