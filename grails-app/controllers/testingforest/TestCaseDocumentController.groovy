@@ -3,7 +3,8 @@ package testingforest
 class TestCaseDocumentController {
 
     def download(Long testCaseId){
-        TestCaseDocument testCaseDocument = TestCaseDocument.get(testCaseId)
+        TestCase testCase = TestCase.get(testCaseId)
+        TestCaseDocument testCaseDocument = TestCaseDocument.get(testCase.getCaseData().getId())
         if (testCaseDocument == null) {
             log.error("Error downloading file ${testCaseDocument.name}: file not found")
 
