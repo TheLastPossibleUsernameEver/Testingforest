@@ -83,17 +83,20 @@ class UserController {
 
     def save(User user) {
         user.role = "user"
-        if (user.validate() && params.password == params.passwordRepeat) {
-            user.save()
-            log.info("User ${user.login} registered")
-            flash.message = message(code: 'registration.success.message', args: [user.name])
-            redirect uri: "/user/log_in"
-        } else if (user.validate()) {
-            render view: 'create'
-            flash.error = message(code: 'user.password.error')
-            log.error("Passwords mismatch for ${params.login} user login")
+        if (user.validate()) {
+            if (params.password == params.passwordRepeat) {
+                user.save()
+                log.info("User ${user.login} registered")
+                flash.message = message(code: 'registration.success.message', args: [user.name])
+                redirect uri: "/user/log_in"
+            } else {
+                flash.error = message(code: 'user.passwordRepeat.error')
+                log.error("Passwords mismatch for ${params.login} user login")
+                redirect uri: "/user/create"
+            }
         } else {
-            respond user.errors, view: 'create'
+            log.error(user.errors)
+            respond user.errors, view: "create"
         }
     }
 
