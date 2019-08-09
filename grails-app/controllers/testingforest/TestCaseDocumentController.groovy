@@ -22,4 +22,13 @@ class TestCaseDocumentController {
         }
     }
 
+    def editDocument(Long testCaseId){
+        TestCaseDocument testCaseDocument = TestCaseDocument.get(testCaseId)
+        if (testCaseDocument == null){
+            log.error("Error rendering file ")
+        } else {
+//            return testCaseDocument.getData()
+        }
+
+    }
 }

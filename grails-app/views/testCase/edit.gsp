@@ -8,6 +8,7 @@
     </title>
 </head>
 <body>
+<asset:stylesheet src = "edit-test-case.css"/>
 <div class="nav" role="navigation">
     <ul>
         <li><g:link class="home" uri="/"><g:message code="default.home.label"/></g:link></li>
@@ -30,7 +31,7 @@
         <fieldset class="form">
             <div class="fieldcontain ${hasErrors(bean: testCase, field: 'caseName','error')}">
                 <label>Test-case name:</label>
-                <g:textField name="caseName" value="${testCase.caseName}"/>
+                <g:textField style = "border-radius: 5px" name="caseName" value="${testCase.caseName}"/>
             </div>
             <g:if test="${testCase.userCreated.id == session.user.id}">
                 <div class="fieldcontain ${hasErrors(bean: testCase, field: 'typeCase','error')}">
@@ -43,6 +44,8 @@
                               valueMessagePrefix="testCase.type.label" />
                 </div>
             </g:if>
+            <g:textArea name="edit-document" rows="5" cols="40" value="${testCase.caseData.data}">
+            </g:textArea>
         </fieldset>
         <fieldset class="buttons">
             <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />

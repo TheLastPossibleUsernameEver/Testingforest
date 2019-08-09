@@ -1,7 +1,7 @@
 package testingforest
 
-import grails.validation.ValidationException
-import static org.springframework.http.HttpStatus.*
+import static org.springframework.http.HttpStatus.NOT_FOUND
+import static org.springframework.http.HttpStatus.NO_CONTENT
 
 class UserController {
 
@@ -9,7 +9,7 @@ class UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def log_in() {}
+    def log_in(){}
 
     def authenticate() {
         def hexPassword = params.password.encodeAsSHA1()

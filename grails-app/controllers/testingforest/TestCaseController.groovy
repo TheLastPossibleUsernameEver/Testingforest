@@ -68,7 +68,7 @@ class TestCaseController {
         if (testCase.validate()){
             testCaseService.save(testCase)
 
-            log.info("Updated ${testCase.caseName} test-case in ${testCaseService.get(testCase).project.projectName}")
+//            log.info("Updated ${testCase.caseName} test-case in ${testCaseService.get(testCase).project.projectName}")
 
             redirect uri: "/testCase/show/$testCase.id"
         } else {
