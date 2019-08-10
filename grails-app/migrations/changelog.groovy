@@ -7,4 +7,6 @@ databaseChangeLog = {
     include file: 'update-tables-5.groovy'
     include file: 'update-tables-6.groovy'
     include file: 'update-tables-7.groovy'
+    include file: 'update-tables-8.groovy'
+    include file: 'update-tables-9.groovy'
 }
