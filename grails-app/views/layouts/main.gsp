@@ -8,15 +8,12 @@
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <asset:link rel="icon" href="Logo - Testing Forest Favicon.png" type="image/x-png"/>
+    <asset:stylesheet src="offcanvas.css"/>
     <asset:stylesheet src="application.css"/>
     <asset:javascript src="application.js"/>
     <g:layoutHead/>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-static-top" role="navigation">
-        <a class="navbar-brand" href="/#"><asset:image src="grails.svg" alt="Grails Logo"/></a>
-    </nav>
-
     <g:layoutBody/>
 
     <div class="footer" role = "contentinfo" style="text-align: center">

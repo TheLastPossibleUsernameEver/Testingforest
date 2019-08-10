@@ -10,7 +10,7 @@ body {
 @media (max-width: 991.98px) {
   .offcanvas-collapse {
     position: fixed;
-    top: 56px; /* Height of navbar */
+    top: 16px; /* Height of navbar */
     bottom: 0;
     left: 100%;
     width: 100%;
@@ -34,11 +34,21 @@ body {
   z-index: 2;
   height: 2.75rem;
   overflow-y: hidden;
+
+}
+
+.right-button{
+  margin-left: auto;
+}
+
+.right-side{
+  margin:0;
+  float: right;
 }
 
 .nav-scroller .nav {
-  display: -ms-flexbox;
-  display: flex;
+
+  display: inline;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
   padding-bottom: 1rem;
@@ -64,19 +74,23 @@ body {
   font-weight: 500;
 }
 
-.bar-text-size {
-  font-size: 150%
+.title-text {
+  font-weight: normal;
+  font-size: 200%
 }
 
 .text-black-50 {color: #1b1e21}
 .text-white-50 { color: rgba(255, 255, 255, .5); }
 
-.user {
-  font-size: 150%;
+.text-feed {
+  font-weight: normal;
+  font-size: 165%;
+  color: #1d2124;
 }
 
-.text-feed {
-  font-size: 125%;
+.date-feed{
+  font-weight: normal;
+  font-size: 100%;
   color: #1d2124;
 }
 
@@ -85,8 +99,6 @@ body {
 }
 
 .text-white {font-size: 1.975rem;}
-
-.bg-purple { background-color: #6f42c1; }
 
 .lh-100 { line-height: 1; }
 .lh-125 { line-height: 1.25; }

@@ -16,7 +16,7 @@ class ProjectController {
             def teamList = currProject.getTeamList()
             def result = teamList.find{member -> if (member != null) member.login.equals(currUser.login)}
             if(result == null) {
-                Feed feed = new Feed(user: currUser, project: currProject, feed: "Был добавлен в проект ")
+                Feed feed = new Feed(user: currUser, project: currProject, feed: "feed.addUser.toProject")
                 feed.save()
 
                 currProject.addToTeamList(currUser).save(flush: true)
@@ -71,6 +71,9 @@ class ProjectController {
         if (project.validate()) {
             project.addToTeamList(session.user).save(flush: true)
 
+            Feed feed = new Feed(user: User.get(session.user.id), project: project, feed: "feed.create.project")
+            feed.save()
+
             log.info("Adding ${session.user.login} user to ${project.projectName} project ")
 
             redirect uri: "/project/index"
@@ -86,7 +89,7 @@ class ProjectController {
             User user = project.teamList.find { member -> member.id == session.user.id}
             project.removeFromTeamList(user)
 
-            Feed feed = new Feed(user: user, project: project, feed: "Покинул проект ")
+            Feed feed = new Feed(user: user, project: project, feed: "feed.leave.project")
             feed.save()
 
             if (project.teamList.isEmpty()) {
@@ -127,7 +130,7 @@ class ProjectController {
            project.save(flush: true)
 
             def user = User.get(session.user.id)
-            Feed feed = new Feed(user: user, project: project, feed: "Отредактировал проект ")
+            Feed feed = new Feed(user: user, project: project, feed: "feed.project.update")
             feed.save()
 
            flash.message = message(code: "project.edit.success.message")

@@ -41,6 +41,10 @@ class TestCaseController {
             if (testCaseDocument.validate()) {
                 testCaseDocument.save(flush: true)
                 testCase.save(flush: true)
+
+                Feed feed = new Feed(user: sessionUser, project: sessionProject, testCase: testCase.caseName, feed: "feed.testcase.create")
+                feed.save()
+
                 flash.message = message(code: "testCase.create.success.message", args: [testCase.caseName])
 
                 log.info("Created ${testCase.caseName} test-case in ${sessionProject.projectName} project ")
@@ -68,7 +72,10 @@ class TestCaseController {
         if (testCase.validate()){
             testCaseService.save(testCase)
 
-            log.info("Updated ${testCase.caseName} test-case in ${testCaseService.get(testCase).project.projectName}")
+            Feed feed = new Feed(user: User.get(session.user.id), project: testCase.project, testCase: testCase.caseName, feed: "feed.testcase.update")
+            feed.save()
+
+            log.info("Updated ${testCase.caseName} test-case in ${testCase.project.projectName}")
 
             redirect uri: "/testCase/show/$testCase.id"
         } else {
@@ -77,6 +84,9 @@ class TestCaseController {
     }
 
     def delete(Long testCaseId) {
+        Feed feed = new Feed(user: User.get(session.user.id), project: TestCase.get(testCaseId).project, testCase: TestCase.get(testCaseId).caseName, feed: "feed.testcase.delete")
+        feed.save()
+
         def projectId = testCaseService.get(testCaseId).project.id
 
         log.info("Deleted ${testCaseService.get(testCaseId).caseName} test-case" +
