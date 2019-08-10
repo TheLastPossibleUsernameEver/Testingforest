@@ -14,11 +14,6 @@
                         <g:message code="user.label.show.info"/>
                     </g:link>
                 </li>
-                <li>
-                    <g:link uri="/user/logout">
-                        <g:message code="logout.label"/>
-                    </g:link>
-                </li>
             </ul>
         </div>
         <div id="edit-user" class="content" role="main">

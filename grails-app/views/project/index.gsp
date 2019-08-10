@@ -15,9 +15,6 @@
         <li><g:link class="list" uri="/user/showInfo">
             <g:message code="user.label.show.info"/>
         </g:link></li>
-        <li><g:link class="list" uri="/user/logout">
-            <g:message code="logout.label"/>
-        </g:link></li>
     </ul>
 </div>
 <div>

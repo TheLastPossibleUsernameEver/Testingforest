@@ -9,11 +9,6 @@
       <div class="nav" role="navigation">
          <u1>
             <li>
-               <g:link class="list" uri="/user/logout">
-                  <g:message code="logout.label"/>
-               </g:link>
-            </li>
-            <li>
                <g:link class="list" uri="/project/index">
                   <g:message code="user.info.button.projectList"/>
                </g:link>

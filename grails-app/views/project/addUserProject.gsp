@@ -12,9 +12,6 @@
         <li><g:link class="list" uri="/project/show/${this.project.id}">
             <g:message code="project.label.show.info"/>
         </g:link></li>
-        <li><g:link class="list" uri="/user/logout">
-            <g:message code="logout.label"/>
-        </g:link></li>
     </u1>
 </div>
 <div class="body">
