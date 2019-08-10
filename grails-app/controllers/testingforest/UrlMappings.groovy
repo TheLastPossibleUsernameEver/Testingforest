@@ -15,6 +15,9 @@ class UrlMappings {
         //TestCaseDocument controller uri
         get "/project/$projectId/testCaseDocument/downloadDocument/$testCaseId"(controller: "testCaseDocument", action:"download")
 
+        //Feed controller uri
+        get "/feed/list"(controller: "feed", action: "list")
+
         //User controller uri
         get "/user/index"(controller: "user", action: "index")
         get "/user/log_in"(controller: "user", action: "log_in")

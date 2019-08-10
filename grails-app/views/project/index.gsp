@@ -9,6 +9,9 @@
 <body>
 <div class="nav" role="navigation">
     <ul>
+        <li><g:link class="list" uri="/feed/list">
+            <g:message code="feed.list.label"/>
+        </g:link></li>
         <li><g:link class="create" action="create">
             <g:message code="project.index.create.button"/>
         </g:link></li>
