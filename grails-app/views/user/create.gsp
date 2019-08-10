@@ -19,9 +19,9 @@
             <h1>
                 <g:message code="registration.label"/>
             </h1>
-            <g:if test="${flash.message}">
-                <div class="message" role="status">
-                    ${flash.message}
+            <g:if test="${this.user}">
+                <div class="errors">
+                    ${flash.error}
                 </div>
             </g:if>
             <g:hasErrors bean="${this.user}">
