@@ -22,6 +22,7 @@ class UrlMappings {
         get "/user/logout"(controller: "user", action: "logout")
         get "/user/show/$id"(controller: "user", action: "show")
         get "/user/create"(controller: "user", action: "create")
+        get "/user/$link "(controller: "user", action: "emailConfirmed")
         post "/user/save"(controller: "user", action: "save")
         get "/user/edit/$id"(controller: "user", action: "edit")
         put "/user/update/$id"(controller: "user", action: "update")

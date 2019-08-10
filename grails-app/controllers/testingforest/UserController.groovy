@@ -1,7 +1,7 @@
 package testingforest
 
 import grails.validation.ValidationException
-import jodd.util.RandomString
+import org.apache.commons.lang.RandomStringUtils
 
 import static org.springframework.http.HttpStatus.*
 
@@ -85,14 +85,15 @@ class UserController {
     def save(User user) {
         user.role = "user"
         if (user.validate()) {
-            RandomString link
+            def ipAddress = "localhost:8080"
+            def link = RandomStringUtils.randomAlphanumeric(10).toString()
             sendMail {
                 from "testingforest@yandex.ru"
                 subject "E-mail confirmation"
                 to params.email
                 text "Congratulations! You are successfully registered on TestingForest" +
-                        "check this link for registration confirm:  " +
-                        "http://localhost:8080/${}"
+                        "check this link for registration confirmation:  " +
+                        "http://${ipAddress}/${link}/"
             }
             user.save()
             log.info("User ${user.login} registered")
