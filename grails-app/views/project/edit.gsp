@@ -8,16 +8,16 @@
 </head>
 <body>
     <div class="nav border-bottom" role="navigation">
-        <g:link class="btn btn-sm btn-outline-dark mt-2 mb-2 ml-2 mr-1 " uri="/project/show/${params.projectId}">
+        <g:link class="btn btn-sm btn-outline-dark mt-2 mb-2 ml-2 mr-1" uri="/project/show/${params.projectId}">
             <g:message code="project.show.label.button"/>
         </g:link>
     </div>
-    <div class="h4 mt-3 mb-3 ml-5 ">
+    <div class="h4 mt-3 mb-3 ml-5">
         <g:message code="project.edit.label"/>
     </div>
 
     <g:if test="${flash.message}">
-        <div class="alert alert-primary " role="status">
+        <div class="alert alert-primary" role="status">
             <div class="ml-4">
                 ${flash.message}
             </div>
