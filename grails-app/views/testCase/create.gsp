@@ -78,7 +78,7 @@
         <div class="input-group ml-5 mb-4">
             <div class="custom-file col-sm-4">
                 <label class="custom-file-label" for="data">
-                    <g:message code="testCaseDocument.data.label.field"/>
+                    <g:message code="testCaseDocument.data.placeholder"/>
                 </label>
                 <input type="file" id="data" name="data"
                        class="custom-file-input col-sm-4"
@@ -89,7 +89,6 @@
         <script>
             $(".custom-file-input").on("change", function() {
                 var fileName = $(this).val().split("\\").pop();
-                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
             });
         </script>
 
