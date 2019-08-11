@@ -6,113 +6,103 @@
       </title>
    </head>
    <body>
-      <div class="nav" role="navigation">
-         <u1>
-            <li>
-               <g:link class="list" uri="/project/index">
-                  <g:message code="user.info.button.projectList"/>
-               </g:link>
-            </li>
-         </u1>
+      <div class="nav border-bottom" role="navigation">
+         <g:link class="btn btn-sm btn-outline-dark mt-2 mb-2 ml-2 mr-1" uri="/project/index">
+            <g:message code="user.info.button.projectList"/>
+         </g:link>
       </div>
-      <div class="content">
-         <h1>
-            <g:message code="user.info.pageName"/>
-         </h1>
+      <div class="h4 mt-3 mb-3 ml-5 ">
+         <g:message code="user.info.pageName"/>
       </div>
-      <div class="fields">
-         <fieldset class="form">
-            <div class="fieldcontain">
-               <label>
-                  <g:message code="user.info.name" />
-               </label>
-               <g:fieldValue bean="${session.user}" field="name" />
+      <form>
+         <div class="form-group row ml-4">
+            <label for="name" class="col-sm-2 ml-5 col-form-label">
+               <g:message code="user.info.name"/>
+            </label>
+            <div class="form-control-plaintext col-sm-9">
+               <g:fieldValue type="text" id="name" bean="${session.user}" field="name" />
             </div>
-            <div class="fieldcontain">
-               <label>
-                  <g:message code="user.info.login" />
-               </label>
-               <g:fieldValue bean="${session.user}" field="login" />
+
+            <label for="login" class="col-sm-2 ml-5 col-form-label">
+               <g:message code="user.info.login"/>
+            </label>
+            <div class="form-control-plaintext col-sm-9">
+               <g:fieldValue type="text" id="login" bean="${session.user}" field="login" />
             </div>
-            <div class="fieldcontain">
-               <label >
-                  <g:message code="user.info.regDate" />
-               </label>
+
+            <label for="login" class="col-sm-2 mb-1 ml-5 col-form-label">
+               <g:message code="user.info.regDate"/>
+            </label>
+            <div class="form-control-plaintext col-sm-9">
                <g:formatDate date="${session.user.dateCreated}" type="datetime" style="SHORT"/>
             </div>
-         </fieldset>
-      </div>
-         <div class="content">
-            <h1 >
-               <g:message code="user.info.testCase.list.label" />
-            </h1>
-         <table>
-            <tr>
-               <th>
-                  <g:message code="user.testcase.caseName" />
-               </th>
-               <th>
-                  <g:message code="user.project.projectName" />
-               </th>
-               <th>
-                  <g:message code="user.testcase.type" />
-               </th>
-               <th>
-                  <g:message code="user.testcase.sizeData"/>
-               </th>
-               <th>
-                  <g:message code="user.testcase.dateCreated" />
-               </th>
-               <th>
-                  <g:message code="user.testcase.lastUpdated" />
-               </th>
-               <th>
-                  <g:message code="testCaseDocument.download"/>
-               </th>
-            </tr>
-            <g:each var="testcase" in="${testCases}" >
+            <div class="col-sm-2 mb-3 mt-3 ml-5">
+               <g:link class="btn btn-sm btn-outline-info" uri="/user/edit/${session.user.id}">
+                  <g:message code="user.edit.label.button"/>
+               </g:link>
+            </div>
+         </div>
+      </form>
+
+      <div class="mt-4">
+         <div class="h5 mt-3 mb-3 ml-5 ">
+            <g:message code="user.info.testCase.list.label" />
+         </div>
+         <table class="table table-light shadow-sm">
+            <thead class="bg-light">
                <tr>
-                  <td>
-                     <g:link uri="/testCase/show/${testcase.id}">
-                        <g:fieldValue bean="${testcase}" field="caseName" />
-                     </g:link>
-                  </td>
-                  <td>
-                     <g:link uri="/project/show/${testcase.project.id}">
-                        <g:fieldValue bean="${testcase.project}" field="projectName" />
-                     </g:link>
-                  </td>
-                  <td>
-                     <g:fieldValue bean="${testcase}" field="typeCase" />
-                  </td>
-                  <td>
-                     <g:fieldValue bean="${testcase}" field="caseData.sizeData" />
-                  </td>
-                  <td>
-                     <g:formatDate date="${testcase.dateCreated}" type="datetime" style="MEDIUM"/>
-                  </td>
-                  <td>
-                     <g:formatDate date="${testcase.lastUpdated}" type="datetime" style="MEDIUM"/>
-                  </td>
-                  <td>
-                     <g:link url="/project/${testcase.project.id}/testCaseDocument/downloadDocument/${testcase.id}">
-                        <g:img dir="images" file="download.png" width="30" height="30"/>
-                     </g:link>
-                  </td>
+                  <th style="width: 20%"><g:message code="user.testcase.caseName"/></th>
+                  <th style="width: 20%"><g:message code="user.project.projectName"/></th>
+                  <th style="width: 3%"><g:message code="user.testcase.type"/></th>
+                  <th style="width: 8%"><g:message code="user.testcase.sizeData"/></th>
+                  <th style="width: 8%"><g:message code="user.testcase.dateCreated"/></th>
+                  <th style="width: 10%"><g:message code="user.testcase.lastUpdated"/></th>
+                  <th style="width: 10%"><g:message code="testCaseDocument.download"/></th>
                </tr>
-            </g:each>
+            </thead>
+            <tbody>
+               <g:each var="testcase" in="${testCases}" >
+                  <tr>
+                     <td>
+                        <g:link uri="/testCase/show/${testcase.id}">
+                           <g:fieldValue bean="${testcase}" field="caseName" />
+                        </g:link>
+                     </td>
+                     <td>
+                        <g:link uri="/project/show/${testcase.project.id}">
+                           <g:fieldValue bean="${testcase.project}" field="projectName" />
+                        </g:link>
+                     </td>
+                     <td>
+                        <g:fieldValue bean="${testcase}" field="typeCase" />
+                     </td>
+                     <td>
+                        <g:fieldValue bean="${testcase}" field="caseData.sizeData" />
+                     </td>
+                     <td>
+                        <g:formatDate date="${testcase.dateCreated}" type="datetime" style="SHORT"/>
+                     </td>
+                     <td>
+                        <g:formatDate date="${testcase.lastUpdated}" type="datetime" style="SHORT"/>
+                     </td>
+                     <td>
+                        <g:link url="/project/${testcase.project.id}/testCaseDocument/downloadDocument/${testcase.id}">
+                           <g:img dir="images" file="download.png" width="25" height="25"/>
+                        </g:link>
+                     </td>
+                  </tr>
+               </g:each>
+            </tbody>
          </table>
       </div>
-      <fieldset class="buttons">
-         <g:link uri="/user/edit/${session.user.id}">
-            <g:message code="user.edit.label.button"/>
-         </g:link>
+      <div class="ml-5 mb-4 mt-4">
          <g:form uri="/user/deleteCurrentUser" method="DELETE">
-            <g:submitButton name="delete"
+            <g:submitButton class="btn btn-outline-danger"
+                            name="delete"
                             value="${message(code: 'user.info.button.deleteAccount')}"
                             onclick="return confirm('${message(code:
                                     'user.button.delete.confirm.message')}')"/>
          </g:form>
-      </fieldset>
+      </div>
    </body>
 </html>
