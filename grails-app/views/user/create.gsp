@@ -7,9 +7,9 @@
 <g:form class="form-signup" resource="${this.user}" method="POST">
     <asset:image class="mx-auto d-block" src="Logo - Testing Forest Login.png"
                  alt="Testing Forest Logo" width="103,333" height="120"/>
-    <h1 class="h3 mb-3 font-weight-normal text-center">
+    <div class="h4 mt-3 mb-3 font-weight-normal text-center" style="line-height: 140%">
         <g:message code="registration.label"/>
-    </h1>
+    </div>
     <g:if test="${flash.message}">
         <div class="alert alert-primary text-center" role="status">
             ${flash.message}

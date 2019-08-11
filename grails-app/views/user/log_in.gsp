@@ -7,9 +7,9 @@
         <g:form class="form-signin" controller="user" action="authenticate">
             <asset:image class="mx-auto d-block" src="Logo - Testing Forest Login.png"
                          alt="Testing Forest Logo" width="103,333" height="120"/>
-            <h1 class="h3 mb-3 font-weight-normal text-center">
+            <div class="h4 mt-3 mb-3 font-weight-normal text-center" style="line-height: 140%">
                 <g:message code="login.label"/>
-            </h1>
+            </div>
             <g:if test="${flash.error}">
                 <div class="alert alert-danger text-center" role="alert">
                     ${flash.error}

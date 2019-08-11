@@ -13,9 +13,7 @@
     <asset:stylesheet src="main.css"/>
     <asset:stylesheet src="offcanvas.css"/>
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <asset:javascript src="bootstrap.js"/>
-    <asset:javascript src="bootstrap.bundle.js"/>
-    <asset:javascript src="jquery-3.3.1.min.js"/>
+    <asset:javascript src="application.js"/>
     <g:layoutHead/>
 </head>
 <body>
@@ -25,23 +23,17 @@
                          alt="Testing Forest Logo" width="269.522" height="50"/>
         </div>
         <div class="collapse navbar-collapse justify-content-end mr-3">
-            <ul class="navbar-nav h6" style="font-size: 18px; font-family: 'Montserrat'">
-                <li class="nav-item active mr-3">
-                    <g:link class="nav-link"  controller="project" action="index">
-                        <g:message code="header.project.label"/>
-                    </g:link>
-                </li>
-                <li class="nav-item active mr-3">
-                    <g:link class="nav-link" controller="feed" action="list">
-                        <g:message code="header.news.label"/>
-                    </g:link>
-                </li>
-                <li class="nav-item active">
-                    <g:link class="nav-link" controller="user" action="logout">
-                        <g:message code="header.signout.label"/>
-                    </g:link>
-                </li>
-            </ul>
+            <div class="navbar-nav h6" style="font-size: 18px; font-family: 'Montserrat', sans-serif;">
+                <g:link class="btn btn-light ml-2 mr-1" controller="project" action="index">
+                    <g:message code="header.project.label"/>
+                </g:link>
+                <g:link class="btn btn-light ml-2 mr-1" controller="feed" action="list">
+                    <g:message code="header.news.label"/>
+                </g:link>
+                <g:link class="btn btn-light ml-2 mr-1" controller="user" action="logout">
+                    <g:message code="header.signout.label"/>
+                </g:link>
+            </div>
         </div>
     </nav>
 
