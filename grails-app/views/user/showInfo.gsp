@@ -58,7 +58,7 @@
                   <th style="width: 8%"><g:message code="user.testcase.sizeData"/></th>
                   <th style="width: 8%"><g:message code="user.testcase.dateCreated"/></th>
                   <th style="width: 10%"><g:message code="user.testcase.lastUpdated"/></th>
-                  <th style="width: 10%"><g:message code="testCaseDocument.download"/></th>
+                  <th style="text-align: center; width: 10%"><g:message code="testCaseDocument.download"/></th>
                </tr>
             </thead>
             <tbody>
@@ -75,7 +75,7 @@
                         </g:link>
                      </td>
                      <td>
-                        <g:fieldValue bean="${testcase}" field="typeCase" />
+                        <g:message code="testCase.type.label.${testcase.typeCase}"/>
                      </td>
                      <td>
                         <g:fieldValue bean="${testcase}" field="caseData.sizeData" />
@@ -86,7 +86,7 @@
                      <td>
                         <g:formatDate date="${testcase.lastUpdated}" type="datetime" style="SHORT"/>
                      </td>
-                     <td>
+                     <td style="text-align: center">
                         <g:link url="/project/${testcase.project.id}/testCaseDocument/downloadDocument/${testcase.id}">
                            <g:img dir="images" file="download.png" width="25" height="25"/>
                         </g:link>
