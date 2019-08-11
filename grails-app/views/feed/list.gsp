@@ -3,13 +3,15 @@
 <head>
     <meta name="layout" content="main" />
     <title>
-        <g:message code="title.project.index"/>
+        <g:message code="title.feed.list"/>
     </title>
 </head>
 <body class="bg-light">
     <main role="main" class="container">
         <div class="my-3 p-3 bg-white rounded shadow-sm">
-            <h5 class="border-bottom border-gray pb-2 mb-0 text-dark title-text">Последние новости</h5>
+            <h5 class="border-bottom border-gray pb-2 mb-0 text-dark title-text">
+                <g:message code="feed.title.last.news"/>
+            </h5>
             <g:if test="${params.sizeList == 0}">
                 <h1><g:message code="feed.label.no.news"/></h1>
             </g:if>
@@ -24,7 +26,7 @@
                                 <g:message bean="${it}" code="${it.feed}" args="${ [it.user.login, it.project.projectName, ""]}"/>
                             </g:else>
                             <strong class="right-side date-feed">
-                            <g:formatDate format="MM/dd HH:mm" date="${it.dateCreated}" />
+                            <g:formatDate format="HH:mm MM/dd" date="${it.dateCreated}" />
                             </strong>
                         </strong>
                     </p>
