@@ -24,11 +24,6 @@
                         <g:message code="testCase.create.label.button"/>
                     </g:link>
                 </li>
-                <li>
-                    <g:link uri="/user/logout">
-                        <g:message code="logout.label"/>
-                    </g:link>
-                </li>
             </ul>
         </div>
         <div class="content" role="main">

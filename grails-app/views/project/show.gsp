@@ -19,11 +19,6 @@
                 <g:message code="project.label.addUserToProject.button"/>
             </g:link>
         </li>
-        <li>
-            <g:link uri="/user/logout">
-                <g:message code="logout.label"/>
-            </g:link>
-        </li>
     </ul>
 </div>
 <div class="content">

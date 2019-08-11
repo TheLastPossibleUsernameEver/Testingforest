@@ -14,9 +14,6 @@
                 <g:message code="project.list.label.button"/>
             </g:link>
         </li>
-        <li><g:link class="list" uri="/user/logout">
-            <g:message code="logout.label"/>
-        </g:link></li>
     </u1>
 </div>
 <g:hasErrors bean="${this.project}">
