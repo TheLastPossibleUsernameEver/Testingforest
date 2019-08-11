@@ -49,14 +49,10 @@
                          placeholder="${message(code: 'user.password.label.field')}" name="password" value="${this.user?.password}"/>
     </div>
     <g:submitButton class="btn btn-lg btn-primary btn-block mt-4" name="create" value="${message(code: 'registration.label.button')}"/>
-    <div>
-        <ul class="nav justify-content-center mt-2">
-            <li class="nav-item">
-                <g:link class="nav-link active" action="log_in">
-                    <g:message code="login.link"/>
-                </g:link>
-            </li>
-        </ul>
+    <div class="nav justify-content-center mt-1">
+        <g:link class="nav-link" action="log_in">
+            <g:message code="login.link"/>
+        </g:link>
     </div>
     <p class="mt-5 mb-2 text-muted text-center">
         Testing Forest

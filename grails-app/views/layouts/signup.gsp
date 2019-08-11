@@ -8,7 +8,7 @@
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <asset:link rel="icon" href="Logo - Testing Forest Favicon.png" type="image/x-png"/>
-    <asset:stylesheet src="application.css"/>
+    <asset:stylesheet src="bootstrap.css"/>
     <asset:stylesheet src="signup.css"/>
     <asset:javascript src="application.js"/>
     <g:layoutHead/>
