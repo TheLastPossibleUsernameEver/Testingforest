@@ -12,6 +12,7 @@
     <asset:stylesheet src="bootstrap.css"/>
     <asset:stylesheet src="main.css"/>
     <asset:stylesheet src="offcanvas.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <asset:javascript src="application.js"/>
     <g:layoutHead/>
 </head>
@@ -22,7 +23,7 @@
                          alt="Testing Forest Logo" width="269.522" height="50"/>
         </div>
         <div class="collapse navbar-collapse justify-content-end mr-3">
-            <ul class="navbar-nav h6" style="font-size: 18px; font-family: 'Montserrat';">
+            <ul class="navbar-nav h6" style="font-size: 18px; font-family: 'Montserrat', sans-serif;">
                 <li class="nav-item active mr-3">
                     <g:link class="nav-link"  controller="project" action="index">
                         <g:message code="header.project.label"/>
