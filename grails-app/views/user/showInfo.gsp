@@ -36,6 +36,7 @@
             <div class="form-control-plaintext col-sm-9">
                <g:formatDate date="${session.user.dateCreated}" type="datetime" style="SHORT"/>
             </div>
+
             <div class="col-sm-2 mb-3 mt-3 ml-5">
                <g:link class="btn btn-sm btn-outline-info" uri="/user/edit/${session.user.id}">
                   <g:message code="user.edit.label.button"/>
