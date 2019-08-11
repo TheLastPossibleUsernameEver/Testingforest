@@ -55,6 +55,12 @@
                               valueMessagePrefix="testCase.type.label" />
                 </div>
             </g:if>
+            <div class="fieldcontain ${hasErrors(bean: testCaseDocument, field: 'data','error')}">
+                <label>
+                    <g:message code="testCaseDocument.data.label.field"/>
+                </label>
+                <input type="file" id="data" name="data" code="testCaseDocument.upload"/>
+            </div>
         </fieldset>
         <fieldset class="buttons">
             <input class="save" type="submit" value="${message(code: 'testCase.save.label.button', default: 'Update')}" />
