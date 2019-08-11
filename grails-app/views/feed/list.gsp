@@ -9,11 +9,13 @@
 <body class="bg-light">
     <main role="main" class="container">
         <div class="my-3 p-3 bg-white rounded shadow-sm">
-            <h5 class="border-bottom border-gray pb-2 mb-0 text-dark title-text">
+            <div class="border-bottom border-gray pb-2 mb-0 h4 text-dark">
                 <g:message code="feed.title.last.news"/>
-            </h5>
+            </div>
             <g:if test="${params.sizeList == 0}">
-                <h1><g:message code="feed.label.no.news"/></h1>
+                <div class="h5 mt-3">
+                    <g:message code="feed.label.no.news"/>
+                </div>
             </g:if>
             <g:each in ="${feedList}">
                 <div class="media text-muted pt-3">
