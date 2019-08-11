@@ -35,8 +35,13 @@ class ProjectController {
             }
         }
         else {
-            log.error "Adding user ${currUser.login} to ${currProject.projectName} project is failed: " +
-                    "User not found"
+            if(params.login) {
+                log.error "Adding user ${params.login} to ${currProject.projectName} project is failed: " +
+                        "User not found"
+            } else {
+                log.error "Adding user to ${currProject.projectName} project is failed: " +
+                        "Empty field"
+            }
 
             flash.error = message(code: 'user.login.not.exist')
             redirect(uri: "/project/$session.projectId/addUserProject")
