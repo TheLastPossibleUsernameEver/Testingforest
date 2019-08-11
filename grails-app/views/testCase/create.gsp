@@ -57,7 +57,7 @@
             <label for="caseName" class="ml-5 mr-4">
                 <g:message code="testCase.caseName.label.field"/>
             </label>
-            <g:textField class="form-control ml-5 mb-4 col-sm-4 ${hasErrors(bean: testCase, field: 'caseName','is-invalid')}"
+            <g:textField class="form-control ml-5 mb-3 col-sm-4 ${hasErrors(bean: testCase, field: 'caseName','is-invalid')}"
                          name="caseName" value="${testCase.caseName}"/>
         </div>
 
@@ -65,25 +65,35 @@
             <label for="typeCase" class="ml-5 mr-4">
                 <g:message code="testCase.typeCase.label.field"/>
             </label>
-            <g:select class="form-control ml-5 mb-4 col-sm-4 ${hasErrors(bean: testCase, field: 'typeCase','is-invalid')}"
+            <g:select class="form-control ml-5 mb-3 col-sm-4 ${hasErrors(bean: testCase, field: 'typeCase','is-invalid')}"
                       name="typeCase"
                       from="${testCase.getConstrainedProperties().typeCase.inList}"
                       value="${testCase.getConstrainedProperties().typeCase.inList[0]}"
                       valueMessagePrefix="testCase.type.label" />
         </div>
 
-            <div class="fieldcontain ${hasErrors(bean: testCaseDocument, field: 'data','error')}">
-                <label>
+        <div class="ml-5 mb-2">
+            <g:message code="testCaseDocument.data.label.field"/>
+        </div>
+        <div class="input-group ml-5 mb-4">
+            <div class="custom-file col-sm-4">
+                <label class="custom-file-label" for="data">
                     <g:message code="testCaseDocument.data.label.field"/>
                 </label>
-                <input type="file" id="data" name="data" code="testCaseDocument.upload"/>
+                <input type="file" id="data" name="data"
+                       class="custom-file-input col-sm-4"
+                       code="testCaseDocument.upload"/>
             </div>
+        </div>
 
+        <script>
+            $(".custom-file-input").on("change", function() {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+        </script>
 
-        <fieldset class="buttons">
-            <g:submitButton name="save"  value="${message(code: 'testCase.create.label.button')}" />
-        </fieldset>
+        <g:submitButton class="btn ml-5 mt-1 mb-4 btn-outline-success" name="save" value="${message(code: 'testCase.create.label.button')}" />
     </g:form>
-
 </body>
 </html>

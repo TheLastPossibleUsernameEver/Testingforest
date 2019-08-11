@@ -13,7 +13,9 @@
     <asset:stylesheet src="main.css"/>
     <asset:stylesheet src="offcanvas.css"/>
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <asset:javascript src="application.js"/>
+    <asset:javascript src="bootstrap.js"/>
+    <asset:javascript src="bootstrap.bundle.js"/>
+    <asset:javascript src="jquery-3.3.1.min.js"/>
     <g:layoutHead/>
 </head>
 <body>
