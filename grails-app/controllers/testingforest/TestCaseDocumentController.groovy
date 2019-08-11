@@ -22,4 +22,31 @@ class TestCaseDocumentController {
         }
     }
 
+    def update (Long testCaseId, Long testCaseDocumentId){
+        def uploadedFile = params.data
+        TestCaseDocument testCaseDocument = TestCaseDocument.get(testCaseDocumentId)
+        def testCase = session.testCase
+        if (uploadedFile != null) {
+
+            testCaseDocument.data = uploadedFile.getBytes()
+            testCaseDocument.name = uploadedFile.originalFilename
+            testCaseDocument.type = uploadedFile.contentType
+            testCaseDocument.length = testCaseDocument.data.length
+            testCase.setCaseData(testCaseDocument)
+            testCaseDocument.setTestCase(testCase)
+        }
+        if (testCase.validate()) {
+            if (testCaseDocument.validate()){
+                testCaseDocument.save(flush:true)
+                testCase.save(flush:true)
+                flash.message = message(code: "testCase.create.success.message", args: [testCase.caseName])
+                redirect uri: "/project/${session.projectId}/testCase/create"
+            } else {
+                respond testCaseDocument.errors, view: "create"
+
+            }
+        } else {
+            respond testCase.errors, view: 'create'
+        }
+    }
 }
