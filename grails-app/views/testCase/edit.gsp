@@ -38,7 +38,7 @@
             </g:eachError>
         </ul>
     </g:hasErrors>
-    <g:form resource="${this.testCase}" uri="/project/${session.projectId}/testCaseDocument/update/${params.testCaseId}" method="PUT">
+    <g:form resource="${this.testCase}" uri="/testCaseDocument/update/${params.testCaseId}">
         <fieldset class="form">
             <div class="fieldcontain ${hasErrors(bean: testCase, field: 'caseName','error')}">
                 <label><g:message code="testCase.caseName.label.field"/></label>
