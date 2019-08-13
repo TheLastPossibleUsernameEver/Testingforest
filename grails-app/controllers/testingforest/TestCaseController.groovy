@@ -42,8 +42,10 @@ class TestCaseController {
                 testCaseDocument.save(flush: true)
                 testCase.save(flush: true)
 
-                Feed feed = new Feed(user: sessionUser, project: sessionProject, testCase: testCase.caseName, feed: "feed.testcase.create")
-                feed.save()
+                if(testCase.getTypeCase().equals("public")) {
+                    Feed feed = new Feed(user: sessionUser.getLogin(), project: sessionProject, testCase: testCase.caseName, feed: "feed.testcase.create")
+                    feed.save()
+                }
 
                 flash.message = message(code: "testCase.create.success.message", args: [testCase.caseName])
 
@@ -72,7 +74,7 @@ class TestCaseController {
         if (testCase.validate()){
             testCaseService.save(testCase)
 
-            Feed feed = new Feed(user: User.get(session.user.id), project: testCase.project, testCase: testCase.caseName, feed: "feed.testcase.update")
+            Feed feed = new Feed(user: User.get(session.user.id).getLogin(), project: testCase.project, testCase: testCase.caseName, feed: "feed.testcase.update")
             feed.save()
 
             log.info("Updated ${testCase.caseName} test-case in ${testCase.project.projectName}")
@@ -84,7 +86,7 @@ class TestCaseController {
     }
 
     def delete(Long testCaseId) {
-        Feed feed = new Feed(user: User.get(session.user.id), project: TestCase.get(testCaseId).project, testCase: TestCase.get(testCaseId).caseName, feed: "feed.testcase.delete")
+        Feed feed = new Feed(user: User.get(session.user.id).getLogin(), project: TestCase.get(testCaseId).project, testCase: TestCase.get(testCaseId).caseName, feed: "feed.testcase.delete")
         feed.save()
 
         def projectId = testCaseService.get(testCaseId).project.id

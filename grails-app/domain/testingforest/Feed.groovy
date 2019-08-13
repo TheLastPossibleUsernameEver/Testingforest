@@ -3,6 +3,7 @@ package testingforest
 class Feed {
 
     String feed
+    String user
     String testCase
     Date dateCreated
 
@@ -10,7 +11,7 @@ class Feed {
         sort dateCreated: 'desc'
     }
 
-    static belongsTo = [user: User, project: Project]
+    static belongsTo = [project: Project]
 
     static constraints = {
         testCase nullable: true

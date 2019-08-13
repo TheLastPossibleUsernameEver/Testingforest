@@ -22,10 +22,10 @@
                     <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray ">
                         <strong class="text-feed">
                             <g:if bean="${it}" test = "${it.testCase != null}">
-                                <g:message bean="${it}" code="${it.feed}" args="${ [it.user.login, it.project.projectName, it.testCase]}"/>
+                                <g:message bean="${it}" code="${it.feed}" args="${ [it.user, it.project.projectName, it.testCase]}"/>
                             </g:if>
                             <g:else>
-                                <g:message bean="${it}" code="${it.feed}" args="${ [it.user.login, it.project.projectName, ""]}"/>
+                                <g:message bean="${it}" code="${it.feed}" args="${ [it.user, it.project.projectName, ""]}"/>
                             </g:else>
                             <strong class="right-side date-feed">
                             <g:formatDate format="HH:mm MM/dd" date="${it.dateCreated}" />
