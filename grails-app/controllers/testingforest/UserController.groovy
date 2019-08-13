@@ -85,15 +85,13 @@ class UserController {
     def save(User user) {
         user.role = "user"
         if (user.validate()) {
-            def ipAddress = "localhost:8080"
-            def link = RandomStringUtils.randomAlphanumeric(10).toString()
             sendMail {
                 from "testingforest@yandex.ru"
                 subject "E-mail confirmation"
                 to params.email
-                text "Congratulations! You are successfully registered on TestingForest" +
-                        "check this link for registration confirmation:  " +
-                        "http://${ipAddress}/${link}/"
+                text "Congratulations! You're successfully registered on TestingForest" +
+                        ".\nYour login is " + user.getLogin() +
+                        ".\nYour current e-mail will be used for password restore if you forgot it."
             }
             user.save()
             log.info("User ${user.login} registered")

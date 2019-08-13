@@ -5,6 +5,7 @@ class User {
     String role
     String login
     String password
+    String email
     Date dateCreated
     Date lastUpdated
     //User created any TestCase
@@ -23,6 +24,7 @@ class User {
         role inList: ["admin", "user"]
         caseList nullable: true
         feedList nullable: true
+        email unique: true
     }
 
     def beforeInsert(){

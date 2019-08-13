@@ -48,6 +48,14 @@
                          class="form-control ${hasErrors(bean: this.user, field: 'password','is-invalid')}"
                          placeholder="${message(code: 'user.password.label.field')}" name="password" value="${this.user?.password}"/>
     </div>
+    <div>
+        <label for="inputEmail" class="sr-only">
+            <g:message code="user.email.label.field"/>
+        </label>
+        <g:textField type="email" id="inputEmail"
+                     class="form-control mb-2 ${hasErrors(bean: this.user, field: 'email','is-invalid')}"
+                     placeholder = "${message(code: 'user.email.label.field')}" name="email" value="${this.user?.email}"/>
+    </div>
     <g:submitButton class="btn btn-lg btn-primary btn-block mt-4" name="create" value="${message(code: 'registration.label.button')}"/>
     <div class="nav justify-content-center mt-1">
         <g:link class="nav-link" action="log_in">
