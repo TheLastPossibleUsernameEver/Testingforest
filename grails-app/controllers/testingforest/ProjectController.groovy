@@ -16,6 +16,9 @@ class ProjectController {
             def teamList = currProject.getTeamList()
             def result = teamList.find{member -> if (member != null) member.login.equals(currUser.login)}
             if(result == null) {
+                Feed feed = new Feed(user: currUser, project: currProject, feed: "feed.addUser.toProject")
+                feed.save()
+
                 currProject.addToTeamList(currUser).save(flush: true)
 
                 log.info("Added user ${currUser.login} to ${currProject.projectName} project")
@@ -32,8 +35,13 @@ class ProjectController {
             }
         }
         else {
-            log.error "Adding user ${currUser.login} to ${currProject.projectName} project is failed: " +
-                    "User not found"
+            if(params.login) {
+                log.error "Adding user ${params.login} to ${currProject.projectName} project is failed: " +
+                        "User not found"
+            } else {
+                log.error "Adding user to ${currProject.projectName} project is failed: " +
+                        "Empty field"
+            }
 
             flash.error = message(code: 'user.login.not.exist')
             redirect(uri: "/project/$session.projectId/addUserProject")
@@ -68,6 +76,9 @@ class ProjectController {
         if (project.validate()) {
             project.addToTeamList(session.user).save(flush: true)
 
+            Feed feed = new Feed(user: User.get(session.user.id), project: project, feed: "feed.create.project")
+            feed.save()
+
             log.info("Adding ${session.user.login} user to ${project.projectName} project ")
 
             redirect uri: "/project/index"
@@ -82,6 +93,10 @@ class ProjectController {
         if (project) {
             User user = project.teamList.find { member -> member.id == session.user.id}
             project.removeFromTeamList(user)
+
+            Feed feed = new Feed(user: user, project: project, feed: "feed.leave.project")
+            feed.save()
+
             if (project.teamList.isEmpty()) {
                 projectService.delete(projectId)
 
@@ -108,6 +123,28 @@ class ProjectController {
             projectService.delete(projectId)
 
             redirect uri: "/project/index"
+        }
+    }
+
+    def edit(Long projectId) {
+        respond projectService.get(projectId)
+    }
+
+    def update(Project project) {
+        if (project.validate()){
+           project.save(flush: true)
+
+            def user = User.get(session.user.id)
+            Feed feed = new Feed(user: user, project: project, feed: "feed.project.update")
+            feed.save()
+
+           flash.message = message(code: "project.edit.success.message")
+
+           log.info("Updating ${project.projectName} project.")
+
+           redirect uri: "/project/show/${project.id}"
+        } else {
+            respond project.errors, view: "edit"
         }
     }
 }

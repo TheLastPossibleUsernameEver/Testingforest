@@ -101,37 +101,28 @@ class UserController {
             redirect uri: "/user/log_in"
         } else {
             respond user.errors, view: 'create'
-            log.error(user.errors)
+            log.error("Incorrect data for user registration")
         }
     }
 
-    def edit(Long id) {
-        respond userService.get(id)
+    def edit(Long userId) {
+        respond userService.get(userId)
     }
 
     def update(User user) {
-
-        if (user == null) {
-            notFound()
-            return
+        if (!user.password) {
+            user.password = user.getPersistentValue("password")
         }
+        if (user.validate()) {
+            user.save(flush: true)
+            flash.message = message(code: "user.edit.success.message")
+            session.user = user
 
+            log.info("Updated ${user.login} user.")
 
-
-        try {
-            userService.save(user)
-        } catch (ValidationException e) {
-            log.error(user.errors)
-            respond user.errors, view:'edit'
-            return
-        }
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect uri: "/user/show/${user.id}"
-            }
-            '*'{ respond user, [status: OK] }
+            redirect uri: "/user/showInfo"
+        } else {
+            respond user.errors, view: "edit"
         }
     }
 

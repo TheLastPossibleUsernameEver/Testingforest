@@ -10,6 +10,7 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
         mockController(ProjectController)
         mockController(TestCaseController)
         mockController(TestCaseDocumentController)
+        mockController(OldTestCaseController)
     }
 
     def cleanup() {
@@ -198,6 +199,46 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
             projectId = 1
             testCaseId = 1
         }
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "Test user/edit url mapping"() {
+        when:
+        request.method = "GET"
+        assertUrlMapping("/user/edit/1", controller: 'user',
+                action: 'edit', method: 'GET') {userId = 1}
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "Test user/update url mapping"() {
+        when:
+        request.method = "PUT"
+        assertUrlMapping("/user/update", controller: 'user',
+                action: 'update', method: 'PUT')
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "Test project/edit url mapping"() {
+        when:
+        request.method = "GET"
+        assertUrlMapping("/project/edit/1", controller: 'project',
+                action: 'edit', method: 'GET') {projectId = 1}
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "Test project/update url mapping"() {
+        when:
+        request.method = "PUT"
+        assertUrlMapping("/project/update", controller: 'project',
+                action: 'update', method: 'PUT')
 
         then:
         noExceptionThrown()
@@ -396,6 +437,59 @@ class UrlMappingsSpec extends Specification implements UrlMappingsUnitTest<UrlMa
         when:
         assertAction('user', 'deleteCurrentUser')
 
+        then:
+        noExceptionThrown()
+    }
+
+    void "User controller edit action"() {
+        expect:
+        verifyAction('user', 'edit')
+
+        when:
+        assertAction('user', 'edit')
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "User controller update action"() {
+        expect:
+        verifyAction('user', 'update')
+
+        when:
+        assertAction('user', 'update')
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "Project controller edit action"() {
+        expect:
+        verifyAction('project', 'edit')
+
+        when:
+        assertAction('project', 'edit')
+
+        then:
+        noExceptionThrown()
+    }
+
+    void "Project controller update action"() {
+        expect:
+        verifyAction('project', 'update')
+
+        when:
+        assertAction('project', 'update')
+
+        then:
+        noExceptionThrown()
+    }
+    void "Test /oldTestCase/delete url mapping"() {
+        expect:
+        verifyAction('oldTestCase', 'delete')
+
+        when:
+        assertAction('oldTestCase', 'delete')
         then:
         noExceptionThrown()
     }

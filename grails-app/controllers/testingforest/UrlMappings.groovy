@@ -15,6 +15,9 @@ class UrlMappings {
         //TestCaseDocument controller uri
         get "/project/$projectId/testCaseDocument/downloadDocument/$testCaseId"(controller: "testCaseDocument", action:"download")
 
+        //Feed controller uri
+        get "/feed/list"(controller: "feed", action: "list")
+
         //User controller uri
         get "/user/index"(controller: "user", action: "index")
         get "/user/log_in"(controller: "user", action: "log_in")
@@ -24,8 +27,8 @@ class UrlMappings {
         get "/user/create"(controller: "user", action: "create")
         get "/user/$link "(controller: "user", action: "emailConfirmed")
         post "/user/save"(controller: "user", action: "save")
-        get "/user/edit/$id"(controller: "user", action: "edit")
-        put "/user/update/$id"(controller: "user", action: "update")
+        get "/user/edit/$userId"(controller: "user", action: "edit")
+        put "/user/update"(controller: "user", action: "update")
         delete "/user/delete/$id"(controller: "user", action: "delete")
         get "/user/showInfo"(controller: "user", action: "showInfo")
         delete "/user/deleteCurrentUser" (controller: "user", action: "deleteCurrentUser")
@@ -39,10 +42,13 @@ class UrlMappings {
         post "/project/save"(controller: "project", action: "save")
         delete "/project/delete/$projectId"(controller: "project", action: "delete")
         put "/project/leaveProject/$projectId"(controller: "project", action: "leaveProject")
+        get "/project/edit/$projectId"(controller: "project", action: "edit")
+        put "/project/update"(controller: "project", action: "update")
 
         //Diagnostic controller uri
         get "/diagnostics/index"(controller: "diagnostics", action: "index")
-
+        //Old testcase deletion Scheduler
+        get "/oldTestCase/delete" (controller: "oldTestCase", action: "delete")
         /*
         //Init version
         "/$controller/$action?/$id?(.$format)?"{

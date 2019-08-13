@@ -8,7 +8,11 @@ class User {
     Date dateCreated
     Date lastUpdated
     //User created any TestCase
-    static hasMany = [caseList : TestCase]
+    static hasMany = [caseList : TestCase, feedList : Feed]
+
+    static mapping = {
+        sort name: 'asc'
+    }
 
     static constraints = {
         login size: 1..45, unique:true, validator: {
@@ -18,6 +22,7 @@ class User {
         name size: 1..45
         role inList: ["admin", "user"]
         caseList nullable: true
+        feedList nullable: true
     }
 
     def beforeInsert(){

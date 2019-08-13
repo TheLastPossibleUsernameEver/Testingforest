@@ -67,4 +67,12 @@ class ProjectInterceptorSpec extends Specification implements InterceptorUnitTes
         then:"The interceptor does match"
         interceptor.doesMatch()
     }
+
+    void "Test project/edit interceptor matching"() {
+        when:"A request matches the interceptor"
+        withRequest(controller:"project", action: "edit")
+
+        then:"The interceptor does match"
+        interceptor.doesMatch()
+    }
 }
