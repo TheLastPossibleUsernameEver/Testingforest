@@ -81,6 +81,18 @@ grails:
                 scriptlets: html
                 taglib: none
                 staticparts: none
+    mail:
+        host: smtp.yandex.ru
+        port: 465
+        username: testingforest@yandex.ru
+        password: kMEMW@9GgN4dOUV
+        default:
+            from: testingforest@yandex.ru
+        props:
+            mail.smtp.auth: true
+            mail.smtp.socketFactory.port: 465
+            mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
+            mail.smtp.socketFactory.fallback: false
 endpoints:
     jmx:
         unique-names: true
@@ -106,12 +118,12 @@ environments:
             url: jdbc:mysql://localhost:3306/tfdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     test:
         dataSource:
-            dbCreate: update
+            dbCreate: none
             url: jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
     production:
         dataSource:
             dbCreate: none
-            url: jdbc:h2:./prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            url: jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
             properties:
                 jmxEnabled: true
                 initialSize: 5

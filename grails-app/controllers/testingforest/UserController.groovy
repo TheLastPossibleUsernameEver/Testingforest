@@ -1,6 +1,8 @@
 package testingforest
 
 import grails.validation.ValidationException
+import org.apache.commons.lang.RandomStringUtils
+
 import static org.springframework.http.HttpStatus.*
 
 class UserController {
@@ -93,6 +95,14 @@ class UserController {
     def save(User user) {
         user.role = "user"
         if (user.validate()) {
+            sendMail {
+                from "testingforest@yandex.ru"
+                subject "E-mail confirmation"
+                to params.email
+                text "Congratulations! You're successfully registered on TestingForest" +
+                        ".\nYour login is " + user.getLogin() +
+                        ".\nYour current e-mail will be used for password restore if you forgot it."
+            }
             user.save()
             log.info("User ${user.login} registered")
             flash.message = message(code: 'registration.success.message', args: [user.name])
