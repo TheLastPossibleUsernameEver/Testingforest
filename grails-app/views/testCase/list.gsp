@@ -18,14 +18,14 @@
                 <g:message code="testCase.create.label.button"/>
             </g:link>
         </div>
-        <div class="content" role="main">
-            <div class="h4 mt-3 mb-3 ml-5 ">
-                <g:message code="testCase.list.label" args="[params.projectName]"/>
-            </div>
+        <div class="h4 mt-3 mb-3 ml-5 ">
+            <g:message code="testCase.list.label" args="[params.projectName]"/>
+        </div>
+        <div role="main">
             <g:if test="${params.sizeTestCaseListFiltered == 0}">
-                <label>
+                <div class="h5 mt-3 mb-3 ml-5" style="font-weight: normal;">
                     <g:message code="testCase.list.empty.label"/>
-                </label>
+                </div>
             </g:if>
             <g:else>
                 <table class="table table-light shadow-sm">

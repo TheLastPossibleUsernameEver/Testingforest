@@ -3,6 +3,7 @@ package testingforest
 class TestCaseController {
 
     def testCaseService
+    def projectService
 
     def list(Long projectId) {
         Project project = Project.get(projectId)
@@ -87,12 +88,16 @@ class TestCaseController {
         Feed feed = new Feed(user: User.get(session.user.id), project: TestCase.get(testCaseId).project, testCase: TestCase.get(testCaseId).caseName, feed: "feed.testcase.delete")
         feed.save()
 
-        def projectId = testCaseService.get(testCaseId).project.id
+        Long projectId = testCaseService.get(testCaseId).project.id
+        Project project = projectService.get(projectId)
+        project.lastUpdated = new Date()
+        projectService.save(project)
 
         log.info("Deleted ${testCaseService.get(testCaseId).caseName} test-case" +
                 "in ${testCaseService.get(testCaseId).project.projectName} project")
 
         testCaseService.delete(testCaseId)
+
         redirect uri: "/project/${projectId}/testCase/list"
     }
 }

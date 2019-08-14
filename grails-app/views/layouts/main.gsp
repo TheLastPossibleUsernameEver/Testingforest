@@ -19,8 +19,10 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm navbar-static-top">
         <div class="navbar-brand ml-2">
-            <asset:image src="Logo - Testing Forest.png"
-                         alt="Testing Forest Logo" width="269.522" height="50"/>
+            <g:link controller="project" action="index">
+                <asset:image src="Logo - Testing Forest.png"
+                             alt="Testing Forest Logo" width="269.522" height="50"/>
+            </g:link>
         </div>
         <div class="collapse navbar-collapse justify-content-end mr-3">
             <div class="navbar-nav h6" style="font-size: 18px; font-family: 'Montserrat', sans-serif;">

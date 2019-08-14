@@ -7,17 +7,23 @@
     </title>
 </head>
 <body>
-<div class="nav" role="navigation">
-    <g:link class="btn btn-sm btn-outline-dark mt-2 mb-2 ml-2 mr-1" action="create">
-        <g:message  code="project.index.create.button"/>
-    </g:link>
-    <g:link class="btn btn-sm btn-outline-dark mt-2 mb-2 ml-1 mr-2" uri="/user/showInfo">
-        <g:message code="user.label.show.info"/>
-    </g:link>
-</div>
-<div>
+    <div class="nav" role="navigation">
+        <g:link class="btn btn-sm btn-outline-dark mt-2 mb-2 ml-2 mr-1" action="create">
+            <g:message  code="project.index.create.button"/>
+        </g:link>
+        <g:link class="btn btn-sm btn-outline-dark mt-2 mb-2 ml-1 mr-2" uri="/user/showInfo">
+            <g:message code="user.label.show.info"/>
+        </g:link>
+    </div>
+
+    <div class="h4 mt-3 mb-3 ml-5">
+        <g:message code="project.list.label"/>
+    </div>
+
     <g:if test="${params.sizeList == 0}">
-        <h1><g:message code="project.label.no.project"/></h1>
+        <div class="h5 mt-3 mb-3 ml-5" style="font-weight: normal;">
+            <g:message code="project.label.no.project"/>
+        </div>
     </g:if>
     <g:else>
         <table class="table table-light shadow-sm">
@@ -47,6 +53,5 @@
             </tbody>
         </table>
     </g:else>
-</div>
 </body>
 </html>
