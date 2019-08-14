@@ -9,7 +9,7 @@ class UrlMappings {
         post "/testCase/save"(controller: "testCase", action: "save")
         get "/testCase/show/$testCaseId"(controller: "testCase", action: "show")
         get "/testCase/edit/$testCaseId"(controller: "testCase", action: "edit")
-        put "/testCase/update/$id"(controller: "testCase", action: "update")
+        put "/testCase/update"(controller: "testCase", action: "update")
         delete "/testCase/delete/$testCaseId"(controller: "testCase", action: "delete")
 
         //TestCaseDocument controller uri

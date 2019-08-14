@@ -16,6 +16,8 @@ class LogoutInterceptor {
         match(controller: "project", action: "create")
         match(controller: "testCase", action: "save")
         match(controller: "testCase", action: "create")
+        match(controller: "testCase", action: "edit")
+        match(controller: "testCase", action: "update")
         match(controller: "user", action: "showInfo")
         match(controller: "user", action: "deleteCurrentUser")
         match(controller: "testCaseDocument", action: "download")
