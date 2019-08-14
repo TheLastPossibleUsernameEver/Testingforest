@@ -17,5 +17,6 @@ class TestCase {
     static constraints = {
         caseName size: 1..255
         typeCase inList: ["public","private"]
+        userCreated nullable: true
     }
 }

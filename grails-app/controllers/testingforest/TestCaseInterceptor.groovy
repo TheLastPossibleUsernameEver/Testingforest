@@ -14,7 +14,7 @@ class TestCaseInterceptor {
     boolean before() {
         TestCase testCase = TestCase.get(params.testCaseId)
         if (testCase.typeCase == "public" ||
-                ( testCase.typeCase == "private" && testCase.userCreated.id == session.user.id)) {
+                (testCase.typeCase == "private" && testCase.userCreated.id == session.user.id)) {
             true
         } else {
             redirect uri: "/project/index"

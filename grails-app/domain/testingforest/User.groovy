@@ -9,7 +9,7 @@ class User {
     Date dateCreated
     Date lastUpdated
     //User created any TestCase
-    static hasMany = [caseList : TestCase, feedList : Feed]
+    static hasMany = [caseList : TestCase]
 
     static mapping = {
         sort name: 'asc'
@@ -23,8 +23,7 @@ class User {
         name size: 1..45
         role inList: ["admin", "user"]
         caseList nullable: true
-        feedList nullable: true
-        email unique: true
+        email unique: true, nullable: false
     }
 
     def beforeInsert(){

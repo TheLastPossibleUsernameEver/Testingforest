@@ -51,7 +51,20 @@ class UserController {
         return [projects:projects,testCases:testCases]
     }
     def deleteCurrentUser() {
-        def user = session.user
+        def user = User.get(session.user.id)
+
+        if(user.getCaseList().size() > 0){
+            for(TestCase testCase : user.getCaseList())
+            {
+                if(testCase.getTypeCase().equals("public")) {
+                    testCase.setUserCreated(null)
+                    testCase.save()
+                }
+                if(testCase.getTypeCase().equals("private"))
+                    testCase.delete()
+            }
+        }
+
         def criteria = Project.createCriteria()
         def projects = criteria.list{
             teamList{
@@ -66,9 +79,6 @@ class UserController {
             }
         }
         log.info("User ${session.user.login} was removed")
-        User.get(user.id).caseList.each{
-            it.delete(flush:true)
-        }
         User.get(user.id).delete(flush:true)
         session.invalidate()
         redirect uri: "/user/log_in"
@@ -121,24 +131,6 @@ class UserController {
             redirect uri: "/user/showInfo"
         } else {
             respond user.errors, view: "edit"
-        }
-    }
-
-    def delete(Long id) {
-        if (id == null) {
-            notFound()
-            return
-        }
-
-        userService.delete(id)
-        log.debug("User ${userService.get(id).login} account deleted")
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
-                redirect uri: "/user/index"
-            }
-            '*'{ render status: NO_CONTENT }
         }
     }
 

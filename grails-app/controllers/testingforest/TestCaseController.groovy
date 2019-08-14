@@ -1,8 +1,11 @@
 package testingforest
 
+import org.apache.commons.io.IOUtils
+
 class TestCaseController {
 
     def testCaseService
+    def projectService
 
     def list(Long projectId) {
         Project project = Project.get(projectId)
@@ -42,8 +45,10 @@ class TestCaseController {
                 testCaseDocument.save(flush: true)
                 testCase.save(flush: true)
 
-                Feed feed = new Feed(user: sessionUser, project: sessionProject, testCase: testCase.caseName, feed: "feed.testcase.create")
-                feed.save()
+                if(testCase.getTypeCase().equals("public")) {
+                    Feed feed = new Feed(user: sessionUser.getLogin(), project: sessionProject, testCase: testCase.caseName, feed: "feed.testcase.create")
+                    feed.save()
+                }
 
                 flash.message = message(code: "testCase.create.success.message", args: [testCase.caseName])
 
@@ -65,34 +70,58 @@ class TestCaseController {
     }
 
     def edit(Long testCaseId) {
-        respond testCaseService.get(testCaseId)
+        TestCase testCase = testCaseService.get(testCaseId)
+        params.projectId = testCase.project.id
+        respond testCase
     }
 
     def update(TestCase testCase) {
+        def data = request.getPart('data')
+        if (data.getSize()) {
+            testCase.caseData.data = IOUtils.toByteArray(data.getInputStream())
+            testCase.caseData.name = data.getSubmittedFileName()
+            testCase.caseData.type = data.getContentType()
+            testCase.caseData.sizeData = data.getSize()
+        }
         if (testCase.validate()){
-            testCaseService.save(testCase)
+            if (testCase.caseData.validate()){
+                testCase.caseData.save(flush: true)
+                testCase.save(flush: true)
 
-            Feed feed = new Feed(user: User.get(session.user.id), project: testCase.project, testCase: testCase.caseName, feed: "feed.testcase.update")
+            Feed feed = new Feed(user: User.get(session.user.id).getLogin(), project: testCase.project, testCase: testCase.caseName, feed: "feed.testcase.update")
             feed.save()
 
-            log.info("Updated ${testCase.caseName} test-case in ${testCase.project.projectName}")
+                log.info("Updated ${testCase.caseName} test-case in ${testCase.project.projectName}")
 
-            redirect uri: "/testCase/show/$testCase.id"
+                redirect uri: "/testCase/show/$testCase.id"
+            } else {
+                log.error("Test-case ${testCase} in ${testCase.project} is invalid: "
+                        + testCase.caseData.errors)
+
+                respond testCase.caseData.errors, view: "edit"
+            }
         } else {
+            log.error("Test-case ${testCase} in ${testCase.project} is invalid: "
+                    + testCase.errors)
+
             respond testCase.errors, view: "edit"
         }
     }
 
     def delete(Long testCaseId) {
-        Feed feed = new Feed(user: User.get(session.user.id), project: TestCase.get(testCaseId).project, testCase: TestCase.get(testCaseId).caseName, feed: "feed.testcase.delete")
+        Feed feed = new Feed(user: User.get(session.user.id).getLogin(), project: TestCase.get(testCaseId).project, testCase: TestCase.get(testCaseId).caseName, feed: "feed.testcase.delete")
         feed.save()
 
-        def projectId = testCaseService.get(testCaseId).project.id
+        Long projectId = testCaseService.get(testCaseId).project.id
+        Project project = projectService.get(projectId)
+        project.lastUpdated = new Date()
+        projectService.save(project)
 
         log.info("Deleted ${testCaseService.get(testCaseId).caseName} test-case" +
                 "in ${testCaseService.get(testCaseId).project.projectName} project")
 
         testCaseService.delete(testCaseId)
+
         redirect uri: "/project/${projectId}/testCase/list"
     }
 }

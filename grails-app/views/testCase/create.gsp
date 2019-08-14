@@ -2,7 +2,6 @@
 <html>
 <head>
     <meta name="layout" content="main" />
-    <g:set var="entityName" value="${message(code: 'user.label', default: 'Test-Case')}" />
     <title>
         <g:message code="title.testCase.create"/>
     </title>
@@ -89,6 +88,7 @@
         <script>
             $(".custom-file-input").on("change", function() {
                 var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
             });
         </script>
 
