@@ -45,7 +45,7 @@
             <g:message code="user.password.label.field"/>
         </label>
         <g:passwordField type="password" id="inputPassword"
-                         class="form-control ${hasErrors(bean: this.user, field: 'password','is-invalid')}"
+                         class="form-control mb-2 ${hasErrors(bean: this.user, field: 'password','is-invalid')}"
                          placeholder="${message(code: 'user.password.label.field')}" name="password" value="${this.user?.password}"/>
     </div>
     <div>

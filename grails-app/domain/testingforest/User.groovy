@@ -24,7 +24,7 @@ class User {
         role inList: ["admin", "user"]
         caseList nullable: true
         feedList nullable: true
-        email unique: true
+        email unique: true, nullable: false
     }
 
     def beforeInsert(){
