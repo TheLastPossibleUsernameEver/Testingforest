@@ -30,11 +30,11 @@
                <g:fieldValue type="text" id="login" bean="${session.user}" field="login" />
             </div>
 
-            <label for="login" class="col-sm-2 mb-1 ml-5 col-form-label">
+            <label for="dateCreated" class="col-sm-2 mb-1 ml-5 col-form-label">
                <g:message code="user.info.regDate"/>
             </label>
             <div class="form-control-plaintext col-sm-9">
-               <g:formatDate date="${session.user.dateCreated}" type="datetime" style="SHORT"/>
+               <g:formatDate id="dateCreated" date="${session.user.dateCreated}" type="datetime" style="SHORT"/>
             </div>
 
             <div class="col-sm-2 mb-3 mt-3 ml-5">
