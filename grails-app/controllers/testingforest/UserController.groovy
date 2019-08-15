@@ -95,6 +95,8 @@ class UserController {
     def save(User user) {
         user.role = "user"
         if (user.validate()) {
+            /*
+            // It does not work due to the spam tracker on the mailing address. FIX!
             sendMail {
                 from "testingforest@yandex.ru"
                 subject "E-mail confirmation"
@@ -103,6 +105,7 @@ class UserController {
                         ".\nYour login is " + user.getLogin() +
                         ".\nYour current e-mail will be used for password restore if you forgot it."
             }
+            */
             user.save()
             log.info("User ${user.login} registered")
             flash.message = message(code: 'registration.success.message', args: [user.name])

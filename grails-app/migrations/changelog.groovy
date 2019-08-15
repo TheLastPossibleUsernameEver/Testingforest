@@ -11,4 +11,5 @@ databaseChangeLog = {
     include file: 'update-tables-9.groovy'
     include file: 'update-tables-10.groovy'
     include file: 'update-tables-11.groovy'
+    include file: 'update-tables-12.groovy'
 }

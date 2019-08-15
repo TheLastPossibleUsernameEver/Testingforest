@@ -23,7 +23,7 @@ class User {
         name size: 1..45
         role inList: ["admin", "user"]
         caseList nullable: true
-        email unique: true, nullable: false
+        email email: true, unique: true, nullable: false
     }
 
     def beforeInsert(){
