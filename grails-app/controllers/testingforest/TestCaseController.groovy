@@ -18,6 +18,7 @@ class TestCaseController {
     }
 
     def show(Long testCaseId) {
+        params.projectId = testCaseService.get(testCaseId).project.id
         respond testCaseService.get(testCaseId)
     }
 
